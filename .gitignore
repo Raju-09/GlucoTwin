@@ -1,0 +1,63 @@
+# ── Python ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# ── Virtual environments ─────────────────────────────────────
+.venv/
+venv/
+env/
+.conda/
+
+# ── Environment / secrets ────────────────────────────────────
+.env
+*.env.local
+
+# ── Data — NEVER commit restricted patient data ──────────────
+data/raw/
+data/interim/
+data/processed/
+# synthetic demo data IS committed
+!data/synthetic_demo/
+
+# ── Model artifacts ──────────────────────────────────────────
+# Review carefully before committing any artifact
+artifacts/
+!artifacts/.gitkeep
+
+# ── Reports ──────────────────────────────────────────────────
+reports/
+!reports/.gitkeep
+
+# ── Notebooks output ─────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── OS ───────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE ──────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Testing / coverage ───────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ── MLflow ───────────────────────────────────────────────────
+mlruns/
+
+# ── Streamlit ────────────────────────────────────────────────
+.streamlit/secrets.toml

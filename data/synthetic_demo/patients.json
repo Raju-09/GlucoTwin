@@ -1,0 +1,38 @@
+[
+  {
+    "patient_id": "SYNTH_001",
+    "label": "Synthetic Patient 001",
+    "condition": "Type 1 Diabetes (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 139.5,
+    "adaptation_recommended": false,
+    "notes": "Classic circadian basal rhythm with distinct dawn phenomenon and standard carbohydrate sensitivity."
+  },
+  {
+    "patient_id": "SYNTH_002",
+    "label": "Synthetic Patient 002 (Adaptation Benchmark)",
+    "condition": "Type 1 Diabetes (Simulated adult with baseline offset)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 128.2,
+    "adaptation_recommended": true,
+    "notes": "Demonstrates strong benefit from patient calibration (+11.3% MAE error reduction from 20.52 to 18.20 mg/dL)."
+  },
+  {
+    "patient_id": "SYNTH_004",
+    "label": "Synthetic Patient 004",
+    "condition": "Type 1 Diabetes (Simulated adult with stable daytime levels)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 135.0,
+    "adaptation_recommended": false,
+    "notes": "Predictable nocturnal baseline; reliable 120-minute horizon forecasts under continuous CGM stream."
+  },
+  {
+    "patient_id": "SYNTH_007",
+    "label": "Synthetic Patient 007 (High Postprandial Excursions)",
+    "condition": "Type 1 Diabetes (Simulated adult with pronounced meal spikes)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 145.8,
+    "adaptation_recommended": true,
+    "notes": "Prominent meal spikes up to 340 mg/dL; demonstrates how persistence overshoots while the ML model captures decay dynamics."
+  }
+]
