@@ -1,0 +1,59 @@
+{
+  "dataset": "synthetic_cgm_benchmark",
+  "split": "chronological_per_patient_with_120m_buffer",
+  "horizon_minutes": 120,
+  "test_samples": 7316,
+  "test_patients": 10,
+  "independence_note": "Test windows use a 5-minute stride and therefore overlap. 7316 is the row count, not an i.i.d. sample size.",
+  "target_protocol": "Observed CGM row nearest in the search order: first timestamp >= t+120-10min that also lies within +/-10min of t+120. No interpolation.",
+  "models": {
+    "persistence": {
+      "mae": 53.25,
+      "rmse": 71.26,
+      "mape_pct": 31.78,
+      "median_abs_error": 42.1
+    },
+    "recent_mean_30min": {
+      "mae": 53.76,
+      "rmse": 71.16,
+      "mape_pct": 32.67,
+      "median_abs_error": 44.28
+    },
+    "recent_mean_60min": {
+      "mae": 53.23,
+      "rmse": 69.58,
+      "mape_pct": 32.94,
+      "median_abs_error": 46.03
+    },
+    "linear_trend_120m": {
+      "mae": 97.38,
+      "rmse": 145.1,
+      "mape_pct": 60.79,
+      "median_abs_error": 65.17
+    },
+    "diurnal_climatology": {
+      "mae": 23.96,
+      "rmse": 34.56,
+      "mape_pct": 15.36,
+      "median_abs_error": 15.53
+    },
+    "glucotwin_v0.1": {
+      "mae": 18.69,
+      "rmse": 30.84,
+      "mape_pct": 11.79,
+      "median_abs_error": 9.49,
+      "n_features": 41,
+      "relative_mae_reduction_vs_persistence_pct": 64.9,
+      "relative_mae_reduction_vs_climatology_pct": 22.0
+    },
+    "glucotwin_adapted": {
+      "mae": 18.48,
+      "rmse": 30.51,
+      "mape_pct": 11.62,
+      "median_abs_error": 9.41,
+      "note": "Train-split residual bias only. Overall change vs global model is +1.12% MAE."
+    }
+  },
+  "training_samples": 24647,
+  "source": "Committed evaluation snapshot. Re-run scripts/reproduce_results.py and scripts/evaluate_baseline_suite.py to refresh."
+}

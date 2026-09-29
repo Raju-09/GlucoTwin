@@ -96,3 +96,43 @@ class LinearTrendBaseline:
 
         # Clip to physiological bounds to prevent explosive trend extrapolation
         return np.clip(preds, self.min_val, self.max_val)
+
+
+class RecentMeanBaseline:
+    """Predicts the mean of the last k historical CGM readings (e.g. last 30 minutes)."""
+
+    def __init__(self, k_readings: int = 6) -> None:
+        self.k_readings = k_readings
+
+    def predict(self, df: pd.DataFrame) -> np.ndarray:
+        """Calculate mean across last k readings."""
+        lag_cols = [f"glucose_lag_{i}" for i in range(self.k_readings)]
+        missing = [c for c in lag_cols if c not in df.columns]
+        if missing:
+            raise ValueError(f"Missing required lag columns: {missing}")
+        return df[lag_cols].mean(axis=1).to_numpy(dtype=float)
+
+
+class DiurnalClimatologyBaseline:
+    """Predicts historical mean glucose conditioned on target hour of day (circadian climatology)."""
+
+    def __init__(self, target_time_col: str = "target_time") -> None:
+        self.target_time_col = target_time_col
+        self.hourly_means: dict[int, float] = {}
+        self.global_mean: float = 120.0
+
+    def fit(self, train_df: pd.DataFrame, target_col: str = "target_glucose") -> DiurnalClimatologyBaseline:
+        """Compute hourly empirical means on training split only."""
+        ts = pd.to_datetime(train_df[self.target_time_col], utc=True)
+        hours = ts.dt.hour
+        grouped = train_df.groupby(hours)[target_col].mean()
+        self.hourly_means = {int(h): float(m) for h, m in grouped.items()}
+        self.global_mean = float(train_df[target_col].mean())
+        return self
+
+    def predict(self, df: pd.DataFrame) -> np.ndarray:
+        """Map target timestamp hour to empirical historical mean."""
+        ts = pd.to_datetime(df[self.target_time_col], utc=True)
+        hours = ts.dt.hour
+        mapped = hours.map(self.hourly_means).fillna(self.global_mean)
+        return mapped.to_numpy(dtype=float)
