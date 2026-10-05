@@ -20,10 +20,10 @@ def test_load_ehr_profiles():
         "ehr_bmi",
         "ehr_diabetes_duration",
         "ehr_baseline_hba1c",
-        "ehr_fasting_glucose",
-        "ehr_estimated_isf",
-        "ehr_estimated_icr",
-        "ehr_total_daily_dose",
+        "ehr_historical_fbg",
+        "ehr_hypertension_flag",
+        "ehr_metformin_flag",
+        "ehr_sglt2i_flag",
         "ehr_dawn_flag",
     ]
     for col in expected_cols:

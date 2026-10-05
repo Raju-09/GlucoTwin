@@ -58,10 +58,10 @@ def load_ehr_profiles(path: str | Path | None = None) -> pd.DataFrame:
             "bmi": "ehr_bmi",
             "diabetes_duration_years": "ehr_diabetes_duration",
             "baseline_hba1c": "ehr_baseline_hba1c",
-            "fasting_glucose_baseline": "ehr_fasting_glucose",
-            "estimated_isf": "ehr_estimated_isf",
-            "estimated_icr": "ehr_estimated_icr",
-            "total_daily_dose": "ehr_total_daily_dose",
+            "historical_fbg_mgdl": "ehr_historical_fbg",
+            "hypertension_flag": "ehr_hypertension_flag",
+            "metformin_flag": "ehr_metformin_flag",
+            "sglt2i_flag": "ehr_sglt2i_flag",
             "dawn_phenomenon_flag": "ehr_dawn_flag",
         }
     )
@@ -72,10 +72,10 @@ def load_ehr_profiles(path: str | Path | None = None) -> pd.DataFrame:
         "ehr_bmi",
         "ehr_diabetes_duration",
         "ehr_baseline_hba1c",
-        "ehr_fasting_glucose",
-        "ehr_estimated_isf",
-        "ehr_estimated_icr",
-        "ehr_total_daily_dose",
+        "ehr_historical_fbg",
+        "ehr_hypertension_flag",
+        "ehr_metformin_flag",
+        "ehr_sglt2i_flag",
         "ehr_dawn_flag",
     ]
     df = df[[c for c in keep_cols if c in df.columns]]

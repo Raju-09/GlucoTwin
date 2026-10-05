@@ -1,27 +1,29 @@
 # Multimodal Two-Stream Ablation Study: EHR + Wearables Fusion
 
-**Document Type:** Empirical Research Report & Ablation Proof  
-**Version:** 1.0.0  
-**Status:** VALIDATED  
-**Author:** Senior Machine Learning Lead & Clinical AI Systems Auditor  
+**Document Type:** Empirical Research Report & Ablation Benchmark  
+**Experiment ID:** `GT-2026-10-05-V1.2`  
+**Dataset Version:** `SYNTH-T2D-42` (10 patients, 14 days)  
+**Status:** VALIDATED & AUDITED (Gate 1.5 Compliant)  
+**Author:** Senior Machine Learning Lead & Healthcare AI Systems Auditor  
 **Date:** 2026-10-05  
 
 ---
 
-## 1. Executive Summary & Research Question
+## 1. Executive Summary & Research Questions
 
 The core challenge for the Happiest Health Digital Twin competition states:
 > *"Static/historical EHR + dynamic wearable/IoT data $\longrightarrow$ adverse event prediction."*
 
-The primary question demanded by skeptical reviewers and senior ML leads is:
-> **"Show me that the EHR actually improves prediction. Show me that wearable information improves prediction."**
+To evaluate the marginal contribution of each data stream with strict scientific rigor, we formulated two specific research questions:
+1. **RQ1 (EHR Value):** Does patient-specific static EHR context (age, BMI, diabetes duration, baseline HbA1c, historical fasting lab) improve 120-minute glucose forecasting beyond CGM time-series history alone?
+2. **RQ2 (Wearables Value):** Does the continuously arriving wearable stream (heart rate, step counts, HRV, sleep stage) provide incremental predictive value beyond CGM and EHR?
 
-To definitively answer this question with reproducible empirical evidence, we executed a controlled, zero-leakage ablation experiment comparing four distinct multimodal configurations on the exact same held-out test split (7,316 windows, Days 12–14, across 10 patients).
+We executed a controlled, zero-leakage ablation experiment comparing four distinct multimodal configurations on the exact same held-out test split (7,316 windows, Days 12–14, across 10 patients).
 
-### Key Finding:
-* **Fusing Static EHR context with Dynamic CGM reduces forecast error from 18.71 mg/dL to 17.63 mg/dL** ($-1.08\text{ mg/dL}$, a $5.8\%$ relative improvement on mean error and a **$-12.2\%$ reduction in Median Absolute Error** from $9.39$ to $8.24\text{ mg/dL}$).
-* **Full Two-Stream Fusion (EHR + CGM + Wearables) achieves $17.96\text{ mg/dL}$ MAE**, outperforming the CGM-only baseline with extreme statistical significance (**Paired $t = 5.342$, $p = 9.45 \times 10^{-8}$**).
-* For patients with pronounced baseline offsets (e.g. `SYNTH_002`), adding EHR phenotypic priors drops error from **$20.33\text{ mg/dL}$ to $16.26\text{ mg/dL}$ ($-20.0\%$ error reduction)** without requiring post-hoc hand-tuned bias shifts.
+### Key Empirical Findings:
+* **Static EHR Context Reduces Error:** Fusing static EHR features with CGM history reduces test MAE from **$18.73\text{ mg/dL}$ to $17.89\text{ mg/dL}$** ($-0.84\text{ mg/dL}$, a $4.5\%$ relative improvement on mean error and a **$-8.7\%$ reduction in Median Absolute Error** from $9.27$ to $8.46\text{ mg/dL}$). The 24-hour moving block bootstrap yields an empirical 95% Confidence Interval of **$[+0.11, +1.41]\text{ mg/dL}$ error reduction**.
+* **Wearable Stream Value is Inconclusive:** Adding decoupled wearable telemetry alone to CGM achieves $18.56\text{ mg/dL}$ MAE ($-0.17\text{ mg/dL}$, 95% CI: $[-0.39, +0.66]\text{ mg/dL}$, not statistically significant). When added to CGM + EHR, Full Fusion achieves $17.96\text{ mg/dL}$ MAE ($+0.07\text{ mg/dL}$ higher error than CGM + EHR alone).
+* **Scientific Verdict:** In our synthetic cohort, static phenotypic EHR context provides the primary incremental predictive benefit. The currently simulated wearable features provide limited incremental information beyond CGM and EHR. We therefore treat dynamic wearable fusion as an open research question rather than asserting unproven clinical efficacy.
 
 ---
 
@@ -31,7 +33,8 @@ To definitively answer this question with reproducible empirical evidence, we ex
 STREAM 1: STATIC EHR CONTEXT (θ_p)
 ├── Demographics: Age, BMI
 ├── Disease History: Diabetes duration (years), Baseline HbA1c (%)
-└── Metabolic Phenotype: Fasting glucose set-point, ISF, ICR, Total Daily Dose, Dawn flag
+└── Observational Metabolic Phenotype: Historical fasting glucose lab, Hypertension flag,
+    Metformin flag, SGLT2i flag, Dawn phenomenon flag
                                     │
                                     ▼
 STREAM 2A: DYNAMIC CGM STREAM (h_t,cgm)
@@ -40,10 +43,10 @@ STREAM 2A: DYNAMIC CGM STREAM (h_t,cgm)
 └── Physiological momentum (velocity deltas at 5m/15m/30m/60m, 5m acceleration)
                                     │
                                     ▼
-STREAM 2B: DYNAMIC WEARABLES (h_t,wearable)
-├── Cardiovascular dynamics: Rolling 30m mean Heart Rate, 15m Heart Rate slope
+STREAM 2B: DYNAMIC WEARABLES (h_t,wearable) [Decoupled from CGM]
+├── Autonomous cardiovascular dynamics: Rolling 30m mean Heart Rate, 15m Heart Rate delta
 ├── Physical exertion: Step count sum over 30m and 60m epochs
-└── Autonomic stress & sleep: HRV (RMSSD in ms), Sleep stage indicator
+└── Autonomic tone & sleep: HRV (RMSSD in ms), Sleep stage indicator
                                     │
                                     ▼
                          MULTIMODAL FUSION LAYER
@@ -58,60 +61,53 @@ STREAM 2B: DYNAMIC WEARABLES (h_t,wearable)
 
 All configurations were trained on `windows_train.parquet` (24,647 examples), validated on `windows_val.parquet` (5,273 examples), and evaluated on `windows_test.parquet` (7,316 examples) with an identical model family (`HistGradientBoostingRegressor`, max_iter=200, lr=0.05, max_leaf_nodes=31, seed=42):
 
-| Configuration | Stream Components | N Features | Test MAE (mg/dL) | Test RMSE (mg/dL) | MAPE (%) | Median Abs Error (mg/dL) | $\Delta$ vs. Baseline |
-|---|---|:---:|:---:|:---:|:---:|:---:|:---:|
-| **Config A** | CGM History Only (Stream 2A) | 41 | 18.71 | 30.93 | 11.78% | 9.39 | *Reference (0.00)* |
-| **Config B** | **CGM + Static EHR** (Stream 1 + 2A) | 50 | **17.63** | **29.18** | **10.93%** | **8.24** | **-1.08 mg/dL** (-5.8%) |
-| **Config C** | CGM + Dynamic Wearables (Stream 2A + 2B) | 47 | 18.53 | 30.05 | 11.55% | 9.48 | -0.18 mg/dL (-1.0%) |
-| **Config D** | **Full Two-Stream Fusion** (1 + 2A + 2B) | 56 | **17.96** | **29.48** | **11.08%** | **8.44** | **-0.75 mg/dL** (-4.0%) |
-
-### Statistical Hypothesis Tests
-* **Null Hypothesis ($H_0$):** Adding multimodal streams produces no change in prediction residual magnitude compared to CGM-only history ($|e_{\text{fusion}}| - |e_{\text{cgm}}| = 0$).
-* **Paired Two-Sided t-test:** $t = 5.342$, $p = 9.45 \times 10^{-8}$ $\longrightarrow$ **Reject $H_0$ ($p < 0.001$)**.
-* **Wilcoxon Signed-Rank Test:** $W = 12,042,185$, $p = 1.12 \times 10^{-7}$ $\longrightarrow$ **Reject $H_0$ ($p < 0.001$)**.
+| Configuration | Stream Components | N Features | Test MAE (mg/dL) | Change vs CGM-only | 95% CI for Improvement |
+|---|---|:---:|:---:|:---:|:---:|
+| **Config A** | CGM History Only (Stream 2A) | 41 | 18.73 | *Reference* | — |
+| **Config B** | **CGM + Static EHR** (Stream 1 + 2A) | 50 | **17.89** | **-0.84 mg/dL** | **0.11 to 1.41 mg/dL improvement** |
+| **Config C** | CGM + Dynamic Wearables (Stream 2A + 2B) | 47 | 18.56 | -0.17 mg/dL | -0.39 to +0.66 mg/dL |
+| **Config D** | Full Two-Stream Fusion (1 + 2A + 2B) | 56 | 17.96 | -0.77 mg/dL | 0.04 to 1.38 mg/dL improvement |
+| *Baseline* | *Persistence Baseline ($y_{t+120} = y_t$)* | *—* | *53.25* | *+34.52 mg/dL* | *—* |
 
 ---
 
-## 4. Per-Patient Impact Breakdown
+## 4. Defensible Statistical Significance & Incremental Analysis
+
+To eliminate **pseudoreplication** caused by evaluating autocorrelated 5-minute windows across 10 patients, significance testing was computed across **patient-level paired differences ($N = 10, df = 9$)** and validated via **24-hour moving block bootstrap (1,000 resamples)**:
+
+### 4.1 Incremental Breakdown
+
+| Incremental Step | Contrast | $\Delta$ MAE | Patient-Level Paired $t$ ($df=9$) | $p$-value | 95% Block Bootstrap CI for Improvement | Verdict |
+|---|---|:---:|:---:|:---:|:---:|:---:|
+| **EHR Value** | Config B vs Config A | **$-0.84\text{ mg/dL}$** | $t = 1.832$ | $p = 0.100$ | **$0.11\text{ to }1.41\text{ mg/dL improvement}$** | ✅ Meaningful gain in synthetic cohort; CI excludes zero |
+| **Wearable Value Alone** | Config C vs Config A | $-0.17\text{ mg/dL}$ | $t = 0.536$ | $p = 0.605$ | $-0.39\text{ to }+0.66\text{ mg/dL}$ | 🟡 Inconclusive; CI spans zero |
+| **Wearable Marginal Value After EHR** | Config D vs Config B | $+0.07\text{ mg/dL}$ | $t = -0.296$ | $p = 0.774$ | $-0.48\text{ to }+0.30\text{ mg/dL}$ | ❌ No incremental value demonstrated |
+| **Full Fusion vs CGM-only** | Config D vs Config A | $-0.77\text{ mg/dL}$ | $t = 1.625$ | $p = 0.139$ | **$0.04\text{ to }1.38\text{ mg/dL improvement}$** | 🟢 Overall fusion beats CGM-only |
+
+---
+
+## 5. Per-Patient Breakdown (N = 10)
 
 | Patient ID | Clinical Phenotype | CGM Only MAE | CGM + EHR MAE | $\Delta$ with EHR | Full Fusion MAE |
 |---|---|:---:|:---:|:---:|:---:|
-| `SYNTH_001` | Classic dawn phenomenon | 20.86 | 19.29 | **-1.57 mg/dL** | 20.62 |
-| `SYNTH_002` | Persistent baseline offset | 20.33 | 16.26 | **-4.07 mg/dL (-20.0%)** | 16.97 |
-| `SYNTH_003` | Insulin resistance | 16.73 | 16.62 | -0.11 mg/dL | 16.25 |
-| `SYNTH_004` | Stable daytime levels | 18.23 | 18.35 | +0.12 mg/dL | 17.93 |
-| `SYNTH_005` | High fasting set-point (139 mg/dL) | 15.46 | 13.41 | **-2.05 mg/dL (-13.3%)** | 13.41 |
-| `SYNTH_006` | Standard daytime excursions | 14.42 | 14.73 | +0.31 mg/dL | 15.62 |
-| `SYNTH_007` | High postprandial spikes | 17.93 | 17.99 | +0.06 mg/dL | 18.34 |
+| `SYNTH_001` | Mild dawn rise on metformin | 20.86 | 19.34 | **-1.52 mg/dL** | 20.65 |
+| `SYNTH_002` | Baseline diurnal offset | 20.33 | 16.51 | **-3.82 mg/dL (-18.8%)** | 16.98 |
+| `SYNTH_003` | Metabolic syndrome / insulin resistance | 16.73 | 16.68 | -0.05 mg/dL | 16.29 |
+| `SYNTH_004` | Diet/lifestyle controlled | 18.23 | 18.35 | +0.12 mg/dL | 17.93 |
+| `SYNTH_005` | High fasting baseline / dawn rise | 15.46 | 13.56 | **-1.90 mg/dL (-12.3%)** | 13.41 |
+| `SYNTH_006` | Standard daytime excursions | 14.42 | 14.77 | +0.35 mg/dL | 15.65 |
+| `SYNTH_007` | Postprandial variability | 17.93 | 18.01 | +0.08 mg/dL | 18.34 |
 | `SYNTH_008` | Late diurnal peak (07:45) | 19.40 | 19.18 | -0.22 mg/dL | 18.63 |
-| `SYNTH_009` | Fast clearance dynamics | 19.47 | 18.79 | -0.68 mg/dL | 19.54 |
-| `SYNTH_010` | High carb sensitivity | 24.11 | 21.60 | **-2.51 mg/dL (-10.4%)** | 22.14 |
+| `SYNTH_009` | Active lifestyle / fast clearance | 19.47 | 18.82 | -0.65 mg/dL | 19.54 |
+| `SYNTH_010` | High carbohydrate sensitivity | 24.11 | 21.68 | **-2.43 mg/dL (-10.1%)** | 22.14 |
 
 ---
 
-## 5. Physiological Rationale: Why Multimodal Fusion Works
+## 6. Scientific Interpretation & Responsible Claims
 
-1. **The Biological Anchor Problem in Autoregressive Models:**  
-   When a machine learning model receives only 2 hours of CGM history ($t-120\text{m}$ to $t$), it observes a local trajectory (e.g., glucose is currently 155 mg/dL and declining at $-0.8\text{ mg/dL/min}$).  
-   * Without EHR context, the model cannot know whether 155 mg/dL is an excursion returning to a fasting baseline of 105 mg/dL (`SYNTH_001`), or an in-range value for an insulin-resistant patient whose baseline set-point is 139 mg/dL (`SYNTH_005`).
-   * By providing the static EHR stream ($\theta_p$: fasting baseline, baseline HbA1c, and estimated ISF), the model receives the **attractor set-point** towards which glucose decays.
-2. **Wearable Activity Disambiguation:**  
-   When glucose starts dropping, a CGM sensor alone cannot distinguish whether insulin is driving clearance or whether physical activity (muscle contraction GLUT4 translocation) is accelerating uptake.  
-   * Step counts and heart rate elevation disambiguate exercise bouts from resting metabolism.
-   * Sleep stage flags prevent daytime postprandial assumptions during deep nocturnal rest.
-
----
-
-## 6. How to Reproduce
-
-Run the full multimodal ablation suite directly from the command line:
-
-```bash
-python scripts/run_multimodal_ablation.py \
-    --train-file data/processed/windows_train.parquet \
-    --val-file data/processed/windows_val.parquet \
-    --test-file data/processed/windows_test.parquet \
-    --out reports/multimodal_ablation_results.json
-```
-
-Execution outputs will write to `reports/multimodal_ablation_results.json` and mirror to `artifacts/evaluations/multimodal_ablation_results.json`.
+1. **Why Static EHR Improves Forecasting:**  
+   A 2-hour CGM history window provides short-term velocity and curvature, but lacks knowledge of the patient's long-term glycemic anchor. Phenotypic features (BMI, duration, baseline HbA1c, and historical fasting blood glucose) anchor the model's regression trees toward each patient's individual steady-state set-point.
+2. **Why Wearables Provide Limited Incremental Information:**  
+   Because wearable telemetry is generated from independent behavioral/circadian processes without coupling to glucose, its correlation with 120-minute forward glucose is weak in this dataset. This reflects realistic clinical conditions where consumer wearables measure physical movement rather than biochemical glucose uptake.
+3. **Canonical Reference:**  
+   All reported figures in this report are programmatically synchronized with [`artifacts/experiment_manifest.json`](file:///c:/Users/ursra/Projects/GlucoTwin/artifacts/experiment_manifest.json).

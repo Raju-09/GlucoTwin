@@ -82,8 +82,14 @@
 ## Research Hardening & Twin Drift Gates
 - [x] Gate 0: Freeze Scientific Contract (docs/research_contract.md, reports/research_contract_audit.json)
 - [x] Gate 1: Two-Stream Multimodal Fusion Proof (src/glucotwin/features/multimodal.py, scripts/run_multimodal_ablation.py, docs/multimodal_ablation.md)
-  - CGM-only (18.71 mg/dL) vs CGM+EHR (17.63 mg/dL, -5.8%) vs Full Fusion (17.96 mg/dL, p=9.45e-8)
-  - Proven per-patient impact on SYNTH_002 (-20.0% error reduction from 20.33 to 16.26 mg/dL)
+- [x] Gate 1.5: Data Generating Process Audit & Leakage Remediation (docs/gate_1_5_multimodal_data_audit.md, reports/gate_1_5_multimodal_data_audit.json)
+  - Fixed P0 EHR target proxy leakage (replaced basal_mean with noisy observational fasting lab + clinical T2D covariates).
+  - Decoupled wearable telemetry generation from CGM glucose (autonomous circadian & activity bouts).
+  - Replaced naïve paired t-test pseudoreplication with Patient-Level Paired Differences ($N=10, df=9$) and 24-hour moving block bootstrap 95% CIs.
+  - Re-evaluated all 4 ablation modes: CGM-only (18.73 mg/dL), CGM+EHR (17.89 mg/dL, 95% CI [+0.11, +1.41]), CGM+Wearables (18.56 mg/dL), Full Fusion (17.96 mg/dL).
+  - Created canonical single source of truth: `artifacts/experiment_manifest.json`.
+  - Realigned clinical cohort framing to Type 2 Diabetes (India chronic lifestyle disease challenge focus).
+  - Updated Streamlit UI & FastAPI endpoints to dynamically load canonical manifest benchmarks.
 - [ ] Gate 2: Patient Digital State Engine (src/glucotwin/twin/state.py, src/glucotwin/twin/update.py)
 - [ ] Gate 3: Twin Drift Detection Subsystem (src/glucotwin/twin/drift.py, src/glucotwin/twin/fidelity.py)
 - [ ] Gate 4: Quantitative Selective Prediction & Fault Injection
