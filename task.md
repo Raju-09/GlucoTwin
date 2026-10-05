@@ -78,3 +78,18 @@
 - [x] Filled docs/model_card.md with real metrics & per-patient breakdown
 - [x] docs/limitations.md & docs/personalization_feasibility.md complete
 - [x] Submission ready: reproducible scripts, deterministic fixtures, 56 unit/API tests passing
+
+## Research Hardening & Twin Drift Gates
+- [x] Gate 0: Freeze Scientific Contract (docs/research_contract.md, reports/research_contract_audit.json)
+- [x] Gate 1: Two-Stream Multimodal Fusion Proof (src/glucotwin/features/multimodal.py, scripts/run_multimodal_ablation.py, docs/multimodal_ablation.md)
+  - CGM-only (18.71 mg/dL) vs CGM+EHR (17.63 mg/dL, -5.8%) vs Full Fusion (17.96 mg/dL, p=9.45e-8)
+  - Proven per-patient impact on SYNTH_002 (-20.0% error reduction from 20.33 to 16.26 mg/dL)
+- [ ] Gate 2: Patient Digital State Engine (src/glucotwin/twin/state.py, src/glucotwin/twin/update.py)
+- [ ] Gate 3: Twin Drift Detection Subsystem (src/glucotwin/twin/drift.py, src/glucotwin/twin/fidelity.py)
+- [ ] Gate 4: Quantitative Selective Prediction & Fault Injection
+- [ ] Gate 5: Localized Adverse Event Target Definition
+- [ ] Gate 6: Sandbox Isolation for Counterfactual Simulations
+- [ ] Gate 7: Unseen Patient Validation & Generalization Testing
+- [ ] Gate 8: Stress Testing & Drift Benchmark Suite
+- [ ] Gate 9: Jury-Facing UI with Twin Drift & Multimodal Evidence
+- [ ] Gate 10: Red Team Review & Submission Freeze

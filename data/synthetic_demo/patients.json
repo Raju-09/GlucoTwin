@@ -18,6 +18,15 @@
     "notes": "Demonstrates strong benefit from patient calibration (+11.3% MAE error reduction from 20.52 to 18.20 mg/dL)."
   },
   {
+    "patient_id": "SYNTH_003",
+    "label": "Synthetic Patient 003",
+    "condition": "Type 1 Diabetes (Elevated baseline set-point)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 148.6,
+    "adaptation_recommended": false,
+    "notes": "Higher fasting set-point with moderate insulin resistance."
+  },
+  {
     "patient_id": "SYNTH_004",
     "label": "Synthetic Patient 004",
     "condition": "Type 1 Diabetes (Simulated adult with stable daytime levels)",
@@ -27,6 +36,24 @@
     "notes": "Predictable nocturnal baseline; reliable 120-minute horizon forecasts under continuous CGM stream."
   },
   {
+    "patient_id": "SYNTH_005",
+    "label": "Synthetic Patient 005",
+    "condition": "Type 1 Diabetes (High fasting baseline & dawn rise)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 154.2,
+    "adaptation_recommended": false,
+    "notes": "Pronounced morning dawn elevation requiring nocturnal baseline context."
+  },
+  {
+    "patient_id": "SYNTH_006",
+    "label": "Synthetic Patient 006",
+    "condition": "Type 1 Diabetes (Standard daytime excursions)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 141.0,
+    "adaptation_recommended": false,
+    "notes": "Predictable meal excursion profiles and stable inter-meal recovery."
+  },
+  {
     "patient_id": "SYNTH_007",
     "label": "Synthetic Patient 007 (High Postprandial Excursions)",
     "condition": "Type 1 Diabetes (Simulated adult with pronounced meal spikes)",
@@ -34,5 +61,32 @@
     "median_glucose_mgdl": 145.8,
     "adaptation_recommended": true,
     "notes": "Prominent meal spikes up to 340 mg/dL; demonstrates how persistence overshoots while the ML model captures decay dynamics."
+  },
+  {
+    "patient_id": "SYNTH_008",
+    "label": "Synthetic Patient 008",
+    "condition": "Type 1 Diabetes (Late morning diurnal peak)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 143.4,
+    "adaptation_recommended": false,
+    "notes": "Diurnal peak occurs later in morning (07:45); benefits from circadian harmonic tracking."
+  },
+  {
+    "patient_id": "SYNTH_009",
+    "label": "Synthetic Patient 009",
+    "condition": "Type 1 Diabetes (Fast clearance dynamic)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 132.8,
+    "adaptation_recommended": false,
+    "notes": "Rapid return to baseline following postprandial excursions."
+  },
+  {
+    "patient_id": "SYNTH_010",
+    "label": "Synthetic Patient 010",
+    "condition": "Type 1 Diabetes (High carbohydrate sensitivity)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 138.7,
+    "adaptation_recommended": false,
+    "notes": "Sensitive postprandial acceleration; benefits from rate-of-change velocity features."
   }
 ]
