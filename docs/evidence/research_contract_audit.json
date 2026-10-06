@@ -1,0 +1,127 @@
+{
+  "audit_version": "1.0.0",
+  "audit_date": "2026-10-05T10:30:00Z",
+  "evaluator": "Senior ML Research Lead & Skeptical Clinical AI Auditor",
+  "system_state": {
+    "repository": "GlucoTwin",
+    "git_branch": "master",
+    "commit_hash": "HEAD",
+    "codebase_status": "Working prototype with unit tests and synthetic benchmark suite"
+  },
+  "challenge_requirements_matrix": {
+    "static_ehr_integration": {
+      "status": "FAIL",
+      "current_implementation": "Static JSON metadata in data/synthetic_demo/patients.json containing patient_id, label, condition, median glucose, and text notes. Rendered purely in UI sidebar.",
+      "gap": "Zero static EHR features are ingested into windows_all.parquet, build_features.py, or model feature matrix X (X dimension = 43, 100% CGM-derived). Patient ID is explicitly excluded to prevent patient overfitting.",
+      "severity": "CRITICAL",
+      "required_remediation": "Incorporate structured historical EHR baseline parameters (e.g. baseline HbA1c proxy, diabetes duration, insulin sensitivity factor, mean nocturnal baseline) into the two-stream feature fusion pipeline."
+    },
+    "dynamic_wearable_integration": {
+      "status": "FAIL",
+      "current_implementation": "Only CGM (glucose_mgdl) is generated and ingested. Synthetic CSV contains sparse/empty meal_carbs_g which is ignored in window extraction.",
+      "gap": "No physical wearable channels exist (Heart Rate, Heart Rate Variability, Step Count, Accelerometry, Skin Temperature, Sleep Stage).",
+      "severity": "HIGH",
+      "required_remediation": "Must clearly define the dynamic wearable scope: either incorporate multi-sensor wearable streams (HR/steps) or explicitly formalize the dynamic stream as CGM-centric wearable biosensing with rigorous ablation."
+    },
+    "multimodal_two_stream_fusion": {
+      "status": "FAIL",
+      "current_implementation": "Model is a single-stream autoregressive tabular gradient booster (HistGradientBoostingRegressor).",
+      "gap": "No fusion layer exists between static EHR and dynamic time-series. The model cannot prove that adding static EHR improves forecasting over CGM alone.",
+      "severity": "CRITICAL",
+      "required_remediation": "Construct a controlled multi-stream ablation experiment (Prompt 1) comparing: (1) CGM history only, (2) CGM + static patient context, (3) CGM + dynamic context, (4) Joint Two-Stream Fusion."
+    },
+    "localized_adverse_event_target": {
+      "status": "WARNING",
+      "current_implementation": "Point regression predicting continuous blood glucose at t+120 minutes (y in mg/dL).",
+      "gap": "Continuous glucose regression does not explicitly score or classify acute localized clinical events (e.g. Hypoglycemia <70 mg/dL, Severe Hypoglycemia <54 mg/dL, Hyperglycemia >180 mg/dL). Classification metrics (AUROC, AUPRC, Sensitivity/Specificity at frozen clinical cutoffs) are missing.",
+      "severity": "MEDIUM",
+      "required_remediation": "Define dual target outputs: (a) continuous point trajectory at t+120m, (b) binary/multiclass adverse excursion event detector with fixed clinical thresholds and calibrated event probabilities."
+    },
+    "digital_twin_drift_detection": {
+      "status": "WARNING",
+      "current_implementation": "Rule-based input data quality checker (ReliabilityChecker) detecting sensor failures (stale readings, gaps, bounds).",
+      "gap": "Input validation checks sensor corruption, not physiological twin drift. A patient can have clean sensor data while their physiological state (metabolic resistance, illness, acute stress) diverges drastically from the twin model's internal representation.",
+      "severity": "HIGH",
+      "required_remediation": "Formalize the Twin State and construct an explicit Twin Drift Detection engine (monitoring cumulative prediction residual divergence, Kalman/particle innovation, or distribution shift) that triggers 'Twin Drift Warning' and degrades confidence."
+    },
+    "reliability_and_gating": {
+      "status": "PASS",
+      "current_implementation": "6 machine-readable reason codes (OK_DATA_INTACT, WARN_PARTIAL_SEQUENCE, ERR_STALE_READING, ERR_EXCESSIVE_GAP, ERR_PHYSIOLOGICAL_OUT_OF_BOUNDS, ERR_INSUFFICIENT_HISTORY) mapped to 3 operational statuses (AVAILABLE, DEGRADED, WITHHELD). Zero silent fabrication.",
+      "gap": "Thresholds (20m stale, 30m gap) are engineering heuristics rather than empirically optimized clinical boundaries.",
+      "severity": "LOW",
+      "required_remediation": "Quantify selective prediction curves (MAE vs coverage) under progressive fault injection."
+    },
+    "leakage_prevention": {
+      "status": "PASS",
+      "current_implementation": "Strict chronological 65/15/20 split across time with 120-minute exclusion buffer between splits. Zero future information used in feature extraction. Scalers and feature stats fitted only on train split.",
+      "gap": "None identified computationally. Fully audited in docs/leakage_audit.md.",
+      "severity": "NONE",
+      "required_remediation": "Maintain strict preservation of splitting protocols."
+    },
+    "experimental_reproducibility": {
+      "status": "PASS",
+      "current_implementation": "Deterministic scripts (scripts/reproduce_results.py, scripts/build_dataset.py) replicating exact numbers across platforms. Fixed seeds (SEED=42).",
+      "gap": "Depends on local synthetic data generator.",
+      "severity": "LOW",
+      "required_remediation": "Retain automated verification script in CI/test suite."
+    },
+    "external_validity_and_generalizability": {
+      "status": "FAIL",
+      "current_implementation": "Evaluated on 10 synthetic patients generated by a procedural composite model (Generator A). Held out generator test (Generator B) completed, showing MAE 39.45 vs 71.99 mg/dL persistence.",
+      "gap": "Zero real-world human data (DiaTrend, OhioT1DM) has been processed. The model's real-world clinical performance remains entirely unproven.",
+      "severity": "CRITICAL",
+      "required_remediation": "Explicitly disclose that all claims of error reduction apply strictly to the specified in silico data-generating process, not human subjects."
+    },
+    "counterfactual_and_intervention_simulation": {
+      "status": "WARNING",
+      "current_implementation": "Unvalidated formulas for exercise and meal carb sensitivity discussed in concept.",
+      "gap": "No causal evidence or validated pharmacokinetic/pharmacodynamic (PK/PD) backing for medication or exercise interventions.",
+      "severity": "HIGH",
+      "required_remediation": "Strictly label all counterfactual/scenario tools as an unvalidated exploratory sandbox, or disable them from clinical claims."
+    }
+  },
+  "component_tier_classification": {
+    "tier_1_experimentally_validated": [
+      "Autoregressive CGM 120-min point forecasting on synthetic cohort (HistGradientBoosting: 18.69 mg/dL MAE vs 53.25 mg/dL persistence)",
+      "Strict chronological train/val/test splitting with 120-min buffer",
+      "Ablation of lag window depth, summary statistics, rate-of-change, and diurnal sin/cos harmonics",
+      "Regime-stratified error analysis (fast rising, fast falling, in-range, nocturnal)",
+      "Per-patient error variability across 10 synthetic subjects",
+      "Input integrity gating (freshness, gap detection, bounds checking)",
+      "Cross-generator holdout evaluation (Generator B transfer)"
+    ],
+    "tier_2_implemented_unvalidated": [
+      "Replay scenario injector (ReplayEngine) for sensor fault simulation",
+      "FastAPI serving layer (/forecast, /health, /patients endpoints)",
+      "Local fallback execution engine in Streamlit"
+    ],
+    "tier_3_ui_presentation_only": [
+      "Static patient profile display (demographics, clinical notes in sidebar)",
+      "Target range shaded band (70-180 mg/dL)",
+      "Reliability indicator badge and traffic light UI",
+      "Personalization toggle for SYNTH_002 (hardcoded -7.17 mg/dL bias shift)"
+    ],
+    "tier_4_hypothesis_simulation_sandbox": [
+      "Counterfactual exercise effect on glucose clearance",
+      "SGLT2i / pharmacodynamic medication impact models",
+      "Whole-body digital twin metabolic claims",
+      "Causal attribution claims via SHAP / feature importances"
+    ]
+  },
+  "forbidden_claims": [
+    "GlucoTwin is a clinically validated medical device or diagnostic system",
+    "GlucoTwin reduces forecast error on human diabetes patients by 64.9%",
+    "The model provides actionable insulin dosing, medication adjustment, or meal therapy advice",
+    "Feature importance or SHAP scores prove causal physiological drivers of glucose excursions",
+    "Simulated exercise or drug effects represent true biological outcomes in real patients",
+    "The system maintains a full-body biophysical digital twin of the patient"
+  ],
+  "open_research_questions": [
+    "Q1: Does fusing static patient EHR context with dynamic CGM stream produce a statistically significant reduction in forecast error over CGM-only models?",
+    "Q2: Can we formulate a mathematically rigorous metric for Twin Drift that separates sensor failure from physiological state divergence?",
+    "Q3: Does selective prediction (abstention under high twin drift) improve downstream clinical utility and lower severe error rates?",
+    "Q4: How does performance translate from regression MAE to clinically actionable adverse event classification (Hypoglycemia < 70 mg/dL)?"
+  ],
+  "overall_contract_verdict": "RESEARCH_GATE_CONDITIONAL_PASS",
+  "contract_summary": "The engineering foundation is robust and leakage-safe, but the scientific claims must be formally constrained. The project must pivot from a CGM-only regressor to a Two-Stream Twin Architecture with explicit Twin Drift Detection and Adverse Event scoring."
+}

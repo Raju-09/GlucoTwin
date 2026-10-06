@@ -78,3 +78,24 @@
 - [x] Filled docs/model_card.md with real metrics & per-patient breakdown
 - [x] docs/limitations.md & docs/personalization_feasibility.md complete
 - [x] Submission ready: reproducible scripts, deterministic fixtures, 56 unit/API tests passing
+
+## Research Hardening & Twin Drift Gates
+- [x] Gate 0: Freeze Scientific Contract (docs/research_contract.md, reports/research_contract_audit.json)
+- [x] Gate 1: Two-Stream Multimodal Fusion Proof (src/glucotwin/features/multimodal.py, scripts/run_multimodal_ablation.py, docs/multimodal_ablation.md)
+- [x] Gate 1.5: Data Generating Process Audit & Leakage Remediation (docs/gate_1_5_multimodal_data_audit.md, reports/gate_1_5_multimodal_data_audit.json)
+  - Fixed P0 EHR target proxy leakage (replaced basal_mean with noisy observational fasting lab + clinical T2D covariates).
+  - Decoupled wearable telemetry generation from CGM glucose (autonomous circadian & activity bouts).
+  - Replaced naïve paired t-test pseudoreplication with Patient-Level Paired Differences ($N=10, df=9$) and 24-hour moving block bootstrap 95% CIs.
+  - Re-evaluated all 4 ablation modes: CGM-only (18.73 mg/dL), CGM+EHR (17.89 mg/dL, 95% CI [+0.11, +1.41]), CGM+Wearables (18.56 mg/dL), Full Fusion (17.96 mg/dL).
+  - Created canonical single source of truth: `artifacts/experiment_manifest.json`.
+  - Realigned clinical cohort framing to Type 2 Diabetes (India chronic lifestyle disease challenge focus).
+  - Updated Streamlit UI & FastAPI endpoints to dynamically load canonical manifest benchmarks.
+- [ ] Gate 2: Patient Digital State Engine (src/glucotwin/twin/state.py, src/glucotwin/twin/update.py)
+- [ ] Gate 3: Twin Drift Detection Subsystem (src/glucotwin/twin/drift.py, src/glucotwin/twin/fidelity.py)
+- [ ] Gate 4: Quantitative Selective Prediction & Fault Injection
+- [ ] Gate 5: Localized Adverse Event Target Definition
+- [ ] Gate 6: Sandbox Isolation for Counterfactual Simulations
+- [ ] Gate 7: Unseen Patient Validation & Generalization Testing
+- [ ] Gate 8: Stress Testing & Drift Benchmark Suite
+- [ ] Gate 9: Jury-Facing UI with Twin Drift & Multimodal Evidence
+- [ ] Gate 10: Red Team Review & Submission Freeze

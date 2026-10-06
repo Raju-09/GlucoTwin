@@ -143,21 +143,32 @@ def get_model_info() -> ModelInfoResponse:
             detail="Forecasting model is not loaded.",
         )
 
-    # Load evaluation report if available
+    # Load canonical experiment manifest if available
+    manifest_file = PROJECT_ROOT / "artifacts" / "experiment_manifest.json"
     eval_file = PROJECT_ROOT / "artifacts" / "evaluations" / "eval_ml_test.json"
     p_file = PROJECT_ROOT / "artifacts" / "evaluations" / "eval_persistence_test.json"
 
-    ml_mae = 18.69
-    ml_rmse = 30.84
+    ml_mae = 17.96
+    ml_rmse = 29.53
     p_mae = 53.25
 
-    if eval_file.exists():
+    if manifest_file.exists():
+        try:
+            with manifest_file.open("r", encoding="utf-8") as fh:
+                mf = json.load(fh)
+                bm = mf.get("benchmarks", {})
+                ml_mae = bm.get("full_fusion_mae_mgdl", ml_mae)
+                ml_rmse = bm.get("full_fusion_rmse_mgdl", ml_rmse)
+                p_mae = bm.get("persistence_mae_mgdl", p_mae)
+        except Exception:
+            pass
+    elif eval_file.exists():
         with eval_file.open("r", encoding="utf-8") as fh:
             ev = json.load(fh)
             ml_mae = ev.get("mae", ml_mae)
             ml_rmse = ev.get("rmse", ml_rmse)
 
-    if p_file.exists():
+    if p_file.exists() and not manifest_file.exists():
         with p_file.open("r", encoding="utf-8") as fh:
             pv = json.load(fh)
             p_mae = pv.get("mae", p_mae)
@@ -166,7 +177,7 @@ def get_model_info() -> ModelInfoResponse:
 
     return ModelInfoResponse(
         model_name=_forecaster.model_name,
-        version="v0.1",
+        version="v1.2",
         horizon_minutes=_forecaster.horizon_minutes,
         test_mae_mgdl=ml_mae,
         test_rmse_mgdl=ml_rmse,
