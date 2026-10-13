@@ -47,13 +47,45 @@ class GlucoTwinForecaster:
         self.model_name = model_name
         self.horizon_minutes = horizon_minutes
 
-    def predict(self, windows_df: pd.DataFrame) -> np.ndarray:
-        """Extract features and generate bounded glucose predictions."""
-        X, _, _ = extract_features_from_windows(windows_df)
-        # Ensure exact column ordering
-        X_ordered = X[self.feature_names]
+    def predict(
+        self,
+        windows_df: pd.DataFrame,
+        ehr_df: pd.DataFrame | None = None,
+        wearable_df: pd.DataFrame | None = None,
+    ) -> np.ndarray:
+        """Extract features and generate bounded glucose predictions.
+
+        Supports:
+        1. Pre-computed feature matrices where all required features already exist as columns.
+        2. Window DataFrames requiring multimodal or CGM feature extraction.
+        """
+        # Case 1: Pre-computed feature columns already present
+        if all(col in windows_df.columns for col in self.feature_names):
+            X_ordered = windows_df[self.feature_names]
+        else:
+            # Case 2: Multimodal or standard window feature extraction
+            has_multimodal = any(
+                c.startswith("ehr_") or c.startswith("wearable_") for c in self.feature_names
+            )
+            if has_multimodal:
+                from glucotwin.features.multimodal import extract_multimodal_features
+
+                has_wearables = any(c.startswith("wearable_") for c in self.feature_names)
+                mode = "full_fusion" if has_wearables else "cgm_plus_ehr"
+                X, _, _ = extract_multimodal_features(
+                    windows_df, ehr_df=ehr_df, wearable_df=wearable_df, mode=mode
+                )
+            else:
+                X, _, _ = extract_features_from_windows(windows_df)
+
+            # Impute any rare missing columns with safe defaults
+            for feat in self.feature_names:
+                if feat not in X.columns:
+                    X[feat] = 0.0
+
+            X_ordered = X[self.feature_names]
+
         raw_preds = self.pipeline.predict(X_ordered)
-        # Enforce physiological bounds
         return np.clip(raw_preds, GLUCOSE_MIN_MGDL, GLUCOSE_MAX_MGDL)
 
     def save(self, out_dir: str | Path) -> None:

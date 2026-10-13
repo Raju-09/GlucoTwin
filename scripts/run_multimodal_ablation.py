@@ -107,6 +107,7 @@ def run_ablation_experiment(
     }
 
     predictions_by_config: dict[str, np.ndarray] = {}
+    trained_pipelines: dict[str, tuple[Pipeline, list[str]]] = {}
     y_test_true = None
 
     for label, mode, desc in configs:
@@ -145,6 +146,7 @@ def run_ablation_experiment(
         # 3. Train
         console.print(f"  Training on {len(X_train):,} samples ({len(feat_names)} features)...")
         pipeline.fit(X_train, y_train)
+        trained_pipelines[mode] = (pipeline, feat_names)
 
         # 4. Predict
         preds_test = np.clip(pipeline.predict(X_test), 20.0, 600.0)
@@ -252,6 +254,7 @@ def run_ablation_experiment(
             for i, pid in enumerate(patient_ids)
         }
     }
+    results["_trained_pipelines"] = trained_pipelines
 
     return results
 
@@ -333,6 +336,21 @@ def main() -> int:
         wearable_df=wearable_df,
         seed=args.seed,
     )
+
+    # Extract trained pipelines before JSON serialization
+    trained_pipelines = results.pop("_trained_pipelines", {})
+    if "full_fusion" in trained_pipelines:
+        from glucotwin.models.train import GlucoTwinForecaster
+        pipe, feat_names = trained_pipelines["full_fusion"]
+        forecaster = GlucoTwinForecaster(
+            pipeline=pipe,
+            feature_names=feat_names,
+            model_name="HistGradientBoostingRegressor (Two-Stream Fusion)",
+            horizon_minutes=120,
+        )
+        forecaster.save(project_root / "artifacts" / "model_multimodal")
+        forecaster.save(project_root / "artifacts" / "model_v0.1")
+        console.print("[green]Saved multimodal model to artifacts/model_multimodal and artifacts/model_v0.1[/green]")
 
     out_file = project_root / args.out
     out_file.parent.mkdir(parents=True, exist_ok=True)

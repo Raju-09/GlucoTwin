@@ -141,3 +141,54 @@ def test_forecast_degraded_partial_sequence(client: TestClient):
     assert data["reliability_status"] == "degraded"
     assert data["predicted_glucose"] is not None
     assert data["reason_code"] == "WARN_PARTIAL_SEQUENCE"
+
+
+def test_forecast_intermediate_trajectory_and_clinical_risk(client: TestClient):
+    base_ts = pd.Timestamp("2024-03-01 12:00:00", tz="UTC")
+    timestamps = [(base_ts + pd.Timedelta(minutes=5 * i)).isoformat() for i in range(24)]
+    values = [140.0 + i * 1.5 for i in range(24)]
+
+    payload = {
+        "patient_id": "SYNTH_001",
+        "origin_time": timestamps[-1],
+        "timestamps": timestamps,
+        "glucose_readings": values,
+        "current_time": timestamps[-1],
+    }
+
+    resp = client.post("/forecast", json=payload)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert len(data["intermediate_trajectory"]) == 4
+    assert [tp["minutes_ahead"] for tp in data["intermediate_trajectory"]] == [30, 60, 90, 120]
+    assert data["hypoglycemia_risk"] in ("Low", "Moderate", "Elevated")
+    assert data["hyperglycemia_risk"] in ("Low", "Moderate", "Elevated")
+    assert len(data["clinical_risk_advisory"]) > 0
+
+
+def test_twin_state_and_update_endpoints(client: TestClient):
+    # 1. GET initial state
+    resp = client.get("/twin/SYNTH_001/state")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["patient_id"] == "SYNTH_001"
+    assert "phenotype" in data
+    assert "dynamic_history" in data
+    assert "stream_freshness" in data
+    assert data["integrity_state"]["status"] == "AVAILABLE"
+
+    # 2. POST update packet
+    pkt = {
+        "timestamp": "2026-10-07T12:05:00Z",
+        "glucose_mgdl": 142.5,
+        "heart_rate_bpm": 74.0,
+        "hrv_rmssd_ms": 45.0,
+        "steps": 120,
+        "sleep_state": "awake",
+    }
+    resp_up = client.post("/twin/SYNTH_001/update", json=pkt)
+    assert resp_up.status_code == 200
+    up_data = resp_up.json()
+    assert up_data["sequence_step"] >= 1
+    assert up_data["derived_kinematics"]["current_glucose"] == 142.5
+
