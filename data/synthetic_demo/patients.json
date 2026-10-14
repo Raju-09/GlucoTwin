@@ -4,89 +4,539 @@
     "label": "Synthetic Patient 001",
     "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
     "days_recorded": 14,
-    "median_glucose_mgdl": 139.5,
+    "median_glucose_mgdl": 111.6,
     "adaptation_recommended": false,
-    "notes": "Circadian basal rhythm with morning dawn rise and diet-related postprandial excursions."
+    "notes": "Adult 74y M, BMI 25.6, HbA1c 6.0%. Lifestyle; No dawn elevation."
   },
   {
     "patient_id": "SYNTH_002",
-    "label": "Synthetic Patient 002 (Adaptation Benchmark)",
+    "label": "Synthetic Patient 002",
     "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
     "days_recorded": 14,
-    "median_glucose_mgdl": 128.2,
-    "adaptation_recommended": true,
-    "notes": "Demonstrates benefit from patient calibration with prominent nocturnal dipping and baseline glycemic offset."
+    "median_glucose_mgdl": 178.5,
+    "adaptation_recommended": false,
+    "notes": "Adult 38y F, BMI 21.0, HbA1c 8.2%. Lifestyle + SGLT2i; No dawn elevation."
   },
   {
     "patient_id": "SYNTH_003",
     "label": "Synthetic Patient 003",
     "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
     "days_recorded": 14,
-    "median_glucose_mgdl": 148.6,
+    "median_glucose_mgdl": 126.2,
     "adaptation_recommended": false,
-    "notes": "Higher fasting set-point with moderate peripheral insulin resistance."
+    "notes": "Adult 64y F, BMI 25.1, HbA1c 6.5%. Metformin; No dawn elevation."
   },
   {
     "patient_id": "SYNTH_004",
     "label": "Synthetic Patient 004",
     "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
     "days_recorded": 14,
-    "median_glucose_mgdl": 135.0,
+    "median_glucose_mgdl": 141.0,
     "adaptation_recommended": false,
-    "notes": "Predictable nocturnal baseline; reliable 120-minute horizon forecasts under continuous CGM stream."
+    "notes": "Adult 58y F, BMI 34.3, HbA1c 7.3%. Metformin; Dawn elevation present."
   },
   {
     "patient_id": "SYNTH_005",
     "label": "Synthetic Patient 005",
     "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
     "days_recorded": 14,
-    "median_glucose_mgdl": 154.2,
-    "adaptation_recommended": false,
-    "notes": "Pronounced morning dawn elevation requiring historical phenotypic context."
+    "median_glucose_mgdl": 141.2,
+    "adaptation_recommended": true,
+    "notes": "Adult 41y M, BMI 30.4, HbA1c 6.9%. Metformin; Dawn elevation present."
   },
   {
     "patient_id": "SYNTH_006",
     "label": "Synthetic Patient 006",
     "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
     "days_recorded": 14,
-    "median_glucose_mgdl": 141.0,
+    "median_glucose_mgdl": 168.0,
     "adaptation_recommended": false,
-    "notes": "Predictable meal excursion profiles and stable inter-meal recovery."
+    "notes": "Adult 61y F, BMI 28.5, HbA1c 8.1%. Metformin; No dawn elevation."
   },
   {
     "patient_id": "SYNTH_007",
-    "label": "Synthetic Patient 007 (High Postprandial Excursions)",
+    "label": "Synthetic Patient 007",
     "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
     "days_recorded": 14,
-    "median_glucose_mgdl": 145.8,
-    "adaptation_recommended": true,
-    "notes": "Prominent meal spikes up to 340 mg/dL; demonstrates how persistence overshoots while the ML model captures decay dynamics."
+    "median_glucose_mgdl": 113.1,
+    "adaptation_recommended": false,
+    "notes": "Adult 71y F, BMI 24.3, HbA1c 6.0%. Metformin; Dawn elevation present."
   },
   {
     "patient_id": "SYNTH_008",
     "label": "Synthetic Patient 008",
     "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
     "days_recorded": 14,
-    "median_glucose_mgdl": 143.4,
+    "median_glucose_mgdl": 126.2,
     "adaptation_recommended": false,
-    "notes": "Diurnal peak occurs in late morning (07:45); benefits from circadian harmonic tracking."
+    "notes": "Adult 53y M, BMI 28.9, HbA1c 6.6%. Metformin; No dawn elevation."
   },
   {
     "patient_id": "SYNTH_009",
     "label": "Synthetic Patient 009",
     "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
     "days_recorded": 14,
-    "median_glucose_mgdl": 132.8,
+    "median_glucose_mgdl": 186.8,
     "adaptation_recommended": false,
-    "notes": "Active lifestyle with brisk postprandial clearance and low nocturnal variability."
+    "notes": "Adult 51y M, BMI 25.1, HbA1c 8.4%. Lifestyle + SGLT2i; Dawn elevation present."
   },
   {
     "patient_id": "SYNTH_010",
     "label": "Synthetic Patient 010",
     "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
     "days_recorded": 14,
-    "median_glucose_mgdl": 138.7,
+    "median_glucose_mgdl": 106.7,
+    "adaptation_recommended": true,
+    "notes": "Adult 67y M, BMI 23.8, HbA1c 6.2%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_011",
+    "label": "Synthetic Patient 011",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 114.6,
     "adaptation_recommended": false,
-    "notes": "Sensitive postprandial acceleration; benefits from rate-of-change velocity features."
+    "notes": "Adult 65y F, BMI 38.1, HbA1c 6.3%. Metformin + SGLT2i; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_012",
+    "label": "Synthetic Patient 012",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 119.0,
+    "adaptation_recommended": false,
+    "notes": "Adult 72y F, BMI 27.4, HbA1c 6.7%. Metformin; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_013",
+    "label": "Synthetic Patient 013",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 127.5,
+    "adaptation_recommended": false,
+    "notes": "Adult 54y F, BMI 31.2, HbA1c 6.9%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_014",
+    "label": "Synthetic Patient 014",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 160.5,
+    "adaptation_recommended": false,
+    "notes": "Adult 49y F, BMI 25.0, HbA1c 7.7%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_015",
+    "label": "Synthetic Patient 015",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 163.7,
+    "adaptation_recommended": true,
+    "notes": "Adult 43y M, BMI 34.4, HbA1c 7.9%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_016",
+    "label": "Synthetic Patient 016",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 151.4,
+    "adaptation_recommended": false,
+    "notes": "Adult 49y M, BMI 31.0, HbA1c 7.4%. Metformin + SGLT2i; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_017",
+    "label": "Synthetic Patient 017",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 172.4,
+    "adaptation_recommended": false,
+    "notes": "Adult 73y M, BMI 32.8, HbA1c 7.8%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_018",
+    "label": "Synthetic Patient 018",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 145.4,
+    "adaptation_recommended": false,
+    "notes": "Adult 47y F, BMI 25.6, HbA1c 7.2%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_019",
+    "label": "Synthetic Patient 019",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 169.0,
+    "adaptation_recommended": false,
+    "notes": "Adult 69y M, BMI 29.6, HbA1c 8.1%. Metformin; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_020",
+    "label": "Synthetic Patient 020",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 146.0,
+    "adaptation_recommended": true,
+    "notes": "Adult 42y M, BMI 27.7, HbA1c 7.0%. Metformin + SGLT2i; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_021",
+    "label": "Synthetic Patient 021",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 138.8,
+    "adaptation_recommended": false,
+    "notes": "Adult 71y M, BMI 31.8, HbA1c 7.1%. Metformin; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_022",
+    "label": "Synthetic Patient 022",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 126.9,
+    "adaptation_recommended": false,
+    "notes": "Adult 50y F, BMI 21.0, HbA1c 6.2%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_023",
+    "label": "Synthetic Patient 023",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 134.0,
+    "adaptation_recommended": false,
+    "notes": "Adult 42y M, BMI 21.0, HbA1c 6.5%. Metformin + SGLT2i; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_024",
+    "label": "Synthetic Patient 024",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 96.8,
+    "adaptation_recommended": false,
+    "notes": "Adult 72y F, BMI 26.3, HbA1c 6.0%. Lifestyle; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_025",
+    "label": "Synthetic Patient 025",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 154.0,
+    "adaptation_recommended": true,
+    "notes": "Adult 52y F, BMI 30.6, HbA1c 7.8%. Lifestyle; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_026",
+    "label": "Synthetic Patient 026",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 144.3,
+    "adaptation_recommended": false,
+    "notes": "Adult 73y F, BMI 31.0, HbA1c 7.4%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_027",
+    "label": "Synthetic Patient 027",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 186.3,
+    "adaptation_recommended": false,
+    "notes": "Adult 43y M, BMI 29.0, HbA1c 8.4%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_028",
+    "label": "Synthetic Patient 028",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 139.5,
+    "adaptation_recommended": false,
+    "notes": "Adult 72y M, BMI 29.2, HbA1c 6.7%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_029",
+    "label": "Synthetic Patient 029",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 132.3,
+    "adaptation_recommended": false,
+    "notes": "Adult 53y F, BMI 31.0, HbA1c 7.3%. Metformin; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_030",
+    "label": "Synthetic Patient 030",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 130.5,
+    "adaptation_recommended": true,
+    "notes": "Adult 54y M, BMI 21.7, HbA1c 6.6%. Metformin; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_031",
+    "label": "Synthetic Patient 031",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 102.8,
+    "adaptation_recommended": false,
+    "notes": "Adult 61y M, BMI 31.4, HbA1c 5.9%. Metformin; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_032",
+    "label": "Synthetic Patient 032",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 140.3,
+    "adaptation_recommended": false,
+    "notes": "Adult 40y F, BMI 30.1, HbA1c 7.0%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_033",
+    "label": "Synthetic Patient 033",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 109.2,
+    "adaptation_recommended": false,
+    "notes": "Adult 39y M, BMI 28.6, HbA1c 5.9%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_034",
+    "label": "Synthetic Patient 034",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 162.1,
+    "adaptation_recommended": false,
+    "notes": "Adult 63y M, BMI 31.8, HbA1c 7.7%. Metformin + SGLT2i; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_035",
+    "label": "Synthetic Patient 035",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 175.5,
+    "adaptation_recommended": true,
+    "notes": "Adult 42y M, BMI 34.0, HbA1c 8.2%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_036",
+    "label": "Synthetic Patient 036",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 125.4,
+    "adaptation_recommended": false,
+    "notes": "Adult 42y M, BMI 31.7, HbA1c 6.4%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_037",
+    "label": "Synthetic Patient 037",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 107.9,
+    "adaptation_recommended": false,
+    "notes": "Adult 48y M, BMI 28.3, HbA1c 5.8%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_038",
+    "label": "Synthetic Patient 038",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 174.4,
+    "adaptation_recommended": false,
+    "notes": "Adult 42y M, BMI 34.0, HbA1c 8.1%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_039",
+    "label": "Synthetic Patient 039",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 131.6,
+    "adaptation_recommended": false,
+    "notes": "Adult 62y M, BMI 25.0, HbA1c 6.9%. Metformin + SGLT2i; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_040",
+    "label": "Synthetic Patient 040",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 141.6,
+    "adaptation_recommended": true,
+    "notes": "Adult 58y F, BMI 24.7, HbA1c 7.0%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_041",
+    "label": "Synthetic Patient 041",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 113.9,
+    "adaptation_recommended": false,
+    "notes": "Adult 64y M, BMI 27.6, HbA1c 6.3%. Lifestyle; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_042",
+    "label": "Synthetic Patient 042",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 170.0,
+    "adaptation_recommended": false,
+    "notes": "Adult 51y F, BMI 25.5, HbA1c 7.9%. Metformin + SGLT2i; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_043",
+    "label": "Synthetic Patient 043",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 151.2,
+    "adaptation_recommended": false,
+    "notes": "Adult 38y M, BMI 31.6, HbA1c 7.3%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_044",
+    "label": "Synthetic Patient 044",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 141.1,
+    "adaptation_recommended": false,
+    "notes": "Adult 48y F, BMI 22.3, HbA1c 6.9%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_045",
+    "label": "Synthetic Patient 045",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 148.0,
+    "adaptation_recommended": true,
+    "notes": "Adult 73y M, BMI 24.4, HbA1c 7.4%. Metformin + SGLT2i; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_046",
+    "label": "Synthetic Patient 046",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 137.2,
+    "adaptation_recommended": false,
+    "notes": "Adult 74y M, BMI 26.9, HbA1c 7.1%. Lifestyle; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_047",
+    "label": "Synthetic Patient 047",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 151.6,
+    "adaptation_recommended": false,
+    "notes": "Adult 46y F, BMI 32.0, HbA1c 7.5%. Metformin + SGLT2i; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_048",
+    "label": "Synthetic Patient 048",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 163.1,
+    "adaptation_recommended": false,
+    "notes": "Adult 69y M, BMI 26.0, HbA1c 7.7%. Metformin; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_049",
+    "label": "Synthetic Patient 049",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 101.8,
+    "adaptation_recommended": false,
+    "notes": "Adult 40y M, BMI 30.2, HbA1c 6.3%. Metformin + SGLT2i; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_050",
+    "label": "Synthetic Patient 050",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 169.7,
+    "adaptation_recommended": true,
+    "notes": "Adult 70y M, BMI 22.2, HbA1c 8.0%. Metformin + SGLT2i; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_051",
+    "label": "Synthetic Patient 051",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 146.9,
+    "adaptation_recommended": false,
+    "notes": "Adult 52y M, BMI 23.5, HbA1c 7.4%. Metformin; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_052",
+    "label": "Synthetic Patient 052",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 142.9,
+    "adaptation_recommended": false,
+    "notes": "Adult 47y M, BMI 31.6, HbA1c 7.2%. Metformin; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_053",
+    "label": "Synthetic Patient 053",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 142.1,
+    "adaptation_recommended": false,
+    "notes": "Adult 45y F, BMI 30.8, HbA1c 7.2%. Lifestyle; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_054",
+    "label": "Synthetic Patient 054",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 95.9,
+    "adaptation_recommended": false,
+    "notes": "Adult 72y M, BMI 24.3, HbA1c 5.8%. Metformin; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_055",
+    "label": "Synthetic Patient 055",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 155.9,
+    "adaptation_recommended": true,
+    "notes": "Adult 69y M, BMI 31.4, HbA1c 7.3%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_056",
+    "label": "Synthetic Patient 056",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 148.8,
+    "adaptation_recommended": false,
+    "notes": "Adult 63y M, BMI 31.6, HbA1c 7.2%. Lifestyle; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_057",
+    "label": "Synthetic Patient 057",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 136.4,
+    "adaptation_recommended": false,
+    "notes": "Adult 47y F, BMI 31.2, HbA1c 7.1%. Metformin + SGLT2i; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_058",
+    "label": "Synthetic Patient 058",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 155.3,
+    "adaptation_recommended": false,
+    "notes": "Adult 63y M, BMI 25.6, HbA1c 7.5%. Metformin; Dawn elevation present."
+  },
+  {
+    "patient_id": "SYNTH_059",
+    "label": "Synthetic Patient 059",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 128.1,
+    "adaptation_recommended": false,
+    "notes": "Adult 41y F, BMI 29.8, HbA1c 6.9%. Metformin + SGLT2i; No dawn elevation."
+  },
+  {
+    "patient_id": "SYNTH_060",
+    "label": "Synthetic Patient 060",
+    "condition": "Synthetic diabetes cohort (Simulated adult dynamics)",
+    "days_recorded": 14,
+    "median_glucose_mgdl": 162.7,
+    "adaptation_recommended": true,
+    "notes": "Adult 43y M, BMI 30.9, HbA1c 7.7%. Metformin; Dawn elevation present."
   }
 ]

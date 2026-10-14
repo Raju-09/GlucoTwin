@@ -1,0 +1,445 @@
+{
+  "experiment_id": "EXP01_BREAK_YOUR_CLAIM",
+  "n_patients": 60,
+  "total_windows": 224681,
+  "temporal_split": {
+    "cgm_only_mae": 18.315,
+    "cgm_plus_ehr_mae": 17.611,
+    "cgm_plus_permuted_ehr_mae": 18.099,
+    "ehr_gain_survived_permutation": true
+  },
+  "lopo_cross_validation": {
+    "mean_cgm_only_mae": 17.655,
+    "mean_cgm_plus_ehr_mae": 17.645,
+    "mean_permuted_ehr_mae": 20.47,
+    "mean_improvement_mgdl": 0.01,
+    "bootstrap_95_ci_improvement": [
+      -0.341,
+      0.326
+    ],
+    "paired_t_statistic": 0.055,
+    "p_value": 0.9562
+  },
+  "per_patient_summary": {
+    "SYNTH_001": {
+      "mae_cgm_only": 15.31,
+      "mae_cgm_plus_ehr": 15.441,
+      "improvement_mgdl": -0.13,
+      "delta_mae_mgdl": 0.13,
+      "mae_permuted_ehr": 21.568
+    },
+    "SYNTH_002": {
+      "mae_cgm_only": 15.748,
+      "mae_cgm_plus_ehr": 15.334,
+      "improvement_mgdl": 0.413,
+      "delta_mae_mgdl": -0.413,
+      "mae_permuted_ehr": 23.393
+    },
+    "SYNTH_003": {
+      "mae_cgm_only": 18.309,
+      "mae_cgm_plus_ehr": 17.657,
+      "improvement_mgdl": 0.652,
+      "delta_mae_mgdl": -0.652,
+      "mae_permuted_ehr": 19.418
+    },
+    "SYNTH_004": {
+      "mae_cgm_only": 20.488,
+      "mae_cgm_plus_ehr": 23.532,
+      "improvement_mgdl": -3.044,
+      "delta_mae_mgdl": 3.044,
+      "mae_permuted_ehr": 20.763
+    },
+    "SYNTH_005": {
+      "mae_cgm_only": 16.267,
+      "mae_cgm_plus_ehr": 17.343,
+      "improvement_mgdl": -1.076,
+      "delta_mae_mgdl": 1.076,
+      "mae_permuted_ehr": 16.967
+    },
+    "SYNTH_006": {
+      "mae_cgm_only": 21.181,
+      "mae_cgm_plus_ehr": 22.458,
+      "improvement_mgdl": -1.277,
+      "delta_mae_mgdl": 1.277,
+      "mae_permuted_ehr": 22.88
+    },
+    "SYNTH_007": {
+      "mae_cgm_only": 17.682,
+      "mae_cgm_plus_ehr": 18.941,
+      "improvement_mgdl": -1.259,
+      "delta_mae_mgdl": 1.259,
+      "mae_permuted_ehr": 19.261
+    },
+    "SYNTH_008": {
+      "mae_cgm_only": 19.102,
+      "mae_cgm_plus_ehr": 18.464,
+      "improvement_mgdl": 0.638,
+      "delta_mae_mgdl": -0.638,
+      "mae_permuted_ehr": 18.669
+    },
+    "SYNTH_009": {
+      "mae_cgm_only": 18.489,
+      "mae_cgm_plus_ehr": 17.48,
+      "improvement_mgdl": 1.009,
+      "delta_mae_mgdl": -1.009,
+      "mae_permuted_ehr": 30.973
+    },
+    "SYNTH_010": {
+      "mae_cgm_only": 19.698,
+      "mae_cgm_plus_ehr": 19.777,
+      "improvement_mgdl": -0.079,
+      "delta_mae_mgdl": 0.079,
+      "mae_permuted_ehr": 22.202
+    },
+    "SYNTH_011": {
+      "mae_cgm_only": 17.987,
+      "mae_cgm_plus_ehr": 20.385,
+      "improvement_mgdl": -2.398,
+      "delta_mae_mgdl": 2.398,
+      "mae_permuted_ehr": 28.026
+    },
+    "SYNTH_012": {
+      "mae_cgm_only": 15.744,
+      "mae_cgm_plus_ehr": 16.328,
+      "improvement_mgdl": -0.583,
+      "delta_mae_mgdl": 0.583,
+      "mae_permuted_ehr": 19.185
+    },
+    "SYNTH_013": {
+      "mae_cgm_only": 18.19,
+      "mae_cgm_plus_ehr": 18.906,
+      "improvement_mgdl": -0.717,
+      "delta_mae_mgdl": 0.717,
+      "mae_permuted_ehr": 18.34
+    },
+    "SYNTH_014": {
+      "mae_cgm_only": 15.656,
+      "mae_cgm_plus_ehr": 14.292,
+      "improvement_mgdl": 1.364,
+      "delta_mae_mgdl": -1.364,
+      "mae_permuted_ehr": 17.75
+    },
+    "SYNTH_015": {
+      "mae_cgm_only": 22.27,
+      "mae_cgm_plus_ehr": 24.067,
+      "improvement_mgdl": -1.796,
+      "delta_mae_mgdl": 1.796,
+      "mae_permuted_ehr": 23.63
+    },
+    "SYNTH_016": {
+      "mae_cgm_only": 16.777,
+      "mae_cgm_plus_ehr": 16.109,
+      "improvement_mgdl": 0.669,
+      "delta_mae_mgdl": -0.669,
+      "mae_permuted_ehr": 17.324
+    },
+    "SYNTH_017": {
+      "mae_cgm_only": 17.372,
+      "mae_cgm_plus_ehr": 18.21,
+      "improvement_mgdl": -0.837,
+      "delta_mae_mgdl": 0.837,
+      "mae_permuted_ehr": 17.436
+    },
+    "SYNTH_018": {
+      "mae_cgm_only": 17.381,
+      "mae_cgm_plus_ehr": 17.487,
+      "improvement_mgdl": -0.107,
+      "delta_mae_mgdl": 0.107,
+      "mae_permuted_ehr": 17.456
+    },
+    "SYNTH_019": {
+      "mae_cgm_only": 17.092,
+      "mae_cgm_plus_ehr": 17.147,
+      "improvement_mgdl": -0.055,
+      "delta_mae_mgdl": 0.055,
+      "mae_permuted_ehr": 17.614
+    },
+    "SYNTH_020": {
+      "mae_cgm_only": 19.022,
+      "mae_cgm_plus_ehr": 18.339,
+      "improvement_mgdl": 0.682,
+      "delta_mae_mgdl": -0.682,
+      "mae_permuted_ehr": 20.523
+    },
+    "SYNTH_021": {
+      "mae_cgm_only": 16.41,
+      "mae_cgm_plus_ehr": 15.021,
+      "improvement_mgdl": 1.389,
+      "delta_mae_mgdl": -1.389,
+      "mae_permuted_ehr": 23.021
+    },
+    "SYNTH_022": {
+      "mae_cgm_only": 18.319,
+      "mae_cgm_plus_ehr": 17.546,
+      "improvement_mgdl": 0.773,
+      "delta_mae_mgdl": -0.773,
+      "mae_permuted_ehr": 19.573
+    },
+    "SYNTH_023": {
+      "mae_cgm_only": 16.264,
+      "mae_cgm_plus_ehr": 16.293,
+      "improvement_mgdl": -0.029,
+      "delta_mae_mgdl": 0.029,
+      "mae_permuted_ehr": 18.593
+    },
+    "SYNTH_024": {
+      "mae_cgm_only": 16.684,
+      "mae_cgm_plus_ehr": 18.112,
+      "improvement_mgdl": -1.429,
+      "delta_mae_mgdl": 1.429,
+      "mae_permuted_ehr": 26.657
+    },
+    "SYNTH_025": {
+      "mae_cgm_only": 17.227,
+      "mae_cgm_plus_ehr": 20.232,
+      "improvement_mgdl": -3.005,
+      "delta_mae_mgdl": 3.005,
+      "mae_permuted_ehr": 18.2
+    },
+    "SYNTH_026": {
+      "mae_cgm_only": 20.411,
+      "mae_cgm_plus_ehr": 20.799,
+      "improvement_mgdl": -0.387,
+      "delta_mae_mgdl": 0.387,
+      "mae_permuted_ehr": 20.808
+    },
+    "SYNTH_027": {
+      "mae_cgm_only": 16.09,
+      "mae_cgm_plus_ehr": 14.812,
+      "improvement_mgdl": 1.278,
+      "delta_mae_mgdl": -1.278,
+      "mae_permuted_ehr": 29.656
+    },
+    "SYNTH_028": {
+      "mae_cgm_only": 16.036,
+      "mae_cgm_plus_ehr": 16.215,
+      "improvement_mgdl": -0.179,
+      "delta_mae_mgdl": 0.179,
+      "mae_permuted_ehr": 16.916
+    },
+    "SYNTH_029": {
+      "mae_cgm_only": 19.817,
+      "mae_cgm_plus_ehr": 21.505,
+      "improvement_mgdl": -1.687,
+      "delta_mae_mgdl": 1.687,
+      "mae_permuted_ehr": 20.652
+    },
+    "SYNTH_030": {
+      "mae_cgm_only": 16.108,
+      "mae_cgm_plus_ehr": 13.617,
+      "improvement_mgdl": 2.49,
+      "delta_mae_mgdl": -2.49,
+      "mae_permuted_ehr": 16.849
+    },
+    "SYNTH_031": {
+      "mae_cgm_only": 16.899,
+      "mae_cgm_plus_ehr": 15.511,
+      "improvement_mgdl": 1.388,
+      "delta_mae_mgdl": -1.388,
+      "mae_permuted_ehr": 25.348
+    },
+    "SYNTH_032": {
+      "mae_cgm_only": 16.275,
+      "mae_cgm_plus_ehr": 15.81,
+      "improvement_mgdl": 0.465,
+      "delta_mae_mgdl": -0.465,
+      "mae_permuted_ehr": 18.038
+    },
+    "SYNTH_033": {
+      "mae_cgm_only": 16.422,
+      "mae_cgm_plus_ehr": 16.022,
+      "improvement_mgdl": 0.4,
+      "delta_mae_mgdl": -0.4,
+      "mae_permuted_ehr": 25.665
+    },
+    "SYNTH_034": {
+      "mae_cgm_only": 17.041,
+      "mae_cgm_plus_ehr": 15.738,
+      "improvement_mgdl": 1.303,
+      "delta_mae_mgdl": -1.303,
+      "mae_permuted_ehr": 20.475
+    },
+    "SYNTH_035": {
+      "mae_cgm_only": 19.182,
+      "mae_cgm_plus_ehr": 18.777,
+      "improvement_mgdl": 0.405,
+      "delta_mae_mgdl": -0.405,
+      "mae_permuted_ehr": 20.713
+    },
+    "SYNTH_036": {
+      "mae_cgm_only": 17.473,
+      "mae_cgm_plus_ehr": 22.372,
+      "improvement_mgdl": -4.899,
+      "delta_mae_mgdl": 4.899,
+      "mae_permuted_ehr": 17.923
+    },
+    "SYNTH_037": {
+      "mae_cgm_only": 17.77,
+      "mae_cgm_plus_ehr": 17.435,
+      "improvement_mgdl": 0.335,
+      "delta_mae_mgdl": -0.335,
+      "mae_permuted_ehr": 35.34
+    },
+    "SYNTH_038": {
+      "mae_cgm_only": 20.7,
+      "mae_cgm_plus_ehr": 21.07,
+      "improvement_mgdl": -0.37,
+      "delta_mae_mgdl": 0.37,
+      "mae_permuted_ehr": 25.251
+    },
+    "SYNTH_039": {
+      "mae_cgm_only": 18.186,
+      "mae_cgm_plus_ehr": 17.247,
+      "improvement_mgdl": 0.939,
+      "delta_mae_mgdl": -0.939,
+      "mae_permuted_ehr": 18.248
+    },
+    "SYNTH_040": {
+      "mae_cgm_only": 14.941,
+      "mae_cgm_plus_ehr": 14.477,
+      "improvement_mgdl": 0.464,
+      "delta_mae_mgdl": -0.464,
+      "mae_permuted_ehr": 14.671
+    },
+    "SYNTH_041": {
+      "mae_cgm_only": 17.077,
+      "mae_cgm_plus_ehr": 15.809,
+      "improvement_mgdl": 1.268,
+      "delta_mae_mgdl": -1.268,
+      "mae_permuted_ehr": 17.428
+    },
+    "SYNTH_042": {
+      "mae_cgm_only": 20.018,
+      "mae_cgm_plus_ehr": 18.98,
+      "improvement_mgdl": 1.038,
+      "delta_mae_mgdl": -1.038,
+      "mae_permuted_ehr": 26.485
+    },
+    "SYNTH_043": {
+      "mae_cgm_only": 17.498,
+      "mae_cgm_plus_ehr": 17.086,
+      "improvement_mgdl": 0.412,
+      "delta_mae_mgdl": -0.412,
+      "mae_permuted_ehr": 18.452
+    },
+    "SYNTH_044": {
+      "mae_cgm_only": 17.332,
+      "mae_cgm_plus_ehr": 17.48,
+      "improvement_mgdl": -0.148,
+      "delta_mae_mgdl": 0.148,
+      "mae_permuted_ehr": 17.159
+    },
+    "SYNTH_045": {
+      "mae_cgm_only": 19.592,
+      "mae_cgm_plus_ehr": 19.402,
+      "improvement_mgdl": 0.189,
+      "delta_mae_mgdl": -0.189,
+      "mae_permuted_ehr": 20.427
+    },
+    "SYNTH_046": {
+      "mae_cgm_only": 16.286,
+      "mae_cgm_plus_ehr": 15.572,
+      "improvement_mgdl": 0.714,
+      "delta_mae_mgdl": -0.714,
+      "mae_permuted_ehr": 18.111
+    },
+    "SYNTH_047": {
+      "mae_cgm_only": 17.04,
+      "mae_cgm_plus_ehr": 16.774,
+      "improvement_mgdl": 0.266,
+      "delta_mae_mgdl": -0.266,
+      "mae_permuted_ehr": 17.322
+    },
+    "SYNTH_048": {
+      "mae_cgm_only": 15.763,
+      "mae_cgm_plus_ehr": 13.941,
+      "improvement_mgdl": 1.822,
+      "delta_mae_mgdl": -1.822,
+      "mae_permuted_ehr": 18.026
+    },
+    "SYNTH_049": {
+      "mae_cgm_only": 18.138,
+      "mae_cgm_plus_ehr": 18.02,
+      "improvement_mgdl": 0.118,
+      "delta_mae_mgdl": -0.118,
+      "mae_permuted_ehr": 25.632
+    },
+    "SYNTH_050": {
+      "mae_cgm_only": 19.759,
+      "mae_cgm_plus_ehr": 18.227,
+      "improvement_mgdl": 1.533,
+      "delta_mae_mgdl": -1.533,
+      "mae_permuted_ehr": 21.47
+    },
+    "SYNTH_051": {
+      "mae_cgm_only": 17.255,
+      "mae_cgm_plus_ehr": 17.303,
+      "improvement_mgdl": -0.048,
+      "delta_mae_mgdl": 0.048,
+      "mae_permuted_ehr": 18.335
+    },
+    "SYNTH_052": {
+      "mae_cgm_only": 18.22,
+      "mae_cgm_plus_ehr": 17.799,
+      "improvement_mgdl": 0.421,
+      "delta_mae_mgdl": -0.421,
+      "mae_permuted_ehr": 17.768
+    },
+    "SYNTH_053": {
+      "mae_cgm_only": 16.896,
+      "mae_cgm_plus_ehr": 15.629,
+      "improvement_mgdl": 1.266,
+      "delta_mae_mgdl": -1.266,
+      "mae_permuted_ehr": 19.874
+    },
+    "SYNTH_054": {
+      "mae_cgm_only": 16.146,
+      "mae_cgm_plus_ehr": 18.611,
+      "improvement_mgdl": -2.465,
+      "delta_mae_mgdl": 2.465,
+      "mae_permuted_ehr": 16.941
+    },
+    "SYNTH_055": {
+      "mae_cgm_only": 19.006,
+      "mae_cgm_plus_ehr": 19.594,
+      "improvement_mgdl": -0.588,
+      "delta_mae_mgdl": 0.588,
+      "mae_permuted_ehr": 19.68
+    },
+    "SYNTH_056": {
+      "mae_cgm_only": 18.615,
+      "mae_cgm_plus_ehr": 18.551,
+      "improvement_mgdl": 0.065,
+      "delta_mae_mgdl": -0.065,
+      "mae_permuted_ehr": 19.876
+    },
+    "SYNTH_057": {
+      "mae_cgm_only": 17.017,
+      "mae_cgm_plus_ehr": 15.451,
+      "improvement_mgdl": 1.565,
+      "delta_mae_mgdl": -1.565,
+      "mae_permuted_ehr": 17.63
+    },
+    "SYNTH_058": {
+      "mae_cgm_only": 15.527,
+      "mae_cgm_plus_ehr": 14.241,
+      "improvement_mgdl": 1.287,
+      "delta_mae_mgdl": -1.287,
+      "mae_permuted_ehr": 15.358
+    },
+    "SYNTH_059": {
+      "mae_cgm_only": 16.407,
+      "mae_cgm_plus_ehr": 15.644,
+      "improvement_mgdl": 0.763,
+      "delta_mae_mgdl": -0.763,
+      "mae_permuted_ehr": 18.399
+    },
+    "SYNTH_060": {
+      "mae_cgm_only": 17.682,
+      "mae_cgm_plus_ehr": 18.302,
+      "improvement_mgdl": -0.62,
+      "delta_mae_mgdl": 0.62,
+      "mae_permuted_ehr": 17.828
+    }
+  }
+}

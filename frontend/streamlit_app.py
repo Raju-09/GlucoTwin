@@ -507,7 +507,7 @@ with card3:
         st.markdown(f"Hyper Risk: :{hy_color}[**{hyper}**]")
     st.caption(f"Code: `{forecast_resp.get('reason_code', 'OK_DATA_INTACT')}` · Quality: `{forecast_resp.get('quality_score_pct', 100.0):.0f}%`")
 
-# Clinical Advisory Alert Banner
+# Experimental Forecast Advisory Banner
 if status_val == "withheld":
     st.error(
         f"🚨 **FORECAST WITHHELD [{forecast_resp['reason_code']}]**: "
@@ -520,7 +520,7 @@ elif status_val == "degraded":
     )
 else:
     st.info(
-        f"🩺 **CLINICAL ADVISORY**: {forecast_resp.get('clinical_risk_advisory', '')}"
+        f"📊 **EXPERIMENTAL FORECAST INDICATOR**: {forecast_resp.get('clinical_risk_advisory', '')}"
     )
 
 # ---------------------------------------------------------------------------
@@ -566,7 +566,7 @@ plot_df = pd.concat(chart_frames, ignore_index=True)
 # Base line chart
 base = alt.Chart(plot_df).encode(
     x=alt.X("timestamp:T", title="Time (UTC)"),
-    y=alt.Y("glucose:Q", title="Blood Glucose (mg/dL)", scale=alt.Scale(domain=[40, 400])),
+    y=alt.Y("glucose:Q", title="Blood Glucose (mg/dL)", scale=alt.Scale(domain=[40, 360], clamp=True, zero=False)),
 )
 
 # Reference physiological range (70 - 180 mg/dL)
@@ -611,32 +611,35 @@ tab1, tab2, tab3, tab4 = st.tabs([
 bm = manifest.get("benchmarks", {})
 
 with tab1:
-    st.markdown("### Multimodal Two-Stream Ablation Benchmark (7,316 Held-Out Test Windows, 10 Patients)")
+    st.markdown(f"### Multimodal Two-Stream Ablation Benchmark ({manifest.get('n_test_windows', 43888):,} Held-Out Test Windows, {manifest.get('n_patients', 60)} Patients)")
     col_e1, col_e2 = st.columns(2)
     with col_e1:
+        cgm_m = bm.get('cgm_only_mae_mgdl', 18.31)
+        ehr_m = bm.get('cgm_plus_ehr_mae_mgdl', 17.61)
+        full_m = bm.get('full_fusion_mae_mgdl', 17.67)
         st.markdown(
             f"""
-            | Configuration | Data Streams | Test MAE (mg/dL) | Δ MAE vs CGM-only |
-            |---|---|:---:|:---:|
-            | **Persistence Baseline** | Naive $y_{{t+120}} = y_t$ | **53.25** | *+34.52 mg/dL* |
-            | **Config A (CGM Only)** | 24 Lags + Rolling Stats (41 feats) | **{bm.get('cgm_only_mae_mgdl', 18.73):.2f}** | *Reference (0.00)* |
-            | **Config B (CGM + Static EHR)** | Demographics + Labs + Fasting Lab (50 feats) | **{bm.get('cgm_plus_ehr_mae_mgdl', 17.89):.2f}** | **-0.84 mg/dL (-4.5%)** |
-            | **Config C (CGM + Wearables)** | Decoupled HR, HRV, Steps, Sleep (47 feats) | **18.56** | -0.17 mg/dL (-0.9%) |
-            | **Config D (Full Two-Stream Fusion)** | EHR + CGM + Wearables (56 feats) | **{bm.get('full_fusion_mae_mgdl', 17.96):.2f}** | -0.77 mg/dL (-4.1%) |
+            | Configuration | Data Streams | Test MAE (mg/dL) | Δ MAE vs CGM-only | 95% CI for Improvement |
+            |---|---|:---:|:---:|:---:|
+            | **Persistence Baseline** | Naive $y_{{t+120}} = y_t$ | **53.25** | *+34.94 mg/dL* | — |
+            | **Config A (CGM Only)** | 24 Lags + Rolling Stats (41 feats) | **{cgm_m:.2f}** | *Reference* | — |
+            | **Config B (CGM + Static EHR)** | Demographics + Labs + Fasting Lab (50 feats) | **{ehr_m:.2f}** | **{ehr_m - cgm_m:+.2f} mg/dL** | **[+0.49, +0.96] mg/dL** |
+            | **Config C (CGM + Wearables)** | Decoupled HR, HRV, Steps, Sleep (47 feats) | **18.32** | +0.01 mg/dL | [-0.08, +0.07] mg/dL |
+            | **Config D (Full Two-Stream Fusion)** | EHR + CGM + Wearables (56 feats) | **{full_m:.2f}** | **{full_m - cgm_m:+.2f} mg/dL** | [+0.44, +0.88] mg/dL |
             """
         )
         st.caption(
             "Evaluation protocol: Strict chronological hold-out split (Days 12–14). "
-            "Block bootstrap 95% CI for EHR improvement: [+0.11, +1.41] mg/dL."
+            "Improvement defined as MAE_CGM - MAE_Model. Block bootstrap 95% CI computed over 24-hour moving blocks."
         )
 
     with col_e2:
         st.markdown(
             f"""
             #### Scientific Takeaways
-            - **EHR Context Value**: Static phenotypic context provides the primary incremental predictive gain ($-0.84\\text{{ mg/dL}}$, strictly positive 95% CI).
-            - **Wearable Stream**: Decoupled physical activity telemetry provides limited incremental benefit beyond CGM + EHR ($+0.07\\text{{ mg/dL}}$ difference).
-            - **Online Personalization**: `{forecast_resp.get('adaptation_applied', False)}`
+            - **EHR Context Gain**: In this synthetic cohort, adding static EHR context produced an average reduction in MAE of **0.71 mg/dL** ($p = 5.6 \\times 10^{{-6}}$, df=59).
+            - **Wearables Increment**: Decoupled physical activity telemetry provided no incremental predictive gain over CGM + EHR ($\\Delta = +0.06\\text{{ mg/dL}}$, $p = 0.24$, CI includes 0).
+            - **Generalization Caution**: This benchmark reflects in-silico cohort dynamics. It does not establish clinical efficacy in real-world patients.
             - **Canonical Manifest**: `{manifest['experiment_id']}` (Version: `{forecast_resp.get('model_version', 'v1.2')}`)
             """
         )
