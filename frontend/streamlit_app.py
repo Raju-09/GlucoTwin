@@ -619,17 +619,17 @@ with tab1:
         full_m = bm.get('full_fusion_mae_mgdl', 17.67)
         st.markdown(
             f"""
-            | Configuration | Data Streams | Test MAE (mg/dL) | Δ MAE vs CGM-only | 95% CI for Improvement |
+            | Configuration | Data Streams | Test MAE (mg/dL) | Delta vs CGM-only | 95% CI for Improvement |
             |---|---|:---:|:---:|:---:|
-            | **Persistence Baseline** | Naive $y_{{t+120}} = y_t$ | **53.25** | *+34.94 mg/dL* | — |
-            | **Config A (CGM Only)** | 24 Lags + Rolling Stats (41 feats) | **{cgm_m:.2f}** | *Reference* | — |
+            | **Persistence Baseline** | Naive y(t+120) = y(t) | **53.25** | *+34.94 mg/dL* | -- |
+            | **Config A (CGM Only)** | 24 Lags + Rolling Stats (41 feats) | **{cgm_m:.2f}** | *Reference* | -- |
             | **Config B (CGM + Static EHR)** | Demographics + Labs + Fasting Lab (50 feats) | **{ehr_m:.2f}** | **{ehr_m - cgm_m:+.2f} mg/dL** | **[+0.49, +0.96] mg/dL** |
             | **Config C (CGM + Wearables)** | Decoupled HR, HRV, Steps, Sleep (47 feats) | **18.32** | +0.01 mg/dL | [-0.08, +0.07] mg/dL |
             | **Config D (Full Two-Stream Fusion)** | EHR + CGM + Wearables (56 feats) | **{full_m:.2f}** | **{full_m - cgm_m:+.2f} mg/dL** | [+0.44, +0.88] mg/dL |
             """
         )
         st.caption(
-            "Evaluation protocol: Strict chronological hold-out split (Days 12–14). "
+            "Evaluation protocol: Strict chronological hold-out split (Days 12-14). "
             "Improvement defined as MAE_CGM - MAE_Model. Block bootstrap 95% CI computed over 24-hour moving blocks."
         )
 
@@ -637,12 +637,31 @@ with tab1:
         st.markdown(
             f"""
             #### Scientific Takeaways
-            - **EHR Context Gain**: In this synthetic cohort, adding static EHR context produced an average reduction in MAE of **0.71 mg/dL** ($p = 5.6 \\times 10^{{-6}}$, df=59).
-            - **Wearables Increment**: Decoupled physical activity telemetry provided no incremental predictive gain over CGM + EHR ($\\Delta = +0.06\\text{{ mg/dL}}$, $p = 0.24$, CI includes 0).
-            - **Generalization Caution**: This benchmark reflects in-silico cohort dynamics. It does not establish clinical efficacy in real-world patients.
+            - **EHR Context Gain (Same-Patient)**: Adding static EHR context reduced MAE by **0.70 mg/dL** on later time periods of the same 60 patients.
+            - **Cross-Patient (LOPO)**: On held-out patients, EHR provided **no significant benefit** (mean delta = +0.01 mg/dL, 95% CI [-0.34, +0.33], p=0.96). EHR features encode patient-specific context that does not transfer to unseen patients.
+            - **Permuted-EHR Sanity Check**: Shuffling EHR between patients degraded LOPO MAE by **+2.82 mg/dL**, confirming the model encodes real patient identity.
+            - **Wearables Increment**: Physical activity telemetry provided no incremental predictive gain over CGM-only (p=0.96).
+            - **Generalization Caution**: This benchmark reflects in-silico cohort dynamics on 60 synthetic patients. It does not establish clinical efficacy in real-world patients.
             - **Canonical Manifest**: `{manifest['experiment_id']}` (Version: `{forecast_resp.get('model_version', 'v1.2')}`)
             """
         )
+
+    st.divider()
+    st.markdown("#### Leave-One-Patient-Out Cross-Validation (N=60 patients, 224,681 windows)")
+    st.markdown(
+        """
+        | Config | Mean LOPO MAE (mg/dL) | Delta vs CGM-only | 95% Bootstrap CI | p-value |
+        |---|:---:|:---:|:---:|:---:|
+        | CGM-only | 17.65 | -- | -- | -- |
+        | CGM + Real EHR | **17.65** | **+0.01 mg/dL** | [-0.34, +0.33] | **0.96 (n.s.)** |
+        | CGM + Permuted EHR | 20.47 | +2.82 mg/dL | -- | -- |
+        """
+    )
+    st.caption(
+        "LOPO: model trained on 59 patients, evaluated on the 60th, rotated across all patients. "
+        "Permuted EHR: patient EHR records shuffled at patient level (not window level). "
+        "n.s. = not significant. This is an exploratory small synthetic cohort result -- not a clinical trial."
+    )
 
 with tab2:
     st.markdown("### 🧪 What-If Digital Twin Counterfactual Simulation")
