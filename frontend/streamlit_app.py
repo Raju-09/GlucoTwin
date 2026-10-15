@@ -427,20 +427,19 @@ latest_obs = replay_data["glucose_readings"][-1]
 status_val = forecast_resp["reliability_status"]
 predicted_val = forecast_resp["predicted_glucose"]
 
-# Clamp velocity for display to physiological limits
+# Use raw observed velocity for clinical veracity; do not cosmetically clamp
 raw_vel = (latest_obs - replay_data["glucose_readings"][-2]) / 5.0 if len(replay_data["glucose_readings"]) >= 2 else 0.0
-display_vel = float(np.clip(raw_vel, -3.5, 3.5))
 
 with st.expander("🩺 Inspect Patient Digital State S(t) = (θ_p, h_t, δ_t)", expanded=False):
     s_col1, s_col2, s_col3, s_col4 = st.columns(4)
     with s_col1:
         st.markdown("**Static EHR Phenotype (θ_p)**")
-        st.caption("🕒 *Updated: 180 days ago (Historical EHR)*")
+        st.caption("🕒 *Updated: 180 days ago [Observed EHR]*")
         st.write(f"Age: **{ehr_override.get('age', 48)}** | BMI: **{ehr_override.get('bmi', 26.4)}**")
         st.write(f"HbA1c: **{ehr_override.get('baseline_hba1c', 6.8)}%** | Duration: **{ehr_override.get('diabetes_duration_years', 5.5)} yrs**")
     with s_col2:
         st.markdown("**Clinical Context & Labs**")
-        st.caption("🕒 *Lab Intake Reference*")
+        st.caption("🕒 *Lab Intake Reference [Observed]*")
         st.write(f"Historical Fasting Lab: **{ehr_override.get('historical_fbg_mgdl', 115.0):.1f} mg/dL**")
         med_str = "Metformin" if ehr_override.get("metformin_flag") else "Lifestyle"
         if ehr_override.get("sglt2i_flag"):
@@ -449,12 +448,12 @@ with st.expander("🩺 Inspect Patient Digital State S(t) = (θ_p, h_t, δ_t)", 
         st.write(f"Dawn Phenom: **{'Positive' if ehr_override.get('dawn_phenomenon_flag') else 'Negative'}**")
     with s_col3:
         st.markdown("**Dynamic Physiology (h_t)**")
-        st.caption("🕒 *CGM: Live (0m) · Wearables: 5m*")
+        st.caption("🕒 *CGM: Live (0m) [Sensor] · Wearables: 5m*")
         st.write(f"Current Glucose: **{latest_obs:.1f} mg/dL**")
-        st.write(f"Velocity ($dG/dt$): **{display_vel:+.2f} mg/dL/min**")
+        st.write(f"Raw Velocity ($dG/dt$): **{raw_vel:+.2f} mg/dL/min**")
         gl_recent = replay_data["glucose_readings"][-12:]
         tir_pct = (sum(1 for g in gl_recent if 70.0 <= g <= 180.0) / len(gl_recent)) * 100.0
-        st.write(f"1h Ref Range (70-180): **{tir_pct:.0f}%**")
+        st.write(f"1h In-Target (70-180): **{tir_pct:.0f}%**")
     with s_col4:
         st.markdown("**Twin Integrity Gate (δ_t)**")
         st.caption("🕒 *Real-time Stream Quality FSM*")
@@ -469,13 +468,13 @@ with st.expander("🩺 Inspect Patient Digital State S(t) = (θ_p, h_t, δ_t)", 
 card1, card2, card3 = st.columns([1, 1, 1.2])
 
 with card1:
-    v_dir = "rising" if display_vel > 0.5 else ("falling" if display_vel < -0.5 else "steady")
+    v_dir = "rising" if raw_vel > 0.5 else ("falling" if raw_vel < -0.5 else "steady")
     st.metric(
         label="🩸 Current Glucose",
         value=f"{latest_obs:.1f} mg/dL",
-        delta=f"{display_vel:+.2f} mg/dL/min ({v_dir})",
+        delta=f"{raw_vel:+.2f} mg/dL/min ({v_dir})",
         delta_color="off",
-        help="Latest verified continuous CGM sensor observation",
+        help="Latest verified continuous CGM sensor observation (unclamped discrete velocity)",
     )
 
 with card2:
@@ -489,7 +488,7 @@ with card2:
             value=f"{predicted_val:.1f} mg/dL",
             delta=f"{diff:+.1f} mg/dL ({dir_label})",
             delta_color="off",
-            help="Two-stream multimodal prediction at t+120 min",
+            help="Single point forecast at t+120 min evaluated on test split (MAE: 17.61 mg/dL)",
         )
 
 with card3:
@@ -501,10 +500,10 @@ with card3:
     r_col_a, r_col_b = st.columns(2)
     with r_col_a:
         h_color = "green" if hypo == "Low" else ("orange" if hypo == "Moderate" else "red")
-        st.markdown(f"Hypo Risk: :{h_color}[**{hypo}**]")
+        st.markdown(f"Low Crossing (<70): :{h_color}[**{hypo}**]")
     with r_col_b:
         hy_color = "green" if hyper == "Low" else ("orange" if hyper == "Moderate" else "red")
-        st.markdown(f"Hyper Risk: :{hy_color}[**{hyper}**]")
+        st.markdown(f"High Crossing (>180): :{hy_color}[**{hyper}**]")
     st.caption(f"Code: `{forecast_resp.get('reason_code', 'OK_DATA_INTACT')}` · Quality: `{forecast_resp.get('quality_score_pct', 100.0):.0f}%`")
 
 # Experimental Forecast Advisory Banner
@@ -527,7 +526,7 @@ else:
 # Interactive Chart: Multi-Horizon Smooth Trajectory
 # ---------------------------------------------------------------------------
 
-st.subheader("📈 Glucose Trajectory & Multi-Horizon Forecast Projection")
+st.subheader("📈 Glucose Trajectory & 120-min Point Forecast")
 
 # Prepare historical context (last 12 hours = 144 steps)
 history_window = full_df.iloc[max(0, step_idx - 144) : step_idx].copy()
@@ -556,7 +555,7 @@ if status_val != "withheld" and predicted_val is not None:
         {
             "timestamp": traj_times,
             "glucose": traj_values,
-            "series": "Multi-Horizon Projection",
+            "series": "Illustrative Trajectory (Kinematic Smoothing)",
         }
     )
     chart_frames.append(forecast_points)
@@ -584,10 +583,10 @@ obs_line = base.transform_filter(alt.datum.series == "Observed History").mark_li
 
 # Forecast smooth curved line
 if status_val != "withheld" and predicted_val is not None:
-    fc_line = base.transform_filter(alt.datum.series == "Multi-Horizon Projection").mark_line(
+    fc_line = base.transform_filter(alt.datum.series == "Illustrative Trajectory (Kinematic Smoothing)").mark_line(
         color="#D81B60", strokeDash=[6, 4], strokeWidth=3, interpolate="monotone"
     )
-    fc_point = base.transform_filter(alt.datum.series == "Multi-Horizon Projection").mark_circle(
+    fc_point = base.transform_filter(alt.datum.series == "Illustrative Trajectory (Kinematic Smoothing)").mark_circle(
         size=70, color="#D81B60"
     )
     final_chart = target_band + obs_line + fc_line + fc_point
@@ -595,7 +594,11 @@ else:
     final_chart = target_band + obs_line
 
 st.altair_chart(final_chart.properties(height=380).interactive(), use_container_width=True)
-st.caption("ℹ️ Green shaded band: Illustrative reference range (70–180 mg/dL). Dashed pink line: Causal multi-horizon projected trajectory.")
+st.caption(
+    "ℹ️ Green shaded band: Illustrative reference range (70–180 mg/dL per ADA consensus). "
+    "Dashed pink line: Illustrative trajectory smoothly interpolating current velocity to the single 120-min point forecast. "
+    "Not four independently evaluated horizon models."
+)
 
 # ---------------------------------------------------------------------------
 # Evidence & Diagnostic Tabs
@@ -619,18 +622,19 @@ with tab1:
         full_m = bm.get('full_fusion_mae_mgdl', 17.67)
         st.markdown(
             f"""
-            | Configuration | Data Streams | Test MAE (mg/dL) | Delta vs CGM-only | 95% CI for Improvement |
+            | Configuration | Data Streams | Test MAE (mg/dL) | Δ MAE (Model − Ref) | Improvement (Ref − Model) [95% CI] |
             |---|---|:---:|:---:|:---:|
-            | **Persistence Baseline** | Naive y(t+120) = y(t) | **53.25** | *+34.94 mg/dL* | -- |
-            | **Config A (CGM Only)** | 24 Lags + Rolling Stats (41 feats) | **{cgm_m:.2f}** | *Reference* | -- |
-            | **Config B (CGM + Static EHR)** | Demographics + Labs + Fasting Lab (50 feats) | **{ehr_m:.2f}** | **{ehr_m - cgm_m:+.2f} mg/dL** | **[+0.49, +0.96] mg/dL** |
-            | **Config C (CGM + Wearables)** | Decoupled HR, HRV, Steps, Sleep (47 feats) | **18.32** | +0.01 mg/dL | [-0.08, +0.07] mg/dL |
-            | **Config D (Full Two-Stream Fusion)** | EHR + CGM + Wearables (56 feats) | **{full_m:.2f}** | **{full_m - cgm_m:+.2f} mg/dL** | [+0.44, +0.88] mg/dL |
+            | **Persistence Baseline** | Naive y(t+120) = y(t) | **53.25** | *+34.94 mg/dL* | *−34.94 mg/dL* |
+            | **Config A (CGM Only)** | 24 Lags + Rolling Stats (41 feats) | **{cgm_m:.2f}** | *Reference (0.00)* | *Reference* |
+            | **Config B (CGM + Static EHR)** | Demographics + Labs + Fasting Lab (50 feats) | **{ehr_m:.2f}** | **{ehr_m - cgm_m:+.2f} mg/dL** | **+0.70 [+0.49, +0.96] mg/dL** |
+            | **Config C (CGM + Wearables)** | Decoupled HR, HRV, Steps, Sleep (47 feats) | **18.32** | +0.01 mg/dL | −0.01 [−0.08, +0.07] mg/dL |
+            | **Config D (Full Two-Stream Fusion)** | EHR + CGM + Wearables (56 feats) | **{full_m:.2f}** | **{full_m - cgm_m:+.2f} mg/dL** | **+0.64 [+0.44, +0.88] mg/dL** |
             """
         )
         st.caption(
-            "Evaluation protocol: Strict chronological hold-out split (Days 12-14). "
-            "Improvement defined as MAE_CGM - MAE_Model. Block bootstrap 95% CI computed over 24-hour moving blocks."
+            "Evaluation protocol: Strict chronological hold-out split (Days 12–14). "
+            "Δ MAE = MAE_Model − MAE_CGM (negative is better). "
+            "Improvement = MAE_CGM − MAE_Model (positive is better; 95% block-bootstrap CI over 24h blocks)."
         )
 
     with col_e2:
