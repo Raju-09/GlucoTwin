@@ -14,16 +14,16 @@
 
 | Field | Details |
 |---|---|
-| **Team Name** | [YOUR_TEAM_NAME] |
-| **Team Leader** | [YOUR_NAME] |
+| **Project Title** | **GlucoTwin: A Reliability-Aware Digital Twin for 120-Minute Glucose Forecasting** |
+| **Team Name** | **Team Synapse** |
+| **Team Leader** | **Sammeta Siva Prasad Raju** |
+| **Team Members** | **Sammeta Siva Prasad Raju, Bedadakota Devi Chandrika** (2 Members) |
 | **College / Incubator** | [YOUR_COLLEGE_NAME] |
-| **Team Members** | [YOUR_NAME] *(solo / list all members)* |
-| **Contact Email** | [YOUR_EMAIL] |
-| **GitHub Repository** | `https://github.com/Raju-09/GlucoTwin` |
-| **Demo Video** | [YouTube unlisted link — add before submission] |
-| **Architecture Diagram** | [`docs/architecture_diagram.pdf`](docs/architecture_diagram.pdf) |
-| **Presentation** | [`docs/glucotwin_presentation.pdf`](docs/glucotwin_presentation.pdf) |
-| **License** | MIT — see [LICENSE](LICENSE) |
+| **GitHub Repository** | `https://github.com/Raju-09/GlucoTwin` (Public) |
+| **Demo Video** | [YouTube Unlisted Link — 15–20 Minute Walkthrough] |
+| **Architecture Diagram** | [`docs/architecture_diagram.pdf`](docs/architecture_diagram.pdf) (Vector PDF) |
+| **Presentation** | [`docs/glucotwin_presentation.pdf`](docs/glucotwin_presentation.pdf) (10-Slide Deck PDF) |
+| **License** | [MIT License](LICENSE) (Open Source) |
 
 ---
 
