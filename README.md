@@ -19,7 +19,7 @@
 | **College / Incubator** | [YOUR_COLLEGE_NAME] |
 | **Team Members** | [YOUR_NAME] *(solo / list all members)* |
 | **Contact Email** | [YOUR_EMAIL] |
-| **GitHub Repository** | `https://github.com/[YOUR_HANDLE]/GlucoTwin` |
+| **GitHub Repository** | `https://github.com/Raju-09/GlucoTwin` |
 | **Demo Video** | [YouTube unlisted link — add before submission] |
 | **Architecture Diagram** | [`docs/architecture_diagram.pdf`](docs/architecture_diagram.pdf) |
 | **Presentation** | [`docs/glucotwin_presentation.pdf`](docs/glucotwin_presentation.pdf) |
@@ -88,7 +88,7 @@ Wearable Stream ────────────────────►�
 
 ```bash
 # 1. Clone
-git clone https://github.com/[YOUR_HANDLE]/GlucoTwin.git
+git clone https://github.com/Raju-09/GlucoTwin.git
 cd GlucoTwin
 
 # 2. Create virtual environment
