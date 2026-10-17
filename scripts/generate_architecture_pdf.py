@@ -84,7 +84,7 @@ def create_architecture_diagram(output_path: Path):
     draw_arrow(75, 56, 60, 16, "120-min Forecast")
 
     # Footer note
-    ax.text(50, 1.2, "Team Synapse  •  Happiest Health Digital Twin Challenge 2026  •  Open-Source MIT License", 
+    ax.text(50, 1.2, "Team Synapse (Mohan Babu University)  •  Happiest Health Digital Twin Challenge 2026  •  MIT License", 
             ha="center", va="center", fontsize=8.5, color="#78909C")
 
     output_path.parent.mkdir(parents=True, exist_ok=True)

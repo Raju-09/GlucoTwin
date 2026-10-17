@@ -18,7 +18,7 @@
 | **Team Name** | **Team Synapse** |
 | **Team Leader** | **Sammeta Siva Prasad Raju** |
 | **Team Members** | **Sammeta Siva Prasad Raju, Bedadakota Devi Chandrika** (2 Members) |
-| **College / Incubator** | [YOUR_COLLEGE_NAME] |
+| **College / Incubator** | **Mohan Babu University** |
 | **GitHub Repository** | `https://github.com/Raju-09/GlucoTwin` (Public) |
 | **Demo Video** | [YouTube Unlisted Link — 15–20 Minute Walkthrough] |
 | **Architecture Diagram** | [`docs/architecture_diagram.pdf`](docs/architecture_diagram.pdf) (Vector PDF) |

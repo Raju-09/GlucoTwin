@@ -9,7 +9,8 @@
 * **Title**: GlucoTwin
 * **Subtitle**: A Reliability-Aware Digital Twin for Proactive Glucose Forecasting and Adverse Event Mitigation
 * **Event**: Happiest Health — Reimagining & Reforming Healthcare in India Summit 2026
-* **Team**: [YOUR_TEAM_NAME] · [YOUR_COLLEGE_NAME]
+* **Team**: Team Synapse · Mohan Babu University
+* **Members**: Sammeta Siva Prasad Raju & Bedadakota Devi Chandrika
 * **Key Visual**: Two-stream data convergence (EHR + CGM) flowing into a calibrated patient twin state.
 
 ---

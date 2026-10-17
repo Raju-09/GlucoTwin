@@ -116,8 +116,8 @@ def build_presentation_pdf(output_path: Path):
     
     meta_data = [
         [Paragraph("<b>Competition:</b> Happiest Health — Digital Twin Challenge 2026", body_style)],
-        [Paragraph("<b>Summit:</b> Reimagining & Reforming Healthcare in India Summit 2026, Bengaluru", body_style)],
-        [Paragraph("<b>Team:</b> Team Synapse  •  <b>Team Leader:</b> Sammeta Siva Prasad Raju  •  <b>Member:</b> Bedadakota Devi Chandrika", body_style)],
+        [Paragraph("<b>Team:</b> Team Synapse  •  <b>College:</b> Mohan Babu University", body_style)],
+        [Paragraph("<b>Team Leader:</b> Sammeta Siva Prasad Raju  •  <b>Member:</b> Bedadakota Devi Chandrika", body_style)],
         [Paragraph("<b>Repository:</b> https://github.com/Raju-09/GlucoTwin  •  <b>License:</b> MIT Open Source", body_style)],
     ]
     meta_table = Table(meta_data, colWidths=[9.5 * inch])
@@ -323,7 +323,7 @@ def build_presentation_pdf(output_path: Path):
     story.append(Spacer(1, 0.3 * inch))
     story.append(Paragraph("<b>GlucoTwin: Forecast Earlier. Intervene Smarter. Fail Closed When Uncertain.</b>", title_slide_style))
     story.append(Spacer(1, 0.1 * inch))
-    story.append(Paragraph("Thank you. Team Synapse — Sammeta Siva Prasad Raju & Bedadakota Devi Chandrika", subtitle_style))
+    story.append(Paragraph("Thank you. Team Synapse — Sammeta Siva Prasad Raju & Bedadakota Devi Chandrika (Mohan Babu University)", subtitle_style))
 
     doc.build(story)
     print(f"Presentation PDF generated at: {output_path}")
