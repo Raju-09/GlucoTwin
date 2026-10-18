@@ -24,16 +24,23 @@
 | **Architecture Diagram** | [`docs/architecture_diagram.pdf`](docs/architecture_diagram.pdf) (Vector PDF) |
 | **Presentation** | [`docs/glucotwin_presentation.pdf`](docs/glucotwin_presentation.pdf) (10-Slide Deck PDF) |
 | **License** | [MIT License](LICENSE) (Open Source) |
+| **Public Accessibility** | All repository files, artifacts, and documentation links are publicly accessible without additional permissions |
 
 ---
 
-## Problem
+## Problem Statement
 
 India has **101 million individuals living with diabetes** according to the ICMR-INDIAB study (*The Lancet Diabetes & Endocrinology*, 2023). While continuous glucose monitors (CGMs) produce readings every 5 minutes, commercial alert systems predominantly prioritize reactive threshold alerts or narrow 20–30 minute predictive horizons (e.g., Dexcom Urgent Low Soon). When warnings arrive close to excursion boundaries, the window for meaningful lifestyle, nutritional, or clinical intervention is constrained.
 
 **GlucoTwin addresses this gap:** it investigates 120-minute forward forecasting, fuses static EHR context with dynamic CGM history, and — critically — provides a built-in reliability gate that flags degraded inputs and withholds ungrounded forecasts.
 
 **Research question:** Does a time-series model improve on a simple persistence baseline on a leakage-safe held-out test set, and when should the system withhold a forecast?
+
+## Healthcare Use Case
+
+- **Proactive Glycemic Excursion Foresight:** Providing an actionable 120-minute forward lead time enables patients and clinicians to undertake dietary adjustments or preemptive medical triage before acute hyperglycemia (>180 mg/dL) or hypoglycemia (<70 mg/dL) occurs.
+- **Fail-Closed Safety & Alarm Fatigue Mitigation:** Standard CGMs trigger continuous false alerts (61.4 alarms/day under persistence). GlucoTwin suppresses false alarm windows by 68% (down to 19.6 windows/day) and actively withholds predictions whenever telemetry latency (>20m), sensor dropout, or non-physiological gradient spikes (>4.0 mg/dL/min) occur.
+- **Clinical Digital Twin Sandbox:** Clinicians can inspect the decoupled digital state $S(t) = (\theta_p, h_t, \delta_t)$ across 14-day continuous timelines and test counterfactual "what-if" behavioral scenarios.
 
 ## Intended User
 
@@ -48,18 +55,27 @@ A clinician or researcher reviewing a **synthetic demo patient's** glucose traje
 | Output | Point forecast of blood glucose (mg/dL) |
 | Reliability | `available` / `degraded` / `withheld` with machine-readable reason code |
 
-## Technical Stack
+## Technical Stack & AI/ML Model Framework Details
+
+### Technical Stack
 
 | Layer | Technology |
 |---|---|
 | Language | Python 3.10+ |
-| ML Model | scikit-learn HistGradientBoostingRegressor (56 features in full fusion; 50 in Config B) |
+| ML Framework | scikit-learn (HistGradientBoostingRegressor) |
 | Feature Hierarchy | **41 CGM dynamics** (24 lags, 10 rolling stats, 5 rate-of-change, 2 circadian) + **9 EHR phenotype** (demographics, HbA1c, FBG, meds) + **6 wearable telemetry** (HR, HRV, steps, sleep) |
-| API | FastAPI + Uvicorn (Median inference latency: 7.79 ms) |
-| Dashboard | Streamlit + Altair |
+| API Layer | FastAPI + Uvicorn (Median inference latency: 7.79 ms) |
+| Dashboard UI | Streamlit + Altair |
 | Containerisation | Docker + docker-compose |
-| Tests | pytest (69 passing) |
-| Data | 60 synthetic T2D patients — mechanistic EHR-physiology coupling, CGM sensor physics layer |
+| Quality & Tests | pytest (69 passing test suite) |
+| Dataset | 60 synthetic T2D patients — mechanistic EHR-physiology coupling, CGM sensor physics layer |
+
+### AI/ML Model & Framework Details
+
+- **Model Family:** Gradient-boosted decision trees (`HistGradientBoostingRegressor`) natively handling non-linear physiological thresholds and feature interactions.
+- **Supervised Window Construction:** Strict chronological hold-out splits (Days 1–11 train, Day 11 val, Days 12–14 test) with a 120-minute safety buffer between splits to mathematically eliminate future data leakage.
+- **Two-Stream Fusion Architecture:** Fuses static EHR embeddings ($\theta_p$) with causal dynamic histories ($h_t$) into a 56-dimensional feature vector.
+- **Rigorous Cross-Validation:** Full Leave-One-Patient-Out (LOPO) cross-validation across 60 patients (224,681 windows) and permuted-EHR control experiments.
 
 ## Data Streams (Dual Fusion)
 
@@ -208,7 +224,7 @@ The reliability layer continuously evaluates input telemetry freshness, sampling
 - All demo data is **synthetic** — no real patient data was used or stored.
 - See [`docs/limitations.md`](docs/limitations.md) for the complete list of known failure cases.
 
-## License
+## Open-Source License Details
 
 - **Software Code:** Licensed under the [MIT License](LICENSE).
 - **Synthetic Data & Documentation:** Available for research and educational purposes. See [`docs/dataset_card.md`](docs/dataset_card.md) for data-specific terms. The software license does not automatically grant rights to third-party medical datasets or dependencies.
