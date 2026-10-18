@@ -16,8 +16,8 @@
 |---|---|
 | **Project Title** | **GlucoTwin: A Reliability-Aware Digital Twin for 120-Minute Glucose Forecasting** |
 | **Team Name** | **Team Synapse** |
-| **Team Leader** | **Sammeta Siva Prasad Raju** |
-| **Team Members** | **Sammeta Siva Prasad Raju, Bedadakota Devi Chandrika** (2 Members) |
+| **Team Leader** | **Sammeta Siva Prasad Raju** ([@Raju-09](https://github.com/Raju-09)) |
+| **Team Members** | **Sammeta Siva Prasad Raju** ([@Raju-09](https://github.com/Raju-09)), **Bedadakota Devi Chandrika** ([@Devi-chandrika24](https://github.com/Devi-chandrika24)) (2 Members) |
 | **College / Incubator** | **Mohan Babu University** |
 | **GitHub Repository** | `https://github.com/Raju-09/GlucoTwin` (Public) |
 | **Demo Video** | [YouTube Walkthrough (Unlisted)](https://youtu.be/Vsmb3QibpKI) |
@@ -228,6 +228,15 @@ The reliability layer continuously evaluates input telemetry freshness, sampling
 
 - **Software Code:** Licensed under the [MIT License](LICENSE).
 - **Synthetic Data & Documentation:** Available for research and educational purposes. See [`docs/dataset_card.md`](docs/dataset_card.md) for data-specific terms. The software license does not automatically grant rights to third-party medical datasets or dependencies.
+
+## Contributors & Team
+
+GlucoTwin was designed, developed, and submitted by **Team Synapse** from **Mohan Babu University**:
+
+- **Sammeta Siva Prasad Raju** — Team Leader ([@Raju-09](https://github.com/Raju-09))  
+  *System architecture, ML modeling pipelines, FastAPI service, and reliability guardrails.*
+- **Bedadakota Devi Chandrika** — Contributor ([@Devi-chandrika24](https://github.com/Devi-chandrika24))  
+  *Feature engineering, data validation protocols, benchmark evaluation, and documentation.*
 
 ## Folder Structure
 

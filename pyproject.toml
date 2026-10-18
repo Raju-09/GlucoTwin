@@ -10,7 +10,8 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [
-    { name = "GlucoTwin Contributors" }
+    { name = "Sammeta Siva Prasad Raju" },
+    { name = "Bedadakota Devi Chandrika" }
 ]
 
 [tool.setuptools.packages.find]

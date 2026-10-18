@@ -2,7 +2,7 @@
 **Challenge:** Happiest Health · Digital Twin Challenge 2026  
 **File Artifact:** `docs/glucotwin_presentation.pdf` (10 Slides Landscape)  
 **Team:** Team Synapse · Mohan Babu University  
-**Members:** Sammeta Siva Prasad Raju (Team Leader) · Bedadakota Devi Chandrika  
+**Members:** Sammeta Siva Prasad Raju ([@Raju-09](https://github.com/Raju-09), Team Leader) · Bedadakota Devi Chandrika ([@Devi-chandrika24](https://github.com/Devi-chandrika24), Contributor)  
 **Code:** `https://github.com/Raju-09/GlucoTwin` · **Video:** `https://youtu.be/Vsmb3QibpKI` (Unlisted) · **License:** MIT  
 
 ---
@@ -11,7 +11,7 @@
 * **Title:** **GlucoTwin**
 * **Subtitle:** A reliability-aware digital twin for 120-minute glucose forecasting
 * **Affiliation:** Team Synapse · Mohan Babu University
-* **Team:** Sammeta Siva Prasad Raju (team leader) · Bedadakota Devi Chandrika
+* **Team:** Sammeta Siva Prasad Raju ([@Raju-09](https://github.com/Raju-09), Team Leader) · Bedadakota Devi Chandrika ([@Devi-chandrika24](https://github.com/Devi-chandrika24), Contributor)
 * **Metadata:**
   * Code: `github.com/Raju-09/GlucoTwin`
   * Video: `youtu.be/Vsmb3QibpKI` (unlisted)
