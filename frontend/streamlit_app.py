@@ -615,38 +615,44 @@ bm = manifest.get("benchmarks", {})
 
 with tab1:
     st.markdown(f"### Multimodal Two-Stream Ablation Benchmark ({manifest.get('n_test_windows', 43888):,} Held-Out Test Windows, {manifest.get('n_patients', 60)} Patients)")
-    col_e1, col_e2 = st.columns(2)
-    with col_e1:
-        cgm_m = bm.get('cgm_only_mae_mgdl', 18.31)
-        ehr_m = bm.get('cgm_plus_ehr_mae_mgdl', 17.61)
-        full_m = bm.get('full_fusion_mae_mgdl', 17.67)
-        p_m = bm.get('persistence_mae_mgdl', 46.88)
+    cgm_m = bm.get('cgm_only_mae_mgdl', 18.31)
+    ehr_m = bm.get('cgm_plus_ehr_mae_mgdl', 17.61)
+    full_m = bm.get('full_fusion_mae_mgdl', 17.67)
+    p_m = bm.get('persistence_mae_mgdl', 46.88)
+    
+    st.markdown(
+        f"""
+        | Configuration | Data Streams | Test MAE (mg/dL) | Δ MAE (Model − Ref) | 95% Bootstrap CI |
+        |---|---|:---:|:---:|:---:|
+        | **Persistence Baseline** | Naive y(t+120) = y(t) | **{p_m:.2f}** | *+{p_m - cgm_m:.2f} mg/dL* | — |
+        | **Config A (CGM Only)** | 24 Lags + Rolling Stats (41 feats) | **{cgm_m:.2f}** | *Reference (0.00)* | — |
+        | **Config B (CGM + Static EHR)** | Demographics + Labs + Fasting Lab (50 feats) | **{ehr_m:.2f}** | **{ehr_m - cgm_m:+.2f} mg/dL** | **[−0.96, −0.49]** ($p = 5.6 \\times 10^{{-6}}$) |
+        | **Config C (CGM + Wearables)** | Decoupled HR, HRV, Steps, Sleep (47 feats) | **18.32** | +0.01 mg/dL | [−0.08, +0.07] ($p = 0.95$, n.s.) |
+        | **Config D (Full Two-Stream Fusion)** | EHR + CGM + Wearables (56 feats) | **{full_m:.2f}** | **{full_m - cgm_m:+.2f} mg/dL** | [−0.88, −0.44] |
+        """
+    )
+    st.caption(
+        "Evaluation protocol: Strict chronological hold-out split (Days 12–14). "
+        "Δ MAE = MAE_Model − MAE_CGM (negative is better). "
+        "95% block-bootstrap CI computed over 24h blocks (288 steps)."
+    )
+
+    t_col1, t_col2 = st.columns(2)
+    with t_col1:
         st.markdown(
             f"""
-            | Configuration | Data Streams | Test MAE (mg/dL) | Δ MAE (Model − Ref) | Improvement (Ref − Model) [95% CI] |
-            |---|---|:---:|:---:|:---:|
-            | **Persistence Baseline** | Naive y(t+120) = y(t) | **{p_m:.2f}** | *+{p_m - cgm_m:+.2f} mg/dL* | *−{p_m - cgm_m:.2f} mg/dL* |
-            | **Config A (CGM Only)** | 24 Lags + Rolling Stats (41 feats) | **{cgm_m:.2f}** | *Reference (0.00)* | *Reference* |
-            | **Config B (CGM + Static EHR)** | Demographics + Labs + Fasting Lab (50 feats) | **{ehr_m:.2f}** | **{ehr_m - cgm_m:+.2f} mg/dL** | **+0.70 [+0.49, +0.96] mg/dL** |
-            | **Config C (CGM + Wearables)** | Decoupled HR, HRV, Steps, Sleep (47 feats) | **18.32** | +0.01 mg/dL | −0.01 [−0.08, +0.07] mg/dL |
-            | **Config D (Full Two-Stream Fusion)** | EHR + CGM + Wearables (56 feats) | **{full_m:.2f}** | **{full_m - cgm_m:+.2f} mg/dL** | **+0.64 [+0.44, +0.88] mg/dL** |
+            #### 🔬 Scientific Takeaways
+            - **EHR Context Gain (Same-Patient)**: Adding static EHR context reduced MAE by **0.70 mg/dL** on later time periods of the same 60 patients ($p = 5.6 \\times 10^{{-6}}$).
+            - **Cross-Patient (LOPO)**: On held-out patients, EHR provided **no significant transfer benefit** (mean delta = +0.01 mg/dL, 95% CI [-0.34, +0.33], $p=0.96$). EHR features encode patient-specific context that does not transfer to unseen patients.
+            - **Permuted-EHR Sanity Check**: Shuffling EHR between patients degraded LOPO MAE by **+2.82 mg/dL** ($p < 0.001$), confirming the model relies on true patient identity.
             """
         )
-        st.caption(
-            "Evaluation protocol: Strict chronological hold-out split (Days 12–14). "
-            "Δ MAE = MAE_Model − MAE_CGM (negative is better). "
-            "Improvement = MAE_CGM − MAE_Model (positive is better; 95% block-bootstrap CI over 24h blocks)."
-        )
-
-    with col_e2:
+    with t_col2:
         st.markdown(
             f"""
-            #### Scientific Takeaways
-            - **EHR Context Gain (Same-Patient)**: Adding static EHR context reduced MAE by **0.70 mg/dL** on later time periods of the same 60 patients.
-            - **Cross-Patient (LOPO)**: On held-out patients, EHR provided **no significant benefit** (mean delta = +0.01 mg/dL, 95% CI [-0.34, +0.33], p=0.96). EHR features encode patient-specific context that does not transfer to unseen patients.
-            - **Permuted-EHR Sanity Check**: Shuffling EHR between patients degraded LOPO MAE by **+2.82 mg/dL**, confirming the model encodes real patient identity.
-            - **Wearables Increment**: Physical activity telemetry provided no incremental predictive gain over CGM-only (p=0.96).
-            - **Generalization Caution**: This benchmark reflects in-silico cohort dynamics on 60 synthetic patients. It does not establish clinical efficacy in real-world patients.
+            #### 📋 Study Boundaries & Manifest
+            - **Wearables Increment**: Physical activity telemetry provided negligible incremental predictive gain over CGM-only ($p=0.95$).
+            - **Generalization Boundary**: This benchmark reflects in-silico cohort dynamics on 60 synthetic patients. External clinical validity requires testing on real clinical trial cohorts (e.g. DiaTrend, OhioT1DM).
             - **Canonical Manifest**: `{manifest['experiment_id']}` (Version: `{forecast_resp.get('model_version', 'v1.2')}`)
             """
         )
