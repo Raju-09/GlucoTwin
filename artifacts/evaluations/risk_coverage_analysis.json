@@ -1,0 +1,16 @@
+{
+  "evaluation_timestamp": "2026-10-15T14:16:13.393808",
+  "n_test_windows": 43888,
+  "ungated_system": {
+    "coverage_pct": 100.0,
+    "mae_mgdl": 17.69,
+    "severe_error_rate_gt_30mgdl_pct": 19.5
+  },
+  "gated_system": {
+    "coverage_pct": 88.0,
+    "mae_mgdl": 17.61,
+    "severe_error_rate_gt_30mgdl_pct": 19.4,
+    "mae_reduction_from_gating_mgdl": 0.07,
+    "severe_error_reduction_pct": 0.1
+  }
+}

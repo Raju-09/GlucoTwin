@@ -1,0 +1,102 @@
+{
+  "experiment": "Independent Generator Holdout (External Synthetic Cohort B)",
+  "generator_a_training_cohort": "SYNTH_001 to SYNTH_010 (seed 42, 24,647 training windows)",
+  "generator_b_testing_cohort": "SYNTH_EXT_001 to SYNTH_EXT_010 (seed 9999, shifted physiology)",
+  "external_windows_evaluated": 38142,
+  "external_patients": 10,
+  "results": {
+    "persistence_baseline": {
+      "mae": 71.99,
+      "rmse": 98.84,
+      "mape_pct": 35.51,
+      "median_abs_error": 53.0
+    },
+    "diurnal_climatology_baseline": {
+      "mae": 44.58,
+      "rmse": 66.02,
+      "mape_pct": 20.96,
+      "median_abs_error": 27.75
+    },
+    "glucotwin_frozen_model": {
+      "mae": 39.45,
+      "rmse": 63.24,
+      "mape_pct": 18.12,
+      "median_abs_error": 18.53,
+      "p90_abs_error": 113.14,
+      "rel_improvement_vs_persistence_pct": 45.2,
+      "rel_improvement_vs_climatology_pct": 11.5
+    }
+  },
+  "per_patient_breakdown": [
+    {
+      "patient_id": "SYNTH_EXT_001",
+      "n_samples": 3809,
+      "persistence_mae": 74.33,
+      "glucotwin_mae": 34.22,
+      "rel_improvement_pct": 54.0
+    },
+    {
+      "patient_id": "SYNTH_EXT_002",
+      "n_samples": 3840,
+      "persistence_mae": 55.19,
+      "glucotwin_mae": 37.55,
+      "rel_improvement_pct": 32.0
+    },
+    {
+      "patient_id": "SYNTH_EXT_003",
+      "n_samples": 3767,
+      "persistence_mae": 75.87,
+      "glucotwin_mae": 37.3,
+      "rel_improvement_pct": 50.8
+    },
+    {
+      "patient_id": "SYNTH_EXT_004",
+      "n_samples": 3826,
+      "persistence_mae": 81.83,
+      "glucotwin_mae": 50.88,
+      "rel_improvement_pct": 37.8
+    },
+    {
+      "patient_id": "SYNTH_EXT_005",
+      "n_samples": 3808,
+      "persistence_mae": 78.04,
+      "glucotwin_mae": 42.92,
+      "rel_improvement_pct": 45.0
+    },
+    {
+      "patient_id": "SYNTH_EXT_006",
+      "n_samples": 3821,
+      "persistence_mae": 79.87,
+      "glucotwin_mae": 36.69,
+      "rel_improvement_pct": 54.1
+    },
+    {
+      "patient_id": "SYNTH_EXT_007",
+      "n_samples": 3818,
+      "persistence_mae": 70.42,
+      "glucotwin_mae": 47.12,
+      "rel_improvement_pct": 33.1
+    },
+    {
+      "patient_id": "SYNTH_EXT_008",
+      "n_samples": 3837,
+      "persistence_mae": 62.47,
+      "glucotwin_mae": 26.61,
+      "rel_improvement_pct": 57.4
+    },
+    {
+      "patient_id": "SYNTH_EXT_009",
+      "n_samples": 3786,
+      "persistence_mae": 64.2,
+      "glucotwin_mae": 33.35,
+      "rel_improvement_pct": 48.1
+    },
+    {
+      "patient_id": "SYNTH_EXT_010",
+      "n_samples": 3830,
+      "persistence_mae": 77.77,
+      "glucotwin_mae": 47.81,
+      "rel_improvement_pct": 38.5
+    }
+  ]
+}

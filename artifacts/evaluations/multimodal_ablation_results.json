@@ -1,0 +1,2595 @@
+{
+  "experiment_id": "GT-2026-10-05-V1.2",
+  "timestamp": "2026-10-14T09:54:04.233111+00:00",
+  "n_train_windows": 148949,
+  "n_val_windows": 31844,
+  "n_test_windows": 43888,
+  "n_test_patients": 60,
+  "configurations": {
+    "cgm_only": {
+      "label": "Config A",
+      "description": "CGM History Only",
+      "n_features": 41,
+      "feature_names": [
+        "glucose_lag_0",
+        "glucose_lag_1",
+        "glucose_lag_2",
+        "glucose_lag_3",
+        "glucose_lag_4",
+        "glucose_lag_5",
+        "glucose_lag_6",
+        "glucose_lag_7",
+        "glucose_lag_8",
+        "glucose_lag_9",
+        "glucose_lag_10",
+        "glucose_lag_11",
+        "glucose_lag_12",
+        "glucose_lag_13",
+        "glucose_lag_14",
+        "glucose_lag_15",
+        "glucose_lag_16",
+        "glucose_lag_17",
+        "glucose_lag_18",
+        "glucose_lag_19",
+        "glucose_lag_20",
+        "glucose_lag_21",
+        "glucose_lag_22",
+        "glucose_lag_23",
+        "mean_last_30m",
+        "std_last_30m",
+        "mean_last_60m",
+        "std_last_60m",
+        "min_last_60m",
+        "max_last_60m",
+        "mean_full_lookback",
+        "std_full_lookback",
+        "min_full_lookback",
+        "max_full_lookback",
+        "delta_5m",
+        "delta_15m",
+        "delta_30m",
+        "delta_60m",
+        "acceleration_5m",
+        "sin_hour",
+        "cos_hour"
+      ],
+      "metrics": {
+        "mae": 18.31,
+        "rmse": 28.52,
+        "mape_pct": 11.34,
+        "median_abs_error": 9.58,
+        "p90_abs_error": 49.64,
+        "max_abs_error": 157.8
+      },
+      "per_patient": [
+        {
+          "patient_id": "SYNTH_001",
+          "n_examples": 701,
+          "mae": 14.85,
+          "rmse": 22.04,
+          "median_abs_error": 8.35,
+          "p90_abs_error": 35.71
+        },
+        {
+          "patient_id": "SYNTH_002",
+          "n_examples": 738,
+          "mae": 14.75,
+          "rmse": 23.82,
+          "median_abs_error": 7.39,
+          "p90_abs_error": 43.92
+        },
+        {
+          "patient_id": "SYNTH_003",
+          "n_examples": 737,
+          "mae": 18.81,
+          "rmse": 28.66,
+          "median_abs_error": 10.03,
+          "p90_abs_error": 52.05
+        },
+        {
+          "patient_id": "SYNTH_004",
+          "n_examples": 735,
+          "mae": 18.56,
+          "rmse": 28.6,
+          "median_abs_error": 9.92,
+          "p90_abs_error": 52.39
+        },
+        {
+          "patient_id": "SYNTH_005",
+          "n_examples": 738,
+          "mae": 16.63,
+          "rmse": 26.1,
+          "median_abs_error": 8.68,
+          "p90_abs_error": 40.41
+        },
+        {
+          "patient_id": "SYNTH_006",
+          "n_examples": 742,
+          "mae": 20.06,
+          "rmse": 32.22,
+          "median_abs_error": 8.67,
+          "p90_abs_error": 58.49
+        },
+        {
+          "patient_id": "SYNTH_007",
+          "n_examples": 702,
+          "mae": 20.9,
+          "rmse": 32.23,
+          "median_abs_error": 11.26,
+          "p90_abs_error": 53.96
+        },
+        {
+          "patient_id": "SYNTH_008",
+          "n_examples": 705,
+          "mae": 21.83,
+          "rmse": 32.69,
+          "median_abs_error": 10.25,
+          "p90_abs_error": 64.3
+        },
+        {
+          "patient_id": "SYNTH_009",
+          "n_examples": 738,
+          "mae": 18.95,
+          "rmse": 28.94,
+          "median_abs_error": 9.98,
+          "p90_abs_error": 52.39
+        },
+        {
+          "patient_id": "SYNTH_010",
+          "n_examples": 741,
+          "mae": 21.42,
+          "rmse": 34.17,
+          "median_abs_error": 10.71,
+          "p90_abs_error": 59.26
+        },
+        {
+          "patient_id": "SYNTH_011",
+          "n_examples": 744,
+          "mae": 17.3,
+          "rmse": 25.82,
+          "median_abs_error": 10.01,
+          "p90_abs_error": 46.9
+        },
+        {
+          "patient_id": "SYNTH_012",
+          "n_examples": 735,
+          "mae": 17.03,
+          "rmse": 25.77,
+          "median_abs_error": 9.97,
+          "p90_abs_error": 47.28
+        },
+        {
+          "patient_id": "SYNTH_013",
+          "n_examples": 739,
+          "mae": 19.44,
+          "rmse": 31.41,
+          "median_abs_error": 9.86,
+          "p90_abs_error": 50.26
+        },
+        {
+          "patient_id": "SYNTH_014",
+          "n_examples": 744,
+          "mae": 15.68,
+          "rmse": 25.22,
+          "median_abs_error": 8.34,
+          "p90_abs_error": 41.93
+        },
+        {
+          "patient_id": "SYNTH_015",
+          "n_examples": 706,
+          "mae": 24.22,
+          "rmse": 35.79,
+          "median_abs_error": 13.36,
+          "p90_abs_error": 64.76
+        },
+        {
+          "patient_id": "SYNTH_016",
+          "n_examples": 738,
+          "mae": 16.82,
+          "rmse": 25.93,
+          "median_abs_error": 8.64,
+          "p90_abs_error": 51.81
+        },
+        {
+          "patient_id": "SYNTH_017",
+          "n_examples": 732,
+          "mae": 19.35,
+          "rmse": 30.68,
+          "median_abs_error": 9.46,
+          "p90_abs_error": 53.67
+        },
+        {
+          "patient_id": "SYNTH_018",
+          "n_examples": 730,
+          "mae": 21.56,
+          "rmse": 32.86,
+          "median_abs_error": 11.12,
+          "p90_abs_error": 59.51
+        },
+        {
+          "patient_id": "SYNTH_019",
+          "n_examples": 724,
+          "mae": 17.78,
+          "rmse": 28.6,
+          "median_abs_error": 8.17,
+          "p90_abs_error": 52.02
+        },
+        {
+          "patient_id": "SYNTH_020",
+          "n_examples": 738,
+          "mae": 21.09,
+          "rmse": 34.05,
+          "median_abs_error": 10.55,
+          "p90_abs_error": 56.12
+        },
+        {
+          "patient_id": "SYNTH_021",
+          "n_examples": 739,
+          "mae": 16.73,
+          "rmse": 25.62,
+          "median_abs_error": 8.6,
+          "p90_abs_error": 44.57
+        },
+        {
+          "patient_id": "SYNTH_022",
+          "n_examples": 739,
+          "mae": 17.29,
+          "rmse": 25.51,
+          "median_abs_error": 10.97,
+          "p90_abs_error": 45.86
+        },
+        {
+          "patient_id": "SYNTH_023",
+          "n_examples": 735,
+          "mae": 18.09,
+          "rmse": 26.22,
+          "median_abs_error": 10.58,
+          "p90_abs_error": 47.54
+        },
+        {
+          "patient_id": "SYNTH_024",
+          "n_examples": 739,
+          "mae": 15.85,
+          "rmse": 21.65,
+          "median_abs_error": 11.89,
+          "p90_abs_error": 35.0
+        },
+        {
+          "patient_id": "SYNTH_025",
+          "n_examples": 700,
+          "mae": 20.19,
+          "rmse": 29.71,
+          "median_abs_error": 10.26,
+          "p90_abs_error": 53.7
+        },
+        {
+          "patient_id": "SYNTH_026",
+          "n_examples": 732,
+          "mae": 23.57,
+          "rmse": 37.45,
+          "median_abs_error": 10.62,
+          "p90_abs_error": 66.16
+        },
+        {
+          "patient_id": "SYNTH_027",
+          "n_examples": 742,
+          "mae": 16.0,
+          "rmse": 24.45,
+          "median_abs_error": 9.42,
+          "p90_abs_error": 40.08
+        },
+        {
+          "patient_id": "SYNTH_028",
+          "n_examples": 735,
+          "mae": 17.96,
+          "rmse": 27.65,
+          "median_abs_error": 9.9,
+          "p90_abs_error": 48.82
+        },
+        {
+          "patient_id": "SYNTH_029",
+          "n_examples": 657,
+          "mae": 17.67,
+          "rmse": 29.46,
+          "median_abs_error": 8.34,
+          "p90_abs_error": 47.53
+        },
+        {
+          "patient_id": "SYNTH_030",
+          "n_examples": 728,
+          "mae": 18.93,
+          "rmse": 30.67,
+          "median_abs_error": 8.81,
+          "p90_abs_error": 49.07
+        },
+        {
+          "patient_id": "SYNTH_031",
+          "n_examples": 736,
+          "mae": 14.94,
+          "rmse": 22.71,
+          "median_abs_error": 8.7,
+          "p90_abs_error": 38.85
+        },
+        {
+          "patient_id": "SYNTH_032",
+          "n_examples": 739,
+          "mae": 17.64,
+          "rmse": 27.58,
+          "median_abs_error": 9.97,
+          "p90_abs_error": 48.0
+        },
+        {
+          "patient_id": "SYNTH_033",
+          "n_examples": 734,
+          "mae": 14.15,
+          "rmse": 21.87,
+          "median_abs_error": 8.38,
+          "p90_abs_error": 32.85
+        },
+        {
+          "patient_id": "SYNTH_034",
+          "n_examples": 739,
+          "mae": 18.03,
+          "rmse": 28.84,
+          "median_abs_error": 8.91,
+          "p90_abs_error": 55.8
+        },
+        {
+          "patient_id": "SYNTH_035",
+          "n_examples": 736,
+          "mae": 21.04,
+          "rmse": 33.61,
+          "median_abs_error": 10.46,
+          "p90_abs_error": 61.91
+        },
+        {
+          "patient_id": "SYNTH_036",
+          "n_examples": 737,
+          "mae": 20.1,
+          "rmse": 31.06,
+          "median_abs_error": 9.5,
+          "p90_abs_error": 57.83
+        },
+        {
+          "patient_id": "SYNTH_037",
+          "n_examples": 742,
+          "mae": 17.33,
+          "rmse": 24.49,
+          "median_abs_error": 11.4,
+          "p90_abs_error": 42.63
+        },
+        {
+          "patient_id": "SYNTH_038",
+          "n_examples": 739,
+          "mae": 22.9,
+          "rmse": 35.32,
+          "median_abs_error": 10.46,
+          "p90_abs_error": 64.94
+        },
+        {
+          "patient_id": "SYNTH_039",
+          "n_examples": 711,
+          "mae": 17.56,
+          "rmse": 25.68,
+          "median_abs_error": 10.06,
+          "p90_abs_error": 46.49
+        },
+        {
+          "patient_id": "SYNTH_040",
+          "n_examples": 731,
+          "mae": 15.04,
+          "rmse": 23.51,
+          "median_abs_error": 8.44,
+          "p90_abs_error": 41.88
+        },
+        {
+          "patient_id": "SYNTH_041",
+          "n_examples": 695,
+          "mae": 18.11,
+          "rmse": 30.74,
+          "median_abs_error": 7.54,
+          "p90_abs_error": 59.77
+        },
+        {
+          "patient_id": "SYNTH_042",
+          "n_examples": 736,
+          "mae": 20.35,
+          "rmse": 32.05,
+          "median_abs_error": 8.46,
+          "p90_abs_error": 56.86
+        },
+        {
+          "patient_id": "SYNTH_043",
+          "n_examples": 735,
+          "mae": 14.32,
+          "rmse": 24.18,
+          "median_abs_error": 6.91,
+          "p90_abs_error": 36.17
+        },
+        {
+          "patient_id": "SYNTH_044",
+          "n_examples": 740,
+          "mae": 17.53,
+          "rmse": 24.76,
+          "median_abs_error": 10.89,
+          "p90_abs_error": 45.82
+        },
+        {
+          "patient_id": "SYNTH_045",
+          "n_examples": 740,
+          "mae": 23.03,
+          "rmse": 34.86,
+          "median_abs_error": 10.85,
+          "p90_abs_error": 62.55
+        },
+        {
+          "patient_id": "SYNTH_046",
+          "n_examples": 740,
+          "mae": 15.65,
+          "rmse": 24.18,
+          "median_abs_error": 7.49,
+          "p90_abs_error": 45.57
+        },
+        {
+          "patient_id": "SYNTH_047",
+          "n_examples": 732,
+          "mae": 18.9,
+          "rmse": 28.79,
+          "median_abs_error": 10.95,
+          "p90_abs_error": 50.43
+        },
+        {
+          "patient_id": "SYNTH_048",
+          "n_examples": 740,
+          "mae": 14.54,
+          "rmse": 23.26,
+          "median_abs_error": 7.28,
+          "p90_abs_error": 41.7
+        },
+        {
+          "patient_id": "SYNTH_049",
+          "n_examples": 738,
+          "mae": 19.98,
+          "rmse": 28.68,
+          "median_abs_error": 12.38,
+          "p90_abs_error": 52.2
+        },
+        {
+          "patient_id": "SYNTH_050",
+          "n_examples": 742,
+          "mae": 18.93,
+          "rmse": 30.82,
+          "median_abs_error": 9.25,
+          "p90_abs_error": 56.52
+        },
+        {
+          "patient_id": "SYNTH_051",
+          "n_examples": 743,
+          "mae": 17.23,
+          "rmse": 24.47,
+          "median_abs_error": 10.68,
+          "p90_abs_error": 44.17
+        },
+        {
+          "patient_id": "SYNTH_052",
+          "n_examples": 737,
+          "mae": 18.41,
+          "rmse": 29.32,
+          "median_abs_error": 8.77,
+          "p90_abs_error": 50.28
+        },
+        {
+          "patient_id": "SYNTH_053",
+          "n_examples": 738,
+          "mae": 18.39,
+          "rmse": 28.65,
+          "median_abs_error": 8.77,
+          "p90_abs_error": 50.97
+        },
+        {
+          "patient_id": "SYNTH_054",
+          "n_examples": 748,
+          "mae": 17.61,
+          "rmse": 25.02,
+          "median_abs_error": 12.15,
+          "p90_abs_error": 40.73
+        },
+        {
+          "patient_id": "SYNTH_055",
+          "n_examples": 703,
+          "mae": 20.85,
+          "rmse": 29.9,
+          "median_abs_error": 13.72,
+          "p90_abs_error": 51.27
+        },
+        {
+          "patient_id": "SYNTH_056",
+          "n_examples": 740,
+          "mae": 18.6,
+          "rmse": 29.44,
+          "median_abs_error": 9.2,
+          "p90_abs_error": 55.02
+        },
+        {
+          "patient_id": "SYNTH_057",
+          "n_examples": 738,
+          "mae": 19.31,
+          "rmse": 29.3,
+          "median_abs_error": 10.19,
+          "p90_abs_error": 50.48
+        },
+        {
+          "patient_id": "SYNTH_058",
+          "n_examples": 736,
+          "mae": 16.24,
+          "rmse": 23.02,
+          "median_abs_error": 10.01,
+          "p90_abs_error": 40.4
+        },
+        {
+          "patient_id": "SYNTH_059",
+          "n_examples": 738,
+          "mae": 14.95,
+          "rmse": 24.71,
+          "median_abs_error": 7.57,
+          "p90_abs_error": 41.97
+        },
+        {
+          "patient_id": "SYNTH_060",
+          "n_examples": 732,
+          "mae": 18.47,
+          "rmse": 31.5,
+          "median_abs_error": 8.83,
+          "p90_abs_error": 48.67
+        }
+      ]
+    },
+    "cgm_plus_ehr": {
+      "label": "Config B",
+      "description": "CGM + Static EHR",
+      "n_features": 50,
+      "feature_names": [
+        "glucose_lag_0",
+        "glucose_lag_1",
+        "glucose_lag_2",
+        "glucose_lag_3",
+        "glucose_lag_4",
+        "glucose_lag_5",
+        "glucose_lag_6",
+        "glucose_lag_7",
+        "glucose_lag_8",
+        "glucose_lag_9",
+        "glucose_lag_10",
+        "glucose_lag_11",
+        "glucose_lag_12",
+        "glucose_lag_13",
+        "glucose_lag_14",
+        "glucose_lag_15",
+        "glucose_lag_16",
+        "glucose_lag_17",
+        "glucose_lag_18",
+        "glucose_lag_19",
+        "glucose_lag_20",
+        "glucose_lag_21",
+        "glucose_lag_22",
+        "glucose_lag_23",
+        "mean_last_30m",
+        "std_last_30m",
+        "mean_last_60m",
+        "std_last_60m",
+        "min_last_60m",
+        "max_last_60m",
+        "mean_full_lookback",
+        "std_full_lookback",
+        "min_full_lookback",
+        "max_full_lookback",
+        "delta_5m",
+        "delta_15m",
+        "delta_30m",
+        "delta_60m",
+        "acceleration_5m",
+        "sin_hour",
+        "cos_hour",
+        "ehr_age",
+        "ehr_bmi",
+        "ehr_diabetes_duration",
+        "ehr_baseline_hba1c",
+        "ehr_historical_fbg",
+        "ehr_hypertension_flag",
+        "ehr_metformin_flag",
+        "ehr_sglt2i_flag",
+        "ehr_dawn_flag"
+      ],
+      "metrics": {
+        "mae": 17.61,
+        "rmse": 28.18,
+        "mape_pct": 10.77,
+        "median_abs_error": 8.43,
+        "p90_abs_error": 49.48,
+        "max_abs_error": 171.42
+      },
+      "per_patient": [
+        {
+          "patient_id": "SYNTH_001",
+          "n_examples": 701,
+          "mae": 14.4,
+          "rmse": 22.04,
+          "median_abs_error": 8.06,
+          "p90_abs_error": 37.03
+        },
+        {
+          "patient_id": "SYNTH_002",
+          "n_examples": 738,
+          "mae": 14.92,
+          "rmse": 23.67,
+          "median_abs_error": 6.6,
+          "p90_abs_error": 41.93
+        },
+        {
+          "patient_id": "SYNTH_003",
+          "n_examples": 737,
+          "mae": 18.02,
+          "rmse": 30.94,
+          "median_abs_error": 5.91,
+          "p90_abs_error": 54.23
+        },
+        {
+          "patient_id": "SYNTH_004",
+          "n_examples": 735,
+          "mae": 21.18,
+          "rmse": 33.49,
+          "median_abs_error": 9.91,
+          "p90_abs_error": 63.57
+        },
+        {
+          "patient_id": "SYNTH_005",
+          "n_examples": 738,
+          "mae": 16.03,
+          "rmse": 26.89,
+          "median_abs_error": 7.37,
+          "p90_abs_error": 40.2
+        },
+        {
+          "patient_id": "SYNTH_006",
+          "n_examples": 742,
+          "mae": 20.69,
+          "rmse": 32.65,
+          "median_abs_error": 9.48,
+          "p90_abs_error": 61.3
+        },
+        {
+          "patient_id": "SYNTH_007",
+          "n_examples": 702,
+          "mae": 19.94,
+          "rmse": 33.44,
+          "median_abs_error": 9.28,
+          "p90_abs_error": 54.81
+        },
+        {
+          "patient_id": "SYNTH_008",
+          "n_examples": 705,
+          "mae": 19.27,
+          "rmse": 30.77,
+          "median_abs_error": 8.08,
+          "p90_abs_error": 60.21
+        },
+        {
+          "patient_id": "SYNTH_009",
+          "n_examples": 738,
+          "mae": 17.65,
+          "rmse": 28.09,
+          "median_abs_error": 7.7,
+          "p90_abs_error": 52.75
+        },
+        {
+          "patient_id": "SYNTH_010",
+          "n_examples": 741,
+          "mae": 20.25,
+          "rmse": 32.76,
+          "median_abs_error": 9.58,
+          "p90_abs_error": 56.92
+        },
+        {
+          "patient_id": "SYNTH_011",
+          "n_examples": 744,
+          "mae": 16.24,
+          "rmse": 26.22,
+          "median_abs_error": 6.83,
+          "p90_abs_error": 50.25
+        },
+        {
+          "patient_id": "SYNTH_012",
+          "n_examples": 735,
+          "mae": 16.2,
+          "rmse": 24.74,
+          "median_abs_error": 7.87,
+          "p90_abs_error": 49.06
+        },
+        {
+          "patient_id": "SYNTH_013",
+          "n_examples": 739,
+          "mae": 18.43,
+          "rmse": 30.6,
+          "median_abs_error": 8.74,
+          "p90_abs_error": 46.2
+        },
+        {
+          "patient_id": "SYNTH_014",
+          "n_examples": 744,
+          "mae": 14.35,
+          "rmse": 23.81,
+          "median_abs_error": 6.99,
+          "p90_abs_error": 39.64
+        },
+        {
+          "patient_id": "SYNTH_015",
+          "n_examples": 706,
+          "mae": 21.69,
+          "rmse": 34.02,
+          "median_abs_error": 10.14,
+          "p90_abs_error": 59.38
+        },
+        {
+          "patient_id": "SYNTH_016",
+          "n_examples": 738,
+          "mae": 17.49,
+          "rmse": 27.35,
+          "median_abs_error": 8.54,
+          "p90_abs_error": 52.91
+        },
+        {
+          "patient_id": "SYNTH_017",
+          "n_examples": 732,
+          "mae": 18.57,
+          "rmse": 29.0,
+          "median_abs_error": 9.95,
+          "p90_abs_error": 50.14
+        },
+        {
+          "patient_id": "SYNTH_018",
+          "n_examples": 730,
+          "mae": 20.39,
+          "rmse": 30.91,
+          "median_abs_error": 10.43,
+          "p90_abs_error": 59.87
+        },
+        {
+          "patient_id": "SYNTH_019",
+          "n_examples": 724,
+          "mae": 18.17,
+          "rmse": 29.57,
+          "median_abs_error": 7.91,
+          "p90_abs_error": 52.96
+        },
+        {
+          "patient_id": "SYNTH_020",
+          "n_examples": 738,
+          "mae": 20.97,
+          "rmse": 35.95,
+          "median_abs_error": 9.86,
+          "p90_abs_error": 54.96
+        },
+        {
+          "patient_id": "SYNTH_021",
+          "n_examples": 739,
+          "mae": 14.17,
+          "rmse": 23.96,
+          "median_abs_error": 5.84,
+          "p90_abs_error": 40.09
+        },
+        {
+          "patient_id": "SYNTH_022",
+          "n_examples": 739,
+          "mae": 16.37,
+          "rmse": 23.49,
+          "median_abs_error": 11.06,
+          "p90_abs_error": 41.27
+        },
+        {
+          "patient_id": "SYNTH_023",
+          "n_examples": 735,
+          "mae": 16.37,
+          "rmse": 24.59,
+          "median_abs_error": 8.36,
+          "p90_abs_error": 48.53
+        },
+        {
+          "patient_id": "SYNTH_024",
+          "n_examples": 739,
+          "mae": 13.57,
+          "rmse": 19.54,
+          "median_abs_error": 8.36,
+          "p90_abs_error": 32.45
+        },
+        {
+          "patient_id": "SYNTH_025",
+          "n_examples": 700,
+          "mae": 18.77,
+          "rmse": 28.96,
+          "median_abs_error": 8.39,
+          "p90_abs_error": 52.39
+        },
+        {
+          "patient_id": "SYNTH_026",
+          "n_examples": 732,
+          "mae": 22.26,
+          "rmse": 36.32,
+          "median_abs_error": 9.91,
+          "p90_abs_error": 69.1
+        },
+        {
+          "patient_id": "SYNTH_027",
+          "n_examples": 742,
+          "mae": 15.8,
+          "rmse": 25.48,
+          "median_abs_error": 7.68,
+          "p90_abs_error": 44.74
+        },
+        {
+          "patient_id": "SYNTH_028",
+          "n_examples": 735,
+          "mae": 17.97,
+          "rmse": 29.43,
+          "median_abs_error": 9.04,
+          "p90_abs_error": 45.68
+        },
+        {
+          "patient_id": "SYNTH_029",
+          "n_examples": 657,
+          "mae": 18.34,
+          "rmse": 27.72,
+          "median_abs_error": 11.14,
+          "p90_abs_error": 45.9
+        },
+        {
+          "patient_id": "SYNTH_030",
+          "n_examples": 728,
+          "mae": 16.74,
+          "rmse": 28.89,
+          "median_abs_error": 6.38,
+          "p90_abs_error": 51.18
+        },
+        {
+          "patient_id": "SYNTH_031",
+          "n_examples": 736,
+          "mae": 13.89,
+          "rmse": 23.09,
+          "median_abs_error": 6.57,
+          "p90_abs_error": 41.89
+        },
+        {
+          "patient_id": "SYNTH_032",
+          "n_examples": 739,
+          "mae": 15.63,
+          "rmse": 24.08,
+          "median_abs_error": 8.39,
+          "p90_abs_error": 42.73
+        },
+        {
+          "patient_id": "SYNTH_033",
+          "n_examples": 734,
+          "mae": 13.05,
+          "rmse": 21.98,
+          "median_abs_error": 6.1,
+          "p90_abs_error": 35.2
+        },
+        {
+          "patient_id": "SYNTH_034",
+          "n_examples": 739,
+          "mae": 17.25,
+          "rmse": 28.98,
+          "median_abs_error": 6.85,
+          "p90_abs_error": 56.51
+        },
+        {
+          "patient_id": "SYNTH_035",
+          "n_examples": 736,
+          "mae": 21.92,
+          "rmse": 32.87,
+          "median_abs_error": 11.87,
+          "p90_abs_error": 59.54
+        },
+        {
+          "patient_id": "SYNTH_036",
+          "n_examples": 737,
+          "mae": 20.54,
+          "rmse": 31.85,
+          "median_abs_error": 10.48,
+          "p90_abs_error": 57.5
+        },
+        {
+          "patient_id": "SYNTH_037",
+          "n_examples": 742,
+          "mae": 16.42,
+          "rmse": 23.96,
+          "median_abs_error": 9.23,
+          "p90_abs_error": 42.2
+        },
+        {
+          "patient_id": "SYNTH_038",
+          "n_examples": 739,
+          "mae": 21.73,
+          "rmse": 34.05,
+          "median_abs_error": 10.38,
+          "p90_abs_error": 62.85
+        },
+        {
+          "patient_id": "SYNTH_039",
+          "n_examples": 711,
+          "mae": 17.51,
+          "rmse": 26.04,
+          "median_abs_error": 8.81,
+          "p90_abs_error": 45.71
+        },
+        {
+          "patient_id": "SYNTH_040",
+          "n_examples": 731,
+          "mae": 14.65,
+          "rmse": 22.26,
+          "median_abs_error": 8.75,
+          "p90_abs_error": 39.45
+        },
+        {
+          "patient_id": "SYNTH_041",
+          "n_examples": 695,
+          "mae": 16.58,
+          "rmse": 27.99,
+          "median_abs_error": 7.8,
+          "p90_abs_error": 53.44
+        },
+        {
+          "patient_id": "SYNTH_042",
+          "n_examples": 736,
+          "mae": 20.15,
+          "rmse": 32.18,
+          "median_abs_error": 8.19,
+          "p90_abs_error": 59.81
+        },
+        {
+          "patient_id": "SYNTH_043",
+          "n_examples": 735,
+          "mae": 15.16,
+          "rmse": 25.34,
+          "median_abs_error": 7.92,
+          "p90_abs_error": 39.13
+        },
+        {
+          "patient_id": "SYNTH_044",
+          "n_examples": 740,
+          "mae": 16.94,
+          "rmse": 24.61,
+          "median_abs_error": 10.07,
+          "p90_abs_error": 42.39
+        },
+        {
+          "patient_id": "SYNTH_045",
+          "n_examples": 740,
+          "mae": 22.13,
+          "rmse": 33.93,
+          "median_abs_error": 10.92,
+          "p90_abs_error": 65.93
+        },
+        {
+          "patient_id": "SYNTH_046",
+          "n_examples": 740,
+          "mae": 14.98,
+          "rmse": 24.64,
+          "median_abs_error": 6.78,
+          "p90_abs_error": 45.08
+        },
+        {
+          "patient_id": "SYNTH_047",
+          "n_examples": 732,
+          "mae": 17.94,
+          "rmse": 27.92,
+          "median_abs_error": 7.83,
+          "p90_abs_error": 50.21
+        },
+        {
+          "patient_id": "SYNTH_048",
+          "n_examples": 740,
+          "mae": 14.44,
+          "rmse": 24.27,
+          "median_abs_error": 5.64,
+          "p90_abs_error": 46.37
+        },
+        {
+          "patient_id": "SYNTH_049",
+          "n_examples": 738,
+          "mae": 18.45,
+          "rmse": 27.86,
+          "median_abs_error": 9.58,
+          "p90_abs_error": 50.62
+        },
+        {
+          "patient_id": "SYNTH_050",
+          "n_examples": 742,
+          "mae": 17.72,
+          "rmse": 28.08,
+          "median_abs_error": 9.09,
+          "p90_abs_error": 54.16
+        },
+        {
+          "patient_id": "SYNTH_051",
+          "n_examples": 743,
+          "mae": 16.65,
+          "rmse": 24.46,
+          "median_abs_error": 8.51,
+          "p90_abs_error": 43.32
+        },
+        {
+          "patient_id": "SYNTH_052",
+          "n_examples": 737,
+          "mae": 19.54,
+          "rmse": 29.91,
+          "median_abs_error": 10.04,
+          "p90_abs_error": 52.64
+        },
+        {
+          "patient_id": "SYNTH_053",
+          "n_examples": 738,
+          "mae": 17.15,
+          "rmse": 27.38,
+          "median_abs_error": 6.45,
+          "p90_abs_error": 52.99
+        },
+        {
+          "patient_id": "SYNTH_054",
+          "n_examples": 748,
+          "mae": 15.98,
+          "rmse": 24.73,
+          "median_abs_error": 9.33,
+          "p90_abs_error": 42.86
+        },
+        {
+          "patient_id": "SYNTH_055",
+          "n_examples": 703,
+          "mae": 18.93,
+          "rmse": 27.52,
+          "median_abs_error": 10.21,
+          "p90_abs_error": 48.98
+        },
+        {
+          "patient_id": "SYNTH_056",
+          "n_examples": 740,
+          "mae": 20.58,
+          "rmse": 31.65,
+          "median_abs_error": 10.32,
+          "p90_abs_error": 58.93
+        },
+        {
+          "patient_id": "SYNTH_057",
+          "n_examples": 738,
+          "mae": 18.21,
+          "rmse": 29.0,
+          "median_abs_error": 7.44,
+          "p90_abs_error": 53.46
+        },
+        {
+          "patient_id": "SYNTH_058",
+          "n_examples": 736,
+          "mae": 13.98,
+          "rmse": 20.95,
+          "median_abs_error": 6.92,
+          "p90_abs_error": 38.64
+        },
+        {
+          "patient_id": "SYNTH_059",
+          "n_examples": 738,
+          "mae": 13.75,
+          "rmse": 24.79,
+          "median_abs_error": 6.17,
+          "p90_abs_error": 41.55
+        },
+        {
+          "patient_id": "SYNTH_060",
+          "n_examples": 732,
+          "mae": 20.03,
+          "rmse": 32.7,
+          "median_abs_error": 12.63,
+          "p90_abs_error": 50.66
+        }
+      ]
+    },
+    "cgm_plus_wearables": {
+      "label": "Config C",
+      "description": "CGM + Dynamic Wearables",
+      "n_features": 47,
+      "feature_names": [
+        "glucose_lag_0",
+        "glucose_lag_1",
+        "glucose_lag_2",
+        "glucose_lag_3",
+        "glucose_lag_4",
+        "glucose_lag_5",
+        "glucose_lag_6",
+        "glucose_lag_7",
+        "glucose_lag_8",
+        "glucose_lag_9",
+        "glucose_lag_10",
+        "glucose_lag_11",
+        "glucose_lag_12",
+        "glucose_lag_13",
+        "glucose_lag_14",
+        "glucose_lag_15",
+        "glucose_lag_16",
+        "glucose_lag_17",
+        "glucose_lag_18",
+        "glucose_lag_19",
+        "glucose_lag_20",
+        "glucose_lag_21",
+        "glucose_lag_22",
+        "glucose_lag_23",
+        "mean_last_30m",
+        "std_last_30m",
+        "mean_last_60m",
+        "std_last_60m",
+        "min_last_60m",
+        "max_last_60m",
+        "mean_full_lookback",
+        "std_full_lookback",
+        "min_full_lookback",
+        "max_full_lookback",
+        "delta_5m",
+        "delta_15m",
+        "delta_30m",
+        "delta_60m",
+        "acceleration_5m",
+        "sin_hour",
+        "cos_hour",
+        "wearable_mean_hr_30m",
+        "wearable_hr_delta_15m",
+        "wearable_steps_sum_30m",
+        "wearable_steps_sum_60m",
+        "wearable_hrv_last",
+        "wearable_sleep_indicator"
+      ],
+      "metrics": {
+        "mae": 18.32,
+        "rmse": 28.53,
+        "mape_pct": 11.33,
+        "median_abs_error": 9.55,
+        "p90_abs_error": 50.24,
+        "max_abs_error": 157.31
+      },
+      "per_patient": [
+        {
+          "patient_id": "SYNTH_001",
+          "n_examples": 701,
+          "mae": 15.47,
+          "rmse": 23.32,
+          "median_abs_error": 8.27,
+          "p90_abs_error": 38.5
+        },
+        {
+          "patient_id": "SYNTH_002",
+          "n_examples": 738,
+          "mae": 14.51,
+          "rmse": 23.77,
+          "median_abs_error": 7.21,
+          "p90_abs_error": 41.64
+        },
+        {
+          "patient_id": "SYNTH_003",
+          "n_examples": 737,
+          "mae": 18.87,
+          "rmse": 28.8,
+          "median_abs_error": 9.79,
+          "p90_abs_error": 52.36
+        },
+        {
+          "patient_id": "SYNTH_004",
+          "n_examples": 735,
+          "mae": 18.74,
+          "rmse": 29.16,
+          "median_abs_error": 9.17,
+          "p90_abs_error": 54.31
+        },
+        {
+          "patient_id": "SYNTH_005",
+          "n_examples": 738,
+          "mae": 17.06,
+          "rmse": 27.05,
+          "median_abs_error": 8.73,
+          "p90_abs_error": 42.4
+        },
+        {
+          "patient_id": "SYNTH_006",
+          "n_examples": 742,
+          "mae": 20.65,
+          "rmse": 33.82,
+          "median_abs_error": 8.82,
+          "p90_abs_error": 62.24
+        },
+        {
+          "patient_id": "SYNTH_007",
+          "n_examples": 702,
+          "mae": 20.45,
+          "rmse": 31.44,
+          "median_abs_error": 11.68,
+          "p90_abs_error": 54.24
+        },
+        {
+          "patient_id": "SYNTH_008",
+          "n_examples": 705,
+          "mae": 21.54,
+          "rmse": 32.02,
+          "median_abs_error": 10.58,
+          "p90_abs_error": 61.02
+        },
+        {
+          "patient_id": "SYNTH_009",
+          "n_examples": 738,
+          "mae": 19.09,
+          "rmse": 29.42,
+          "median_abs_error": 9.2,
+          "p90_abs_error": 55.07
+        },
+        {
+          "patient_id": "SYNTH_010",
+          "n_examples": 741,
+          "mae": 21.09,
+          "rmse": 33.07,
+          "median_abs_error": 11.41,
+          "p90_abs_error": 56.83
+        },
+        {
+          "patient_id": "SYNTH_011",
+          "n_examples": 744,
+          "mae": 17.72,
+          "rmse": 26.94,
+          "median_abs_error": 9.7,
+          "p90_abs_error": 48.13
+        },
+        {
+          "patient_id": "SYNTH_012",
+          "n_examples": 735,
+          "mae": 16.99,
+          "rmse": 25.61,
+          "median_abs_error": 9.93,
+          "p90_abs_error": 48.29
+        },
+        {
+          "patient_id": "SYNTH_013",
+          "n_examples": 739,
+          "mae": 19.03,
+          "rmse": 30.59,
+          "median_abs_error": 9.64,
+          "p90_abs_error": 49.12
+        },
+        {
+          "patient_id": "SYNTH_014",
+          "n_examples": 744,
+          "mae": 15.06,
+          "rmse": 24.41,
+          "median_abs_error": 7.86,
+          "p90_abs_error": 39.58
+        },
+        {
+          "patient_id": "SYNTH_015",
+          "n_examples": 706,
+          "mae": 23.76,
+          "rmse": 35.07,
+          "median_abs_error": 13.54,
+          "p90_abs_error": 62.28
+        },
+        {
+          "patient_id": "SYNTH_016",
+          "n_examples": 738,
+          "mae": 17.25,
+          "rmse": 26.5,
+          "median_abs_error": 8.87,
+          "p90_abs_error": 54.15
+        },
+        {
+          "patient_id": "SYNTH_017",
+          "n_examples": 732,
+          "mae": 19.12,
+          "rmse": 29.75,
+          "median_abs_error": 9.96,
+          "p90_abs_error": 53.16
+        },
+        {
+          "patient_id": "SYNTH_018",
+          "n_examples": 730,
+          "mae": 21.26,
+          "rmse": 32.43,
+          "median_abs_error": 10.27,
+          "p90_abs_error": 61.42
+        },
+        {
+          "patient_id": "SYNTH_019",
+          "n_examples": 724,
+          "mae": 17.77,
+          "rmse": 28.66,
+          "median_abs_error": 8.09,
+          "p90_abs_error": 50.46
+        },
+        {
+          "patient_id": "SYNTH_020",
+          "n_examples": 738,
+          "mae": 21.3,
+          "rmse": 34.04,
+          "median_abs_error": 10.7,
+          "p90_abs_error": 52.6
+        },
+        {
+          "patient_id": "SYNTH_021",
+          "n_examples": 739,
+          "mae": 16.46,
+          "rmse": 25.35,
+          "median_abs_error": 8.15,
+          "p90_abs_error": 44.2
+        },
+        {
+          "patient_id": "SYNTH_022",
+          "n_examples": 739,
+          "mae": 17.36,
+          "rmse": 25.81,
+          "median_abs_error": 10.78,
+          "p90_abs_error": 47.42
+        },
+        {
+          "patient_id": "SYNTH_023",
+          "n_examples": 735,
+          "mae": 17.71,
+          "rmse": 26.06,
+          "median_abs_error": 9.93,
+          "p90_abs_error": 46.75
+        },
+        {
+          "patient_id": "SYNTH_024",
+          "n_examples": 739,
+          "mae": 15.05,
+          "rmse": 20.86,
+          "median_abs_error": 10.62,
+          "p90_abs_error": 33.39
+        },
+        {
+          "patient_id": "SYNTH_025",
+          "n_examples": 700,
+          "mae": 20.0,
+          "rmse": 29.67,
+          "median_abs_error": 10.15,
+          "p90_abs_error": 52.97
+        },
+        {
+          "patient_id": "SYNTH_026",
+          "n_examples": 732,
+          "mae": 23.59,
+          "rmse": 37.54,
+          "median_abs_error": 11.13,
+          "p90_abs_error": 65.89
+        },
+        {
+          "patient_id": "SYNTH_027",
+          "n_examples": 742,
+          "mae": 16.44,
+          "rmse": 25.24,
+          "median_abs_error": 9.45,
+          "p90_abs_error": 42.04
+        },
+        {
+          "patient_id": "SYNTH_028",
+          "n_examples": 735,
+          "mae": 18.17,
+          "rmse": 27.69,
+          "median_abs_error": 10.29,
+          "p90_abs_error": 48.94
+        },
+        {
+          "patient_id": "SYNTH_029",
+          "n_examples": 657,
+          "mae": 17.59,
+          "rmse": 29.41,
+          "median_abs_error": 8.56,
+          "p90_abs_error": 48.81
+        },
+        {
+          "patient_id": "SYNTH_030",
+          "n_examples": 728,
+          "mae": 18.85,
+          "rmse": 30.1,
+          "median_abs_error": 9.3,
+          "p90_abs_error": 49.02
+        },
+        {
+          "patient_id": "SYNTH_031",
+          "n_examples": 736,
+          "mae": 14.68,
+          "rmse": 22.59,
+          "median_abs_error": 7.94,
+          "p90_abs_error": 39.53
+        },
+        {
+          "patient_id": "SYNTH_032",
+          "n_examples": 739,
+          "mae": 17.57,
+          "rmse": 27.5,
+          "median_abs_error": 9.59,
+          "p90_abs_error": 47.18
+        },
+        {
+          "patient_id": "SYNTH_033",
+          "n_examples": 734,
+          "mae": 14.27,
+          "rmse": 21.48,
+          "median_abs_error": 8.74,
+          "p90_abs_error": 31.46
+        },
+        {
+          "patient_id": "SYNTH_034",
+          "n_examples": 739,
+          "mae": 17.66,
+          "rmse": 28.52,
+          "median_abs_error": 8.47,
+          "p90_abs_error": 53.03
+        },
+        {
+          "patient_id": "SYNTH_035",
+          "n_examples": 736,
+          "mae": 20.61,
+          "rmse": 33.19,
+          "median_abs_error": 9.62,
+          "p90_abs_error": 61.2
+        },
+        {
+          "patient_id": "SYNTH_036",
+          "n_examples": 737,
+          "mae": 20.33,
+          "rmse": 31.55,
+          "median_abs_error": 9.99,
+          "p90_abs_error": 57.98
+        },
+        {
+          "patient_id": "SYNTH_037",
+          "n_examples": 742,
+          "mae": 17.46,
+          "rmse": 24.1,
+          "median_abs_error": 11.97,
+          "p90_abs_error": 41.72
+        },
+        {
+          "patient_id": "SYNTH_038",
+          "n_examples": 739,
+          "mae": 23.6,
+          "rmse": 35.82,
+          "median_abs_error": 10.93,
+          "p90_abs_error": 67.51
+        },
+        {
+          "patient_id": "SYNTH_039",
+          "n_examples": 711,
+          "mae": 17.69,
+          "rmse": 26.07,
+          "median_abs_error": 9.43,
+          "p90_abs_error": 46.84
+        },
+        {
+          "patient_id": "SYNTH_040",
+          "n_examples": 731,
+          "mae": 15.17,
+          "rmse": 23.6,
+          "median_abs_error": 8.81,
+          "p90_abs_error": 39.76
+        },
+        {
+          "patient_id": "SYNTH_041",
+          "n_examples": 695,
+          "mae": 18.12,
+          "rmse": 31.12,
+          "median_abs_error": 7.76,
+          "p90_abs_error": 59.81
+        },
+        {
+          "patient_id": "SYNTH_042",
+          "n_examples": 736,
+          "mae": 20.12,
+          "rmse": 30.91,
+          "median_abs_error": 8.76,
+          "p90_abs_error": 53.89
+        },
+        {
+          "patient_id": "SYNTH_043",
+          "n_examples": 735,
+          "mae": 14.6,
+          "rmse": 24.44,
+          "median_abs_error": 7.15,
+          "p90_abs_error": 36.25
+        },
+        {
+          "patient_id": "SYNTH_044",
+          "n_examples": 740,
+          "mae": 17.75,
+          "rmse": 24.84,
+          "median_abs_error": 11.14,
+          "p90_abs_error": 44.82
+        },
+        {
+          "patient_id": "SYNTH_045",
+          "n_examples": 740,
+          "mae": 23.26,
+          "rmse": 35.28,
+          "median_abs_error": 10.71,
+          "p90_abs_error": 63.06
+        },
+        {
+          "patient_id": "SYNTH_046",
+          "n_examples": 740,
+          "mae": 15.63,
+          "rmse": 24.02,
+          "median_abs_error": 7.84,
+          "p90_abs_error": 44.83
+        },
+        {
+          "patient_id": "SYNTH_047",
+          "n_examples": 732,
+          "mae": 19.1,
+          "rmse": 29.13,
+          "median_abs_error": 10.83,
+          "p90_abs_error": 52.42
+        },
+        {
+          "patient_id": "SYNTH_048",
+          "n_examples": 740,
+          "mae": 15.02,
+          "rmse": 23.75,
+          "median_abs_error": 7.92,
+          "p90_abs_error": 41.72
+        },
+        {
+          "patient_id": "SYNTH_049",
+          "n_examples": 738,
+          "mae": 20.69,
+          "rmse": 29.42,
+          "median_abs_error": 13.67,
+          "p90_abs_error": 53.29
+        },
+        {
+          "patient_id": "SYNTH_050",
+          "n_examples": 742,
+          "mae": 19.06,
+          "rmse": 31.38,
+          "median_abs_error": 9.0,
+          "p90_abs_error": 55.8
+        },
+        {
+          "patient_id": "SYNTH_051",
+          "n_examples": 743,
+          "mae": 16.95,
+          "rmse": 24.29,
+          "median_abs_error": 10.33,
+          "p90_abs_error": 45.16
+        },
+        {
+          "patient_id": "SYNTH_052",
+          "n_examples": 737,
+          "mae": 18.34,
+          "rmse": 29.28,
+          "median_abs_error": 8.35,
+          "p90_abs_error": 52.01
+        },
+        {
+          "patient_id": "SYNTH_053",
+          "n_examples": 738,
+          "mae": 18.53,
+          "rmse": 29.02,
+          "median_abs_error": 8.45,
+          "p90_abs_error": 54.03
+        },
+        {
+          "patient_id": "SYNTH_054",
+          "n_examples": 748,
+          "mae": 17.17,
+          "rmse": 24.42,
+          "median_abs_error": 11.42,
+          "p90_abs_error": 38.69
+        },
+        {
+          "patient_id": "SYNTH_055",
+          "n_examples": 703,
+          "mae": 21.07,
+          "rmse": 29.66,
+          "median_abs_error": 14.85,
+          "p90_abs_error": 50.06
+        },
+        {
+          "patient_id": "SYNTH_056",
+          "n_examples": 740,
+          "mae": 18.34,
+          "rmse": 29.1,
+          "median_abs_error": 9.14,
+          "p90_abs_error": 52.37
+        },
+        {
+          "patient_id": "SYNTH_057",
+          "n_examples": 738,
+          "mae": 19.31,
+          "rmse": 29.54,
+          "median_abs_error": 10.17,
+          "p90_abs_error": 50.38
+        },
+        {
+          "patient_id": "SYNTH_058",
+          "n_examples": 736,
+          "mae": 16.22,
+          "rmse": 22.87,
+          "median_abs_error": 10.13,
+          "p90_abs_error": 39.85
+        },
+        {
+          "patient_id": "SYNTH_059",
+          "n_examples": 738,
+          "mae": 14.92,
+          "rmse": 24.59,
+          "median_abs_error": 7.94,
+          "p90_abs_error": 40.54
+        },
+        {
+          "patient_id": "SYNTH_060",
+          "n_examples": 732,
+          "mae": 18.41,
+          "rmse": 32.03,
+          "median_abs_error": 8.94,
+          "p90_abs_error": 50.27
+        }
+      ]
+    },
+    "full_fusion": {
+      "label": "Config D",
+      "description": "Full Two-Stream Fusion (EHR + CGM + Wearables)",
+      "n_features": 56,
+      "feature_names": [
+        "glucose_lag_0",
+        "glucose_lag_1",
+        "glucose_lag_2",
+        "glucose_lag_3",
+        "glucose_lag_4",
+        "glucose_lag_5",
+        "glucose_lag_6",
+        "glucose_lag_7",
+        "glucose_lag_8",
+        "glucose_lag_9",
+        "glucose_lag_10",
+        "glucose_lag_11",
+        "glucose_lag_12",
+        "glucose_lag_13",
+        "glucose_lag_14",
+        "glucose_lag_15",
+        "glucose_lag_16",
+        "glucose_lag_17",
+        "glucose_lag_18",
+        "glucose_lag_19",
+        "glucose_lag_20",
+        "glucose_lag_21",
+        "glucose_lag_22",
+        "glucose_lag_23",
+        "mean_last_30m",
+        "std_last_30m",
+        "mean_last_60m",
+        "std_last_60m",
+        "min_last_60m",
+        "max_last_60m",
+        "mean_full_lookback",
+        "std_full_lookback",
+        "min_full_lookback",
+        "max_full_lookback",
+        "delta_5m",
+        "delta_15m",
+        "delta_30m",
+        "delta_60m",
+        "acceleration_5m",
+        "sin_hour",
+        "cos_hour",
+        "ehr_age",
+        "ehr_bmi",
+        "ehr_diabetes_duration",
+        "ehr_baseline_hba1c",
+        "ehr_historical_fbg",
+        "ehr_hypertension_flag",
+        "ehr_metformin_flag",
+        "ehr_sglt2i_flag",
+        "ehr_dawn_flag",
+        "wearable_mean_hr_30m",
+        "wearable_hr_delta_15m",
+        "wearable_steps_sum_30m",
+        "wearable_steps_sum_60m",
+        "wearable_hrv_last",
+        "wearable_sleep_indicator"
+      ],
+      "metrics": {
+        "mae": 17.67,
+        "rmse": 28.27,
+        "mape_pct": 10.82,
+        "median_abs_error": 8.54,
+        "p90_abs_error": 49.98,
+        "max_abs_error": 162.21
+      },
+      "per_patient": [
+        {
+          "patient_id": "SYNTH_001",
+          "n_examples": 701,
+          "mae": 14.5,
+          "rmse": 22.08,
+          "median_abs_error": 8.27,
+          "p90_abs_error": 36.39
+        },
+        {
+          "patient_id": "SYNTH_002",
+          "n_examples": 738,
+          "mae": 15.17,
+          "rmse": 24.24,
+          "median_abs_error": 6.5,
+          "p90_abs_error": 44.88
+        },
+        {
+          "patient_id": "SYNTH_003",
+          "n_examples": 737,
+          "mae": 17.93,
+          "rmse": 30.37,
+          "median_abs_error": 6.56,
+          "p90_abs_error": 52.73
+        },
+        {
+          "patient_id": "SYNTH_004",
+          "n_examples": 735,
+          "mae": 21.14,
+          "rmse": 34.1,
+          "median_abs_error": 9.7,
+          "p90_abs_error": 64.74
+        },
+        {
+          "patient_id": "SYNTH_005",
+          "n_examples": 738,
+          "mae": 15.84,
+          "rmse": 26.51,
+          "median_abs_error": 7.5,
+          "p90_abs_error": 42.51
+        },
+        {
+          "patient_id": "SYNTH_006",
+          "n_examples": 742,
+          "mae": 20.84,
+          "rmse": 33.57,
+          "median_abs_error": 9.36,
+          "p90_abs_error": 63.16
+        },
+        {
+          "patient_id": "SYNTH_007",
+          "n_examples": 702,
+          "mae": 19.73,
+          "rmse": 32.71,
+          "median_abs_error": 9.63,
+          "p90_abs_error": 57.49
+        },
+        {
+          "patient_id": "SYNTH_008",
+          "n_examples": 705,
+          "mae": 19.58,
+          "rmse": 30.46,
+          "median_abs_error": 8.73,
+          "p90_abs_error": 60.3
+        },
+        {
+          "patient_id": "SYNTH_009",
+          "n_examples": 738,
+          "mae": 18.08,
+          "rmse": 28.64,
+          "median_abs_error": 7.89,
+          "p90_abs_error": 54.9
+        },
+        {
+          "patient_id": "SYNTH_010",
+          "n_examples": 741,
+          "mae": 20.18,
+          "rmse": 32.5,
+          "median_abs_error": 9.95,
+          "p90_abs_error": 56.09
+        },
+        {
+          "patient_id": "SYNTH_011",
+          "n_examples": 744,
+          "mae": 16.88,
+          "rmse": 27.31,
+          "median_abs_error": 7.25,
+          "p90_abs_error": 53.23
+        },
+        {
+          "patient_id": "SYNTH_012",
+          "n_examples": 735,
+          "mae": 16.5,
+          "rmse": 25.73,
+          "median_abs_error": 7.47,
+          "p90_abs_error": 52.02
+        },
+        {
+          "patient_id": "SYNTH_013",
+          "n_examples": 739,
+          "mae": 18.75,
+          "rmse": 30.71,
+          "median_abs_error": 9.55,
+          "p90_abs_error": 47.7
+        },
+        {
+          "patient_id": "SYNTH_014",
+          "n_examples": 744,
+          "mae": 14.31,
+          "rmse": 23.6,
+          "median_abs_error": 7.29,
+          "p90_abs_error": 39.21
+        },
+        {
+          "patient_id": "SYNTH_015",
+          "n_examples": 706,
+          "mae": 22.17,
+          "rmse": 34.29,
+          "median_abs_error": 10.47,
+          "p90_abs_error": 61.7
+        },
+        {
+          "patient_id": "SYNTH_016",
+          "n_examples": 738,
+          "mae": 17.16,
+          "rmse": 26.89,
+          "median_abs_error": 8.16,
+          "p90_abs_error": 49.71
+        },
+        {
+          "patient_id": "SYNTH_017",
+          "n_examples": 732,
+          "mae": 18.38,
+          "rmse": 28.69,
+          "median_abs_error": 9.68,
+          "p90_abs_error": 51.42
+        },
+        {
+          "patient_id": "SYNTH_018",
+          "n_examples": 730,
+          "mae": 20.95,
+          "rmse": 31.54,
+          "median_abs_error": 10.69,
+          "p90_abs_error": 57.8
+        },
+        {
+          "patient_id": "SYNTH_019",
+          "n_examples": 724,
+          "mae": 18.09,
+          "rmse": 29.62,
+          "median_abs_error": 8.0,
+          "p90_abs_error": 51.51
+        },
+        {
+          "patient_id": "SYNTH_020",
+          "n_examples": 738,
+          "mae": 20.71,
+          "rmse": 34.4,
+          "median_abs_error": 10.29,
+          "p90_abs_error": 55.53
+        },
+        {
+          "patient_id": "SYNTH_021",
+          "n_examples": 739,
+          "mae": 13.96,
+          "rmse": 23.27,
+          "median_abs_error": 6.11,
+          "p90_abs_error": 39.84
+        },
+        {
+          "patient_id": "SYNTH_022",
+          "n_examples": 739,
+          "mae": 16.4,
+          "rmse": 23.88,
+          "median_abs_error": 10.48,
+          "p90_abs_error": 41.48
+        },
+        {
+          "patient_id": "SYNTH_023",
+          "n_examples": 735,
+          "mae": 15.83,
+          "rmse": 24.47,
+          "median_abs_error": 7.74,
+          "p90_abs_error": 47.68
+        },
+        {
+          "patient_id": "SYNTH_024",
+          "n_examples": 739,
+          "mae": 13.92,
+          "rmse": 20.28,
+          "median_abs_error": 8.69,
+          "p90_abs_error": 31.95
+        },
+        {
+          "patient_id": "SYNTH_025",
+          "n_examples": 700,
+          "mae": 18.42,
+          "rmse": 29.09,
+          "median_abs_error": 7.79,
+          "p90_abs_error": 52.75
+        },
+        {
+          "patient_id": "SYNTH_026",
+          "n_examples": 732,
+          "mae": 21.77,
+          "rmse": 35.85,
+          "median_abs_error": 9.61,
+          "p90_abs_error": 64.03
+        },
+        {
+          "patient_id": "SYNTH_027",
+          "n_examples": 742,
+          "mae": 15.67,
+          "rmse": 24.81,
+          "median_abs_error": 8.31,
+          "p90_abs_error": 41.28
+        },
+        {
+          "patient_id": "SYNTH_028",
+          "n_examples": 735,
+          "mae": 17.99,
+          "rmse": 29.63,
+          "median_abs_error": 8.75,
+          "p90_abs_error": 44.78
+        },
+        {
+          "patient_id": "SYNTH_029",
+          "n_examples": 657,
+          "mae": 18.36,
+          "rmse": 27.57,
+          "median_abs_error": 11.32,
+          "p90_abs_error": 48.65
+        },
+        {
+          "patient_id": "SYNTH_030",
+          "n_examples": 728,
+          "mae": 18.01,
+          "rmse": 30.2,
+          "median_abs_error": 7.95,
+          "p90_abs_error": 51.01
+        },
+        {
+          "patient_id": "SYNTH_031",
+          "n_examples": 736,
+          "mae": 14.0,
+          "rmse": 23.35,
+          "median_abs_error": 6.7,
+          "p90_abs_error": 43.25
+        },
+        {
+          "patient_id": "SYNTH_032",
+          "n_examples": 739,
+          "mae": 15.7,
+          "rmse": 24.59,
+          "median_abs_error": 7.97,
+          "p90_abs_error": 41.36
+        },
+        {
+          "patient_id": "SYNTH_033",
+          "n_examples": 734,
+          "mae": 13.48,
+          "rmse": 22.14,
+          "median_abs_error": 6.95,
+          "p90_abs_error": 33.24
+        },
+        {
+          "patient_id": "SYNTH_034",
+          "n_examples": 739,
+          "mae": 17.51,
+          "rmse": 29.72,
+          "median_abs_error": 6.76,
+          "p90_abs_error": 59.04
+        },
+        {
+          "patient_id": "SYNTH_035",
+          "n_examples": 736,
+          "mae": 21.2,
+          "rmse": 32.89,
+          "median_abs_error": 10.5,
+          "p90_abs_error": 58.33
+        },
+        {
+          "patient_id": "SYNTH_036",
+          "n_examples": 737,
+          "mae": 20.61,
+          "rmse": 31.91,
+          "median_abs_error": 11.01,
+          "p90_abs_error": 58.75
+        },
+        {
+          "patient_id": "SYNTH_037",
+          "n_examples": 742,
+          "mae": 16.17,
+          "rmse": 23.34,
+          "median_abs_error": 9.33,
+          "p90_abs_error": 43.83
+        },
+        {
+          "patient_id": "SYNTH_038",
+          "n_examples": 739,
+          "mae": 22.73,
+          "rmse": 34.97,
+          "median_abs_error": 11.57,
+          "p90_abs_error": 69.34
+        },
+        {
+          "patient_id": "SYNTH_039",
+          "n_examples": 711,
+          "mae": 17.25,
+          "rmse": 25.75,
+          "median_abs_error": 9.12,
+          "p90_abs_error": 44.9
+        },
+        {
+          "patient_id": "SYNTH_040",
+          "n_examples": 731,
+          "mae": 14.33,
+          "rmse": 22.25,
+          "median_abs_error": 7.78,
+          "p90_abs_error": 36.86
+        },
+        {
+          "patient_id": "SYNTH_041",
+          "n_examples": 695,
+          "mae": 17.67,
+          "rmse": 29.72,
+          "median_abs_error": 7.84,
+          "p90_abs_error": 53.22
+        },
+        {
+          "patient_id": "SYNTH_042",
+          "n_examples": 736,
+          "mae": 20.47,
+          "rmse": 32.37,
+          "median_abs_error": 8.96,
+          "p90_abs_error": 60.79
+        },
+        {
+          "patient_id": "SYNTH_043",
+          "n_examples": 735,
+          "mae": 14.88,
+          "rmse": 24.64,
+          "median_abs_error": 7.73,
+          "p90_abs_error": 39.56
+        },
+        {
+          "patient_id": "SYNTH_044",
+          "n_examples": 740,
+          "mae": 16.66,
+          "rmse": 24.49,
+          "median_abs_error": 9.97,
+          "p90_abs_error": 43.83
+        },
+        {
+          "patient_id": "SYNTH_045",
+          "n_examples": 740,
+          "mae": 22.44,
+          "rmse": 34.65,
+          "median_abs_error": 10.95,
+          "p90_abs_error": 67.2
+        },
+        {
+          "patient_id": "SYNTH_046",
+          "n_examples": 740,
+          "mae": 15.29,
+          "rmse": 25.06,
+          "median_abs_error": 6.83,
+          "p90_abs_error": 45.48
+        },
+        {
+          "patient_id": "SYNTH_047",
+          "n_examples": 732,
+          "mae": 18.02,
+          "rmse": 27.95,
+          "median_abs_error": 7.9,
+          "p90_abs_error": 49.21
+        },
+        {
+          "patient_id": "SYNTH_048",
+          "n_examples": 740,
+          "mae": 14.79,
+          "rmse": 24.74,
+          "median_abs_error": 5.99,
+          "p90_abs_error": 47.98
+        },
+        {
+          "patient_id": "SYNTH_049",
+          "n_examples": 738,
+          "mae": 18.45,
+          "rmse": 27.82,
+          "median_abs_error": 9.55,
+          "p90_abs_error": 51.07
+        },
+        {
+          "patient_id": "SYNTH_050",
+          "n_examples": 742,
+          "mae": 17.78,
+          "rmse": 28.23,
+          "median_abs_error": 8.91,
+          "p90_abs_error": 54.02
+        },
+        {
+          "patient_id": "SYNTH_051",
+          "n_examples": 743,
+          "mae": 16.67,
+          "rmse": 24.81,
+          "median_abs_error": 7.93,
+          "p90_abs_error": 45.1
+        },
+        {
+          "patient_id": "SYNTH_052",
+          "n_examples": 737,
+          "mae": 19.01,
+          "rmse": 29.15,
+          "median_abs_error": 9.66,
+          "p90_abs_error": 52.02
+        },
+        {
+          "patient_id": "SYNTH_053",
+          "n_examples": 738,
+          "mae": 17.29,
+          "rmse": 27.36,
+          "median_abs_error": 6.7,
+          "p90_abs_error": 50.28
+        },
+        {
+          "patient_id": "SYNTH_054",
+          "n_examples": 748,
+          "mae": 16.61,
+          "rmse": 25.46,
+          "median_abs_error": 9.47,
+          "p90_abs_error": 43.13
+        },
+        {
+          "patient_id": "SYNTH_055",
+          "n_examples": 703,
+          "mae": 19.28,
+          "rmse": 27.85,
+          "median_abs_error": 11.18,
+          "p90_abs_error": 51.09
+        },
+        {
+          "patient_id": "SYNTH_056",
+          "n_examples": 740,
+          "mae": 20.15,
+          "rmse": 31.71,
+          "median_abs_error": 9.93,
+          "p90_abs_error": 58.48
+        },
+        {
+          "patient_id": "SYNTH_057",
+          "n_examples": 738,
+          "mae": 17.95,
+          "rmse": 28.64,
+          "median_abs_error": 7.54,
+          "p90_abs_error": 52.18
+        },
+        {
+          "patient_id": "SYNTH_058",
+          "n_examples": 736,
+          "mae": 13.84,
+          "rmse": 20.42,
+          "median_abs_error": 7.24,
+          "p90_abs_error": 36.57
+        },
+        {
+          "patient_id": "SYNTH_059",
+          "n_examples": 738,
+          "mae": 13.97,
+          "rmse": 24.98,
+          "median_abs_error": 6.62,
+          "p90_abs_error": 41.29
+        },
+        {
+          "patient_id": "SYNTH_060",
+          "n_examples": 732,
+          "mae": 19.35,
+          "rmse": 32.21,
+          "median_abs_error": 11.89,
+          "p90_abs_error": 50.38
+        }
+      ]
+    }
+  },
+  "statistical_tests": {
+    "cgm_plus_ehr_vs_cgm_only": {
+      "mean_mae_reduction_mgdl": 0.7056937707616164,
+      "patient_level_paired_t": 4.994576136574512,
+      "patient_level_pvalue": 5.557073943153604e-06,
+      "block_bootstrap_95_ci": [
+        0.4861987580350557,
+        0.9606818452899772
+      ],
+      "interpretation": "EHR context provides consistent error reduction across patients."
+    },
+    "cgm_plus_wearables_vs_cgm_only": {
+      "mean_mae_reduction_mgdl": -0.002407245767784616,
+      "patient_level_paired_t": -0.05690700804094201,
+      "patient_level_pvalue": 0.9548115597869795,
+      "block_bootstrap_95_ci": [
+        -0.07730265341077476,
+        0.07027867636402162
+      ],
+      "interpretation": "Wearables alone provide limited and statistically marginal gain."
+    },
+    "full_fusion_vs_cgm_plus_ehr": {
+      "mean_mae_reduction_mgdl": -0.06124822955058917,
+      "patient_level_paired_t": -1.1823760248527198,
+      "patient_level_pvalue": 0.24179975643990792,
+      "block_bootstrap_95_ci": [
+        -0.16160352786596854,
+        0.02874484084911291
+      ],
+      "interpretation": "Wearables do not provide statistically significant incremental gain when added to EHR."
+    },
+    "full_fusion_vs_cgm_only": {
+      "mean_mae_reduction_mgdl": 0.6444455412110273,
+      "patient_level_paired_t": 5.057139571941226,
+      "patient_level_pvalue": 4.4237861755659224e-06,
+      "block_bootstrap_95_ci": [
+        0.44355589468083745,
+        0.8828823374131304
+      ]
+    },
+    "patient_level_maes": {
+      "SYNTH_001": {
+        "cgm_only": 14.847709585538514,
+        "cgm_plus_ehr": 14.399327578264186,
+        "cgm_plus_wearables": 15.465907106525659,
+        "full_fusion": 14.499111926362161
+      },
+      "SYNTH_002": {
+        "cgm_only": 14.747411801125823,
+        "cgm_plus_ehr": 14.91895425449934,
+        "cgm_plus_wearables": 14.511037441100319,
+        "full_fusion": 15.172039796277808
+      },
+      "SYNTH_003": {
+        "cgm_only": 18.805577597550265,
+        "cgm_plus_ehr": 18.0181587400515,
+        "cgm_plus_wearables": 18.86607367627094,
+        "full_fusion": 17.932853632235517
+      },
+      "SYNTH_004": {
+        "cgm_only": 18.557653039329477,
+        "cgm_plus_ehr": 21.18475348144324,
+        "cgm_plus_wearables": 18.736393437306674,
+        "full_fusion": 21.140608322976213
+      },
+      "SYNTH_005": {
+        "cgm_only": 16.634878696070217,
+        "cgm_plus_ehr": 16.029385414205958,
+        "cgm_plus_wearables": 17.058491311776972,
+        "full_fusion": 15.842885700198789
+      },
+      "SYNTH_006": {
+        "cgm_only": 20.055076549494533,
+        "cgm_plus_ehr": 20.689910254501957,
+        "cgm_plus_wearables": 20.647022119140015,
+        "full_fusion": 20.84039787243217
+      },
+      "SYNTH_007": {
+        "cgm_only": 20.895251018949992,
+        "cgm_plus_ehr": 19.9408864992805,
+        "cgm_plus_wearables": 20.44960115049935,
+        "full_fusion": 19.729617536434226
+      },
+      "SYNTH_008": {
+        "cgm_only": 21.82552093157179,
+        "cgm_plus_ehr": 19.27446707038436,
+        "cgm_plus_wearables": 21.543886166212125,
+        "full_fusion": 19.58126770611083
+      },
+      "SYNTH_009": {
+        "cgm_only": 18.946546460605216,
+        "cgm_plus_ehr": 17.645433775175096,
+        "cgm_plus_wearables": 19.087683762403813,
+        "full_fusion": 18.079001544609042
+      },
+      "SYNTH_010": {
+        "cgm_only": 21.42047774735463,
+        "cgm_plus_ehr": 20.25093879858265,
+        "cgm_plus_wearables": 21.08886211107039,
+        "full_fusion": 20.176085521198555
+      },
+      "SYNTH_011": {
+        "cgm_only": 17.30458534263012,
+        "cgm_plus_ehr": 16.235140736826676,
+        "cgm_plus_wearables": 17.719428638427587,
+        "full_fusion": 16.878597177236824
+      },
+      "SYNTH_012": {
+        "cgm_only": 17.02942639407097,
+        "cgm_plus_ehr": 16.19961452920663,
+        "cgm_plus_wearables": 16.990079089143798,
+        "full_fusion": 16.500125372930384
+      },
+      "SYNTH_013": {
+        "cgm_only": 19.439665339605508,
+        "cgm_plus_ehr": 18.429862424811837,
+        "cgm_plus_wearables": 19.029495972407613,
+        "full_fusion": 18.747113067102802
+      },
+      "SYNTH_014": {
+        "cgm_only": 15.684220251465122,
+        "cgm_plus_ehr": 14.352733334210937,
+        "cgm_plus_wearables": 15.059173860673242,
+        "full_fusion": 14.306082248779871
+      },
+      "SYNTH_015": {
+        "cgm_only": 24.22014782904137,
+        "cgm_plus_ehr": 21.685228059170655,
+        "cgm_plus_wearables": 23.76395538748927,
+        "full_fusion": 22.17391833193677
+      },
+      "SYNTH_016": {
+        "cgm_only": 16.824422333120562,
+        "cgm_plus_ehr": 17.487872145110146,
+        "cgm_plus_wearables": 17.250224534803714,
+        "full_fusion": 17.159553289295808
+      },
+      "SYNTH_017": {
+        "cgm_only": 19.34947130830165,
+        "cgm_plus_ehr": 18.574916918454992,
+        "cgm_plus_wearables": 19.124366735584896,
+        "full_fusion": 18.38433612379596
+      },
+      "SYNTH_018": {
+        "cgm_only": 21.55965112654906,
+        "cgm_plus_ehr": 20.394222739818765,
+        "cgm_plus_wearables": 21.25805509134985,
+        "full_fusion": 20.94846356546603
+      },
+      "SYNTH_019": {
+        "cgm_only": 17.776184607012652,
+        "cgm_plus_ehr": 18.168529068310974,
+        "cgm_plus_wearables": 17.765197397165455,
+        "full_fusion": 18.090212456472
+      },
+      "SYNTH_020": {
+        "cgm_only": 21.09202073461241,
+        "cgm_plus_ehr": 20.966563657174486,
+        "cgm_plus_wearables": 21.29715100381457,
+        "full_fusion": 20.708751771930864
+      },
+      "SYNTH_021": {
+        "cgm_only": 16.731355628028705,
+        "cgm_plus_ehr": 14.16706898323105,
+        "cgm_plus_wearables": 16.458770765942493,
+        "full_fusion": 13.96379961179009
+      },
+      "SYNTH_022": {
+        "cgm_only": 17.294222758221938,
+        "cgm_plus_ehr": 16.373776502033323,
+        "cgm_plus_wearables": 17.35866529182916,
+        "full_fusion": 16.403186414992522
+      },
+      "SYNTH_023": {
+        "cgm_only": 18.090835580727273,
+        "cgm_plus_ehr": 16.368458675991167,
+        "cgm_plus_wearables": 17.712557250898158,
+        "full_fusion": 15.834336901598226
+      },
+      "SYNTH_024": {
+        "cgm_only": 15.847448291672908,
+        "cgm_plus_ehr": 13.565645764233208,
+        "cgm_plus_wearables": 15.050290566156791,
+        "full_fusion": 13.920576650996985
+      },
+      "SYNTH_025": {
+        "cgm_only": 20.188516791774383,
+        "cgm_plus_ehr": 18.770811694662324,
+        "cgm_plus_wearables": 20.00135447712772,
+        "full_fusion": 18.41938336215599
+      },
+      "SYNTH_026": {
+        "cgm_only": 23.566375637300013,
+        "cgm_plus_ehr": 22.261338369776816,
+        "cgm_plus_wearables": 23.58541067575336,
+        "full_fusion": 21.766163821591185
+      },
+      "SYNTH_027": {
+        "cgm_only": 16.00232229218687,
+        "cgm_plus_ehr": 15.80418547936954,
+        "cgm_plus_wearables": 16.443357431594816,
+        "full_fusion": 15.665271326502987
+      },
+      "SYNTH_028": {
+        "cgm_only": 17.958085417804522,
+        "cgm_plus_ehr": 17.96607580925013,
+        "cgm_plus_wearables": 18.171310715078082,
+        "full_fusion": 17.989356925914127
+      },
+      "SYNTH_029": {
+        "cgm_only": 17.66830878547211,
+        "cgm_plus_ehr": 18.34167018507259,
+        "cgm_plus_wearables": 17.589194503792545,
+        "full_fusion": 18.358743678463544
+      },
+      "SYNTH_030": {
+        "cgm_only": 18.934736825471926,
+        "cgm_plus_ehr": 16.74077586732389,
+        "cgm_plus_wearables": 18.84504057406785,
+        "full_fusion": 18.01382279699524
+      },
+      "SYNTH_031": {
+        "cgm_only": 14.94222940520604,
+        "cgm_plus_ehr": 13.890730296250176,
+        "cgm_plus_wearables": 14.675270145251158,
+        "full_fusion": 13.997996646276134
+      },
+      "SYNTH_032": {
+        "cgm_only": 17.64045076935229,
+        "cgm_plus_ehr": 15.63467356734225,
+        "cgm_plus_wearables": 17.567959379104348,
+        "full_fusion": 15.70471158205605
+      },
+      "SYNTH_033": {
+        "cgm_only": 14.15080967344759,
+        "cgm_plus_ehr": 13.047398105999944,
+        "cgm_plus_wearables": 14.272852464280186,
+        "full_fusion": 13.484528828693634
+      },
+      "SYNTH_034": {
+        "cgm_only": 18.028726331909848,
+        "cgm_plus_ehr": 17.249137759310848,
+        "cgm_plus_wearables": 17.657908369011366,
+        "full_fusion": 17.51428542650158
+      },
+      "SYNTH_035": {
+        "cgm_only": 21.042712929937252,
+        "cgm_plus_ehr": 21.916214132351524,
+        "cgm_plus_wearables": 20.61186861497691,
+        "full_fusion": 21.195234395848924
+      },
+      "SYNTH_036": {
+        "cgm_only": 20.102209264659265,
+        "cgm_plus_ehr": 20.54469896255409,
+        "cgm_plus_wearables": 20.332423947577155,
+        "full_fusion": 20.60748482396056
+      },
+      "SYNTH_037": {
+        "cgm_only": 17.33299650411302,
+        "cgm_plus_ehr": 16.417527266847017,
+        "cgm_plus_wearables": 17.462519551098918,
+        "full_fusion": 16.167233906261995
+      },
+      "SYNTH_038": {
+        "cgm_only": 22.89540503188953,
+        "cgm_plus_ehr": 21.732651235408742,
+        "cgm_plus_wearables": 23.60339137271747,
+        "full_fusion": 22.728244241317547
+      },
+      "SYNTH_039": {
+        "cgm_only": 17.563462003985855,
+        "cgm_plus_ehr": 17.506588843335354,
+        "cgm_plus_wearables": 17.692801462171705,
+        "full_fusion": 17.253103984596375
+      },
+      "SYNTH_040": {
+        "cgm_only": 15.035753404545202,
+        "cgm_plus_ehr": 14.6483004618539,
+        "cgm_plus_wearables": 15.168321395059223,
+        "full_fusion": 14.325671898695024
+      },
+      "SYNTH_041": {
+        "cgm_only": 18.110408478723894,
+        "cgm_plus_ehr": 16.576586475102435,
+        "cgm_plus_wearables": 18.124902270518298,
+        "full_fusion": 17.67474534330533
+      },
+      "SYNTH_042": {
+        "cgm_only": 20.35203006040754,
+        "cgm_plus_ehr": 20.14898152841902,
+        "cgm_plus_wearables": 20.119791537432075,
+        "full_fusion": 20.469495700968054
+      },
+      "SYNTH_043": {
+        "cgm_only": 14.315436736340265,
+        "cgm_plus_ehr": 15.155545225327216,
+        "cgm_plus_wearables": 14.597289489081733,
+        "full_fusion": 14.875918948795647
+      },
+      "SYNTH_044": {
+        "cgm_only": 17.52670656593228,
+        "cgm_plus_ehr": 16.937064203478364,
+        "cgm_plus_wearables": 17.745061562215188,
+        "full_fusion": 16.662759327816698
+      },
+      "SYNTH_045": {
+        "cgm_only": 23.025453668148486,
+        "cgm_plus_ehr": 22.132189457659624,
+        "cgm_plus_wearables": 23.257694476435333,
+        "full_fusion": 22.436098272373382
+      },
+      "SYNTH_046": {
+        "cgm_only": 15.649029875984407,
+        "cgm_plus_ehr": 14.976352400426224,
+        "cgm_plus_wearables": 15.629202740637718,
+        "full_fusion": 15.28670754831018
+      },
+      "SYNTH_047": {
+        "cgm_only": 18.900784130304398,
+        "cgm_plus_ehr": 17.944395212232397,
+        "cgm_plus_wearables": 19.102869649288415,
+        "full_fusion": 18.022453437761463
+      },
+      "SYNTH_048": {
+        "cgm_only": 14.535071384489394,
+        "cgm_plus_ehr": 14.444909023320006,
+        "cgm_plus_wearables": 15.020420103336381,
+        "full_fusion": 14.791214783990293
+      },
+      "SYNTH_049": {
+        "cgm_only": 19.981166203443973,
+        "cgm_plus_ehr": 18.45017776042034,
+        "cgm_plus_wearables": 20.687676587306452,
+        "full_fusion": 18.448080666115523
+      },
+      "SYNTH_050": {
+        "cgm_only": 18.929593767600775,
+        "cgm_plus_ehr": 17.722903146446267,
+        "cgm_plus_wearables": 19.057344895820194,
+        "full_fusion": 17.78281724681135
+      },
+      "SYNTH_051": {
+        "cgm_only": 17.22959114027841,
+        "cgm_plus_ehr": 16.6459626365761,
+        "cgm_plus_wearables": 16.948975392081337,
+        "full_fusion": 16.673430040271644
+      },
+      "SYNTH_052": {
+        "cgm_only": 18.4117987292333,
+        "cgm_plus_ehr": 19.544231857478035,
+        "cgm_plus_wearables": 18.3364435925159,
+        "full_fusion": 19.008557599659877
+      },
+      "SYNTH_053": {
+        "cgm_only": 18.39366155521943,
+        "cgm_plus_ehr": 17.152944131470207,
+        "cgm_plus_wearables": 18.534012575196368,
+        "full_fusion": 17.287284546703933
+      },
+      "SYNTH_054": {
+        "cgm_only": 17.61469917173461,
+        "cgm_plus_ehr": 15.979510175393642,
+        "cgm_plus_wearables": 17.166432372888586,
+        "full_fusion": 16.608847675679083
+      },
+      "SYNTH_055": {
+        "cgm_only": 20.853435959889566,
+        "cgm_plus_ehr": 18.92660225068509,
+        "cgm_plus_wearables": 21.069252322167713,
+        "full_fusion": 19.277555947129017
+      },
+      "SYNTH_056": {
+        "cgm_only": 18.603888632692467,
+        "cgm_plus_ehr": 20.584702002628845,
+        "cgm_plus_wearables": 18.344027396437706,
+        "full_fusion": 20.145451898989588
+      },
+      "SYNTH_057": {
+        "cgm_only": 19.311376911957925,
+        "cgm_plus_ehr": 18.213301772832455,
+        "cgm_plus_wearables": 19.310922681795365,
+        "full_fusion": 17.951880985653577
+      },
+      "SYNTH_058": {
+        "cgm_only": 16.236720825840592,
+        "cgm_plus_ehr": 13.980091177853867,
+        "cgm_plus_wearables": 16.217050392739377,
+        "full_fusion": 13.835078116408534
+      },
+      "SYNTH_059": {
+        "cgm_only": 14.948387847584636,
+        "cgm_plus_ehr": 13.749947984572174,
+        "cgm_plus_wearables": 14.922945640848019,
+        "full_fusion": 13.97033595378823
+      },
+      "SYNTH_060": {
+        "cgm_only": 18.467294045815166,
+        "cgm_plus_ehr": 20.02674560362603,
+        "cgm_plus_wearables": 18.408161833997692,
+        "full_fusion": 19.349791011143676
+      }
+    }
+  }
+}

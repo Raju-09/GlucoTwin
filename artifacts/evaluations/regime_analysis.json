@@ -1,0 +1,63 @@
+{
+  "analysis_name": "GlucoTwin Forecast Error Analysis by Glucose Trajectory Regime",
+  "methodology": "Mathematical non-clinical categorization based strictly on Delta_30m at forecast origin",
+  "test_samples": 7316,
+  "regimes": [
+    {
+      "regime_name": "Relatively Stable (|Delta_30m| <= 15)",
+      "n_samples": 4321,
+      "pct_of_test_cohort": 59.1,
+      "persistence_mae": 47.84,
+      "persistence_rmse": 70.07,
+      "persistence_median": 22.2,
+      "glucotwin_mae": 21.56,
+      "glucotwin_rmse": 34.32,
+      "glucotwin_median": 10.37,
+      "glucotwin_p90": 55.62,
+      "rel_mae_improvement_pct": 54.9,
+      "rel_rmse_improvement_pct": 51.0
+    },
+    {
+      "regime_name": "Rising (15 < Delta_30m <= 45)",
+      "n_samples": 241,
+      "pct_of_test_cohort": 3.3,
+      "persistence_mae": 64.64,
+      "persistence_rmse": 77.7,
+      "persistence_median": 69.6,
+      "glucotwin_mae": 7.99,
+      "glucotwin_rmse": 10.85,
+      "glucotwin_median": 6.24,
+      "glucotwin_p90": 15.41,
+      "rel_mae_improvement_pct": 87.6,
+      "rel_rmse_improvement_pct": 86.0
+    },
+    {
+      "regime_name": "Falling (-45 <= Delta_30m < -15)",
+      "n_samples": 1821,
+      "pct_of_test_cohort": 24.9,
+      "persistence_mae": 50.13,
+      "persistence_rmse": 61.24,
+      "persistence_median": 42.2,
+      "glucotwin_mae": 17.65,
+      "glucotwin_rmse": 30.14,
+      "glucotwin_median": 9.67,
+      "glucotwin_p90": 40.89,
+      "rel_mae_improvement_pct": 64.8,
+      "rel_rmse_improvement_pct": 50.8
+    },
+    {
+      "regime_name": "Rapidly Changing (|Delta_30m| > 45)",
+      "n_samples": 933,
+      "pct_of_test_cohort": 12.8,
+      "persistence_mae": 81.46,
+      "persistence_rmse": 90.56,
+      "persistence_median": 80.7,
+      "glucotwin_mae": 10.22,
+      "glucotwin_rmse": 14.03,
+      "glucotwin_median": 7.91,
+      "glucotwin_p90": 21.69,
+      "rel_mae_improvement_pct": 87.4,
+      "rel_rmse_improvement_pct": 84.5
+    }
+  ]
+}

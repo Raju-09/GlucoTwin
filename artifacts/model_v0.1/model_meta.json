@@ -1,0 +1,5 @@
+{
+  "model_name": "HistGradientBoostingRegressor (Two-Stream Fusion)",
+  "horizon_minutes": 120,
+  "n_features": 56
+}

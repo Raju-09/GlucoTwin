@@ -1,0 +1,66 @@
+{
+  "evaluation_timestamp": "2026-10-15T14:14:54.955736",
+  "n_test_windows": 43888,
+  "n_patients": 60,
+  "total_simulated_patient_days": 152.4,
+  "hypoglycemia_lt_70": {
+    "glucotwin": {
+      "event_threshold_mgdl": 70.0,
+      "event_direction": "<",
+      "total_events": 71,
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 71,
+      "true_negatives": 43817,
+      "sensitivity_recall": 0.0,
+      "specificity": 1.0,
+      "precision": 0.0,
+      "f1_score": 0.0,
+      "false_alarms_per_patient_day": 0.0
+    },
+    "persistence": {
+      "event_threshold_mgdl": 70.0,
+      "event_direction": "<",
+      "total_events": 71,
+      "true_positives": 9,
+      "false_positives": 62,
+      "false_negatives": 62,
+      "true_negatives": 43755,
+      "sensitivity_recall": 0.1268,
+      "specificity": 0.9986,
+      "precision": 0.1268,
+      "f1_score": 0.1268,
+      "false_alarms_per_patient_day": 0.41
+    }
+  },
+  "hyperglycemia_gt_180": {
+    "glucotwin": {
+      "event_threshold_mgdl": 180.0,
+      "event_direction": ">",
+      "total_events": 12246,
+      "true_positives": 9338,
+      "false_positives": 2988,
+      "false_negatives": 2908,
+      "true_negatives": 28654,
+      "sensitivity_recall": 0.7625,
+      "specificity": 0.9056,
+      "precision": 0.7576,
+      "f1_score": 0.7601,
+      "false_alarms_per_patient_day": 19.61
+    },
+    "persistence": {
+      "event_threshold_mgdl": 180.0,
+      "event_direction": ">",
+      "total_events": 12246,
+      "true_positives": 3252,
+      "false_positives": 9359,
+      "false_negatives": 8994,
+      "true_negatives": 22283,
+      "sensitivity_recall": 0.2656,
+      "specificity": 0.7042,
+      "precision": 0.2579,
+      "f1_score": 0.2617,
+      "false_alarms_per_patient_day": 61.42
+    }
+  }
+}

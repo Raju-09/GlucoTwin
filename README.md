@@ -29,9 +29,9 @@
 
 ## Problem
 
-India has **101 million people living with diabetes** — the largest diabetic population in the world (IDF Diabetes Atlas, 2023). Continuous Glucose Monitors (CGMs) record a reading every 5 minutes, but all current CGM alert systems are **reactive** — they fire *after* glucose crosses a threshold. By the time a clinician sees the number, the window to intervene has already passed.
+India has **101 million individuals living with diabetes** according to the ICMR-INDIAB study (*The Lancet Diabetes & Endocrinology*, 2023). While continuous glucose monitors (CGMs) produce readings every 5 minutes, commercial alert systems predominantly prioritize reactive threshold alerts or narrow 20–30 minute predictive horizons (e.g., Dexcom Urgent Low Soon). When warnings arrive close to excursion boundaries, the window for meaningful lifestyle, nutritional, or clinical intervention is constrained.
 
-**GlucoTwin addresses this gap:** it forecasts glucose 120 minutes ahead, fuses static EHR context with dynamic CGM history, and — critically — tells the clinician *when not to trust the prediction* through a built-in reliability layer.
+**GlucoTwin addresses this gap:** it investigates 120-minute forward forecasting, fuses static EHR context with dynamic CGM history, and — critically — provides a built-in reliability gate that flags degraded inputs and withholds ungrounded forecasts.
 
 **Research question:** Does a time-series model improve on a simple persistence baseline on a leakage-safe held-out test set, and when should the system withhold a forecast?
 
@@ -53,9 +53,9 @@ A clinician or researcher reviewing a **synthetic demo patient's** glucose traje
 | Layer | Technology |
 |---|---|
 | Language | Python 3.10+ |
-| ML Model | scikit-learn HistGradientBoostingRegressor (41 features) |
-| Feature Engineering | CGM lags, rolling stats, rate-of-change, circadian encoding, EHR context (9 fields) |
-| API | FastAPI + Uvicorn |
+| ML Model | scikit-learn HistGradientBoostingRegressor (56 features in full fusion; 50 in Config B) |
+| Feature Hierarchy | **41 CGM dynamics** (24 lags, 10 rolling stats, 5 rate-of-change, 2 circadian) + **9 EHR phenotype** (demographics, HbA1c, FBG, meds) + **6 wearable telemetry** (HR, HRV, steps, sleep) |
+| API | FastAPI + Uvicorn (Median inference latency: 7.79 ms) |
 | Dashboard | Streamlit + Altair |
 | Containerisation | Docker + docker-compose |
 | Tests | pytest (69 passing) |
@@ -70,12 +70,12 @@ A clinician or researcher reviewing a **synthetic demo patient's** glucose traje
 
 ## Architecture
 
-See [`docs/architecture_diagram.pdf`](docs/architecture_diagram.pdf) for the visual diagram.
+See [`docs/architecture_diagram.pdf`](docs/architecture_diagram.pdf) for the visual diagram. The production FastAPI service serves the 56-feature model (`artifacts/model_v0.1/model.joblib`), automatically substituting historical defaults when optional wearable channels are absent.
 
 ```
 Static EHR ──────────────────────────┐
                                      ▼
-                          Feature Engineering (50 feats)
+                           Feature Engineering (56 feats)
                                      │
 CGM Stream → Validation → Windows ──►├──► HistGBM Model ──► Reliability Gate ──► FastAPI ──► Streamlit
                                      │         │                    │
@@ -151,13 +151,15 @@ Evaluated under strict chronological hold-out (Days 12–14) with a 120-minute b
 
 | Configuration | Data Streams | Test MAE (mg/dL) | Δ MAE (Model − Ref) | 95% Bootstrap CI |
 |---|---|:---:|:---:|:---:|
-| **Persistence Baseline** | Naive $y_{t+120} = y_t$ | **53.25** | *+34.94 mg/dL* | — |
+| **Persistence Baseline** | Naive $y_{t+120} = y_t$ | **46.88** | *+28.57 mg/dL* | — |
+| **Linear Trend Extrapolation** | Slope from last 30m projected to 120m | **86.83** | *+68.52 mg/dL* | — |
 | **Config A (CGM Only)** | 24 lags + rolling stats (41 feats) | **18.31** | *Reference (0.00)* | — |
-| **Config B (CGM + Static EHR)** | Demographics + Labs + FBG (50 feats) | **17.61** | **−0.70 mg/dL** | **[+0.49, +0.96]** ($p = 5.6 \times 10^{-6}$) |
+| **Config B (CGM + Static EHR)** | Demographics + Labs + FBG (50 feats) | **17.61** | **−0.70 mg/dL** | **[−0.96, −0.49]** ($p = 5.6 \times 10^{-6}$) |
 | **Config C (CGM + Wearables)** | Decoupled HR, HRV, steps, sleep (47 feats) | **18.32** | +0.01 mg/dL | [−0.08, +0.07] ($p = 0.95$, n.s.) |
-| **Config D (Full Fusion)** | EHR + CGM + Wearables (56 feats) | **17.67** | **−0.64 mg/dL** | [+0.44, +0.88] |
+| **Config D (Full Fusion)** | EHR + CGM + Wearables (56 feats) | **17.67** | **−0.64 mg/dL** | [−0.88, −0.44] |
 
-*Takeaway:* Static EHR context provides a modest, statistically significant error reduction (−0.70 mg/dL) on subsequent time periods for the same patients. Wearable telemetry under this simulator provided negligible incremental predictive value.
+*Statistical Evaluation:* Patient-level paired t-test ($N=60$ patients, $t=4.99$, $p=5.6 \times 10^{-6}$) and 24-hour block bootstrap (288-step blocks, 1,000 resamples) to properly account for temporal autocorrelation.  
+*Takeaway:* Static EHR context provides a modest, statistically significant error reduction (−0.70 mg/dL) on subsequent time periods for the same patients. Wearable telemetry under this simulator provided negligible incremental predictive value. Linear extrapolation blows up at 120 minutes because metabolic dynamics turn around non-linearly.
 
 ### 2. Leave-One-Patient-Out Cross-Validation (N=60 Patients, 224,681 Windows)
 
@@ -165,20 +167,33 @@ Evaluated under strict chronological hold-out (Days 12–14) with a 120-minute b
 |---|:---:|:---:|:---:|:---:|
 | **CGM Only** | 17.65 mg/dL | — | — | — |
 | **CGM + Real EHR** | **17.65 mg/dL** | +0.01 mg/dL | [−0.34, +0.33] | **0.956 (n.s.)** |
-| **CGM + Permuted EHR (Control)** | **20.47 mg/dL** | **+2.82 mg/dL** | — | — |
+| **CGM + Permuted EHR (Control)** | **20.47 mg/dL** | **+2.82 mg/dL** | — | **p < 0.001** |
 
-*Scientific Interpretation:* When evaluated on completely unseen patients (LOPO), EHR context provides no transfer gain ($p=0.956$). However, randomly shuffling EHR between patients causes a **catastrophic +2.82 mg/dL degradation**, proving the model encodes true patient identity rather than population-wide physiology. We report this boundary openly rather than claiming unvalidated generalization.
+*Scientific Interpretation:* When evaluated on completely unseen patients (LOPO), static EHR context provides no transfer gain ($p=0.956$). Static EHR features act as a same-patient identity anchor rather than universal rules. Randomly shuffling EHR between patients causes a +2.82 mg/dL error increase ($p < 0.001$), consistent with the model utilizing patient-specific static embeddings rather than generic population averages. We report this boundary openly rather than claiming unvalidated generalization.
 
 ### 3. Clinical Adverse Event Classification (t+120 min Horizon)
 
-| Adverse Event | Model | Events (N) | Sensitivity (Recall) | Specificity | Precision | F1-Score | False Alarms / Patient-Day |
-|---|---|:---:|:---:|:---:|:---:|:---:|:---:|
-| **Hyperglycemia (>180 mg/dL)** | Persistence Baseline | 12,246 | 26.6% | 70.4% | 25.8% | 0.262 | 61.4 alarms/day |
-| **Hyperglycemia (>180 mg/dL)** | **GlucoTwin Two-Stream** | 12,246 | **76.2%** | **90.6%** | **75.8%** | **0.760** | **19.6 alarms/day (−68%)** |
-| **Hypoglycemia (<70 mg/dL)** | Persistence Baseline | 71 | 12.7% | 99.9% | 12.7% | 0.127 | 0.4 alarms/day |
-| **Hypoglycemia (<70 mg/dL)** | **GlucoTwin Two-Stream** | 71 | **0.0%** | **100.0%** | **0.0%** | **0.000** | **0.0 alarms/day** |
+Evaluated across 43,888 held-out test windows (60 patients, 152.4 simulated patient-days):
 
-*Takeaway:* GlucoTwin catches nearly 3× more postprandial hyperglycemic spikes 2 hours in advance while reducing false alarms by **68%**, combating alarm fatigue. In our adult T2D cohort, hypoglycemia is a rare tail event (<0.2% prevalence); standard MSE regression regresses towards the mean (~150 mg/dL) and misses rare nadirs below 70 mg/dL. This is an explicit limitation requiring asymmetric loss functions in future work.
+| Adverse Event State | Model | Positive Windows (N) | Sensitivity (Recall) | Specificity | Precision | F1-Score | False-Alarm Windows / Patient-Day* |
+|---|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Hyperglycemia (>180 mg/dL)** | Persistence Baseline | 12,246 | 26.6% | 70.4% | 25.8% | 0.262 | 61.4 windows/day |
+| **Hyperglycemia (>180 mg/dL)** | **GlucoTwin Two-Stream** | 12,246 | **76.2%** | **90.6%** | **75.8%** | **0.760** | **19.6 windows/day (−68%)** |
+| **Hypoglycemia (<70 mg/dL)** | Persistence Baseline | 71 | 12.7% | 99.9% | 12.7% | 0.127 | 0.4 windows/day |
+| **Hypoglycemia (<70 mg/dL)** | **GlucoTwin Two-Stream** | 71 | **0.0%** | **100.0%** | **0.0%** | **0.000** | **0.0 windows/day** |
+
+*\*Note on Alert Units:* False positive rates are reported in 5-minute sampling window equivalents per patient-day. GlucoTwin reduces false-alarm active time from ~307 minutes/day (61.4 windows) down to ~98 minutes/day (19.6 windows), significantly combating clinician alarm fatigue. In our adult T2D cohort, 12,246 of 43,888 windows (27.9%) represent sustained or transient postprandial hyperglycemia, whereas hypoglycemia is a rare tail state (71 windows, <0.2% prevalence). Standard MSE regression regresses toward the conditional mean (~150 mg/dL) and misses rare nadirs below 70 mg/dL. This is an explicit limitation requiring asymmetric loss weighting or dedicated classifier heads in future work.
+
+### 4. Reliability Gate & Selective Prediction (Risk-Coverage Analysis)
+
+The reliability layer continuously evaluates input telemetry freshness, sampling gaps, and non-physiological gradients before releasing predictions:
+
+| Operating Mode | Test Coverage (%) | MAE (mg/dL) | Severe Errors (>30 mg/dL) | Policy & Decision Rule |
+|---|:---:|:---:|:---:|---|
+| **Ungated System** | 100.0% (43,888/43,888) | 17.69 | 19.5% | Predicts unconditionally on all inputs |
+| **Reliability-Gated System** | **88.0%** (38,621/43,888) | **17.61** | **19.4%** | Withholds when stale (>20m), gap (>30m), or spike (>4 mg/dL/m) |
+
+*Safety Rationale:* On nominal synthetic data with regular sensor sampling, withholding 12.0% of degraded or high-uncertainty windows yields a modest MAE reduction (−0.08 mg/dL). Its primary clinical value is **fail-closed safety**: suppressing ungrounded or misleading forecasts during hardware dropout, sensor detachment, or telemetry latency rather than returning silent errors.
 
 ## Model & Data Cards
 

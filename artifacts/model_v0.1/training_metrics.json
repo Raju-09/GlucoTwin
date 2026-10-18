@@ -1,0 +1,9 @@
+{
+  "train_mae": 14.01,
+  "train_rmse": 22.32,
+  "n_train_samples": 24647,
+  "n_features": 41,
+  "val_mae": 18.32,
+  "val_rmse": 31.54,
+  "n_val_samples": 5273
+}

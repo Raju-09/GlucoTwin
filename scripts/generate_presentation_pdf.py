@@ -137,12 +137,12 @@ def build_presentation_pdf(output_path: Path):
     story.append(Paragraph("1. The Healthcare Challenge in India", slide_header_style))
     story.append(Paragraph("101 Million Patients: The Critical Need for Proactive Glycemic Management", subhead_style))
     story.append(Spacer(1, 0.15 * inch))
-    story.append(Paragraph("• <b>Global Diabetes Epicenter:</b> India has over 101 million diagnosed individuals with diabetes (IDF Diabetes Atlas, 2023), with millions undiagnosed in tier-2/3 cities and rural hubs.", bullet_style))
-    story.append(Paragraph("• <b>The Fatal Flaw of Modern CGMs:</b> Continuous Glucose Monitors generate readings every 5 minutes, but current alert algorithms are entirely <i>reactive</i>. They fire alarms only after blood glucose breaches dangerous thresholds (&lt;70 mg/dL for hypoglycemia, &gt;180 mg/dL for hyperglycemia), when metabolic stress has already commenced.", bullet_style))
+    story.append(Paragraph("• <b>Epidemiological Challenge:</b> India has over 101 million individuals living with diabetes according to the ICMR-INDIAB study (The Lancet Diabetes & Endocrinology, 2023), with millions undiagnosed in tier-2/3 cities and rural hubs.", bullet_style))
+    story.append(Paragraph("• <b>Limitations of Existing CGM Alerts:</b> Continuous Glucose Monitors generate readings every 5 minutes, but commercial alert algorithms prioritize reactive threshold alerts or narrow 20–30 minute windows (e.g., Dexcom Urgent Low Soon). When alarms fire close to excursion boundaries, the window for meaningful lifestyle or clinical intervention is constrained.", bullet_style))
     story.append(Paragraph("• <b>The Proactive 2-Hour Window:</b> A validated 120-minute forward forecast provides actionable lead time for dietary adjustment, physical activity, or preemptive clinical triage before acute excursions occur.", bullet_style))
     story.append(Paragraph("• <b>Data Privacy Sandbox Compliance:</b> Built and evaluated using in-silico synthetic cohorts and open-source formats in strict compliance with India's DPDP Act and global HIPAA frameworks.", bullet_style))
     story.append(Spacer(1, 0.25 * inch))
-    story.append(Paragraph("<i>'Reactive alarms notify patients of emergencies; proactive digital twins prevent them.'</i>", callout_style))
+    story.append(Paragraph("<i>'Narrow alarms notify patients of imminent emergencies; proactive digital twins enable foresight.'</i>", callout_style))
     story.append(PageBreak())
 
     # -------------------------------------------------------------
@@ -223,11 +223,11 @@ def build_presentation_pdf(output_path: Path):
 
     ablation_data = [
         [Paragraph("<b>Configuration</b>", body_style), Paragraph("<b>Input Streams & Features</b>", body_style), Paragraph("<b>Test MAE</b>", body_style), Paragraph("<b>Δ MAE vs Ref</b>", body_style), Paragraph("<b>95% Bootstrap CI</b>", body_style)],
-        [Paragraph("<b>Persistence Baseline</b>", body_style), Paragraph("Naive y(t+120) = y(t)", body_style), Paragraph("53.25 mg/dL", body_style), Paragraph("+34.94 mg/dL", body_style), Paragraph("—", body_style)],
+        [Paragraph("<b>Persistence Baseline</b>", body_style), Paragraph("Naive y(t+120) = y(t)", body_style), Paragraph("46.88 mg/dL", body_style), Paragraph("+28.57 mg/dL", body_style), Paragraph("—", body_style)],
         [Paragraph("<b>Config A (CGM Only)</b>", body_style), Paragraph("24 Lags + Rolling Kinematics (41 feats)", body_style), Paragraph("18.31 mg/dL", body_style), Paragraph("Reference", body_style), Paragraph("—", body_style)],
-        [Paragraph("<b>Config B (CGM + Static EHR)</b>", body_style), Paragraph("Demographics + Labs + Fasting Lab (50 feats)", body_style), Paragraph("<b>17.61 mg/dL</b>", body_style), Paragraph("<b>−0.70 mg/dL</b>", body_style), Paragraph("<b>[+0.49, +0.96]</b> (p &lt; 10⁻⁵)", body_style)],
+        [Paragraph("<b>Config B (CGM + Static EHR)</b>", body_style), Paragraph("Demographics + Labs + Fasting Lab (50 feats)", body_style), Paragraph("<b>17.61 mg/dL</b>", body_style), Paragraph("<b>−0.70 mg/dL</b>", body_style), Paragraph("<b>[−0.96, −0.49]</b> (p &lt; 10⁻⁵)", body_style)],
         [Paragraph("<b>Config C (CGM + Wearables)</b>", body_style), Paragraph("Decoupled HR, HRV, Steps, Sleep (47 feats)", body_style), Paragraph("18.32 mg/dL", body_style), Paragraph("+0.01 mg/dL", body_style), Paragraph("[−0.08, +0.07] (p = 0.95)", body_style)],
-        [Paragraph("<b>Config D (Full Two-Stream)</b>", body_style), Paragraph("EHR + CGM + Wearables (56 feats)", body_style), Paragraph("<b>17.67 mg/dL</b>", body_style), Paragraph("<b>−0.64 mg/dL</b>", body_style), Paragraph("[+0.44, +0.88]", body_style)],
+        [Paragraph("<b>Config D (Full Two-Stream)</b>", body_style), Paragraph("EHR + CGM + Wearables (56 feats)", body_style), Paragraph("<b>17.67 mg/dL</b>", body_style), Paragraph("<b>−0.64 mg/dL</b>", body_style), Paragraph("[−0.88, −0.44]", body_style)],
     ]
     ab_table = Table(ablation_data, colWidths=[2.2 * inch, 3.2 * inch, 1.3 * inch, 1.4 * inch, 1.7 * inch])
     ab_table.setStyle(TableStyle([
@@ -255,7 +255,7 @@ def build_presentation_pdf(output_path: Path):
         [Paragraph("<b>Evaluation Mode</b>", body_style), Paragraph("<b>Mean LOPO MAE</b>", body_style), Paragraph("<b>Delta vs CGM-Only</b>", body_style), Paragraph("<b>Scientific Verdict</b>", body_style)],
         [Paragraph("<b>CGM Only</b>", body_style), Paragraph("17.65 mg/dL", body_style), Paragraph("Reference", body_style), Paragraph("Solid kinematic time-series tracking.", body_style)],
         [Paragraph("<b>CGM + Real EHR</b>", body_style), Paragraph("<b>17.65 mg/dL</b>", body_style), Paragraph("+0.01 mg/dL (p = 0.956)", body_style), Paragraph("<b>No transfer benefit on unseen patients.</b> EHR acts as same-patient anchor.", body_style)],
-        [Paragraph("<b>CGM + Permuted EHR</b>", body_style), Paragraph("<b>20.47 mg/dL</b>", body_style), Paragraph("<b>+2.82 mg/dL degradation</b>", body_style), Paragraph("<b>Catastrophic failure.</b> Confirms model relies on true patient identity.", body_style)],
+        [Paragraph("<b>CGM + Permuted EHR</b>", body_style), Paragraph("<b>20.47 mg/dL</b>", body_style), Paragraph("<b>+2.82 mg/dL degradation</b>", body_style), Paragraph("<b>Significant error rise (+2.82 mg/dL).</b> Consistent with model utilizing patient-specific static embeddings rather than population averages.", body_style)],
     ]
     lp_table = Table(lopo_data, colWidths=[2.2 * inch, 1.8 * inch, 2.2 * inch, 3.6 * inch])
     lp_table.setStyle(TableStyle([
@@ -277,11 +277,11 @@ def build_presentation_pdf(output_path: Path):
     story.append(Spacer(1, 0.1 * inch))
 
     ev_data = [
-        [Paragraph("<b>Adverse Event</b>", body_style), Paragraph("<b>Model</b>", body_style), Paragraph("<b>Events (N)</b>", body_style), Paragraph("<b>Sensitivity</b>", body_style), Paragraph("<b>Specificity</b>", body_style), Paragraph("<b>Precision</b>", body_style), Paragraph("<b>F1-Score</b>", body_style), Paragraph("<b>False Alarms/Day</b>", body_style)],
-        [Paragraph("Hyperglycemia (>180 mg/dL)", body_style), Paragraph("Persistence Baseline", body_style), Paragraph("12,246", body_style), Paragraph("26.6%", body_style), Paragraph("70.4%", body_style), Paragraph("25.8%", body_style), Paragraph("0.262", body_style), Paragraph("61.4", body_style)],
-        [Paragraph("Hyperglycemia (>180 mg/dL)", body_style), Paragraph("<b>GlucoTwin (Two-Stream)</b>", body_style), Paragraph("12,246", body_style), Paragraph("<b>76.2%</b>", body_style), Paragraph("<b>90.6%</b>", body_style), Paragraph("<b>75.8%</b>", body_style), Paragraph("<b>0.760</b>", body_style), Paragraph("<b>19.6 (−68%)</b>", body_style)],
-        [Paragraph("Hypoglycemia (<70 mg/dL)", body_style), Paragraph("Persistence Baseline", body_style), Paragraph("71", body_style), Paragraph("12.7%", body_style), Paragraph("99.9%", body_style), Paragraph("12.7%", body_style), Paragraph("0.127", body_style), Paragraph("0.4", body_style)],
-        [Paragraph("Hypoglycemia (<70 mg/dL)", body_style), Paragraph("<b>GlucoTwin (Two-Stream)</b>", body_style), Paragraph("71", body_style), Paragraph("0.0%", body_style), Paragraph("100.0%", body_style), Paragraph("0.0%", body_style), Paragraph("0.000", body_style), Paragraph("0.0", body_style)],
+        [Paragraph("<b>Adverse Event State</b>", body_style), Paragraph("<b>Model</b>", body_style), Paragraph("<b>Positive Windows (N)</b>", body_style), Paragraph("<b>Sensitivity</b>", body_style), Paragraph("<b>Specificity</b>", body_style), Paragraph("<b>Precision</b>", body_style), Paragraph("<b>F1-Score</b>", body_style), Paragraph("<b>False Alarms / Day*</b>", body_style)],
+        [Paragraph("Hyperglycemia (>180 mg/dL)", body_style), Paragraph("Persistence Baseline", body_style), Paragraph("12,246", body_style), Paragraph("26.6%", body_style), Paragraph("70.4%", body_style), Paragraph("25.8%", body_style), Paragraph("0.262", body_style), Paragraph("61.4 windows", body_style)],
+        [Paragraph("Hyperglycemia (>180 mg/dL)", body_style), Paragraph("<b>GlucoTwin (Two-Stream)</b>", body_style), Paragraph("12,246", body_style), Paragraph("<b>76.2%</b>", body_style), Paragraph("<b>90.6%</b>", body_style), Paragraph("<b>75.8%</b>", body_style), Paragraph("<b>0.760</b>", body_style), Paragraph("<b>19.6 windows (−68%)</b>", body_style)],
+        [Paragraph("Hypoglycemia (<70 mg/dL)", body_style), Paragraph("Persistence Baseline", body_style), Paragraph("71", body_style), Paragraph("12.7%", body_style), Paragraph("99.9%", body_style), Paragraph("12.7%", body_style), Paragraph("0.127", body_style), Paragraph("0.4 windows", body_style)],
+        [Paragraph("Hypoglycemia (<70 mg/dL)", body_style), Paragraph("<b>GlucoTwin (Two-Stream)</b>", body_style), Paragraph("71", body_style), Paragraph("0.0%", body_style), Paragraph("100.0%", body_style), Paragraph("0.0%", body_style), Paragraph("0.000", body_style), Paragraph("0.0 windows", body_style)],
     ]
     ev_table = Table(ev_data, colWidths=[2.0 * inch, 1.8 * inch, 0.9 * inch, 1.0 * inch, 1.0 * inch, 1.0 * inch, 0.9 * inch, 1.2 * inch])
     ev_table.setStyle(TableStyle([

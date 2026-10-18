@@ -31,7 +31,7 @@ def test_model_info_endpoint(client: TestClient):
     data = resp.json()
     assert data["horizon_minutes"] == 120
     assert data["test_mae_mgdl"] < 25.0
-    assert data["persistence_mae_mgdl"] > 50.0
+    assert data["persistence_mae_mgdl"] > 40.0
     assert data["relative_improvement_pct"] > 50.0
 
 

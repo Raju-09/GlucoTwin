@@ -29,8 +29,11 @@ data/processed/
 
 # ── Model artifacts ──────────────────────────────────────────
 # Review carefully before committing any artifact
-artifacts/
+artifacts/*
 !artifacts/.gitkeep
+!artifacts/model_v0.1/
+!artifacts/experiment_manifest.json
+!artifacts/evaluations/
 
 # ── Reports ──────────────────────────────────────────────────
 reports/

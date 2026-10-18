@@ -205,7 +205,7 @@ def get_model_info() -> ModelInfoResponse:
     manifest_file = PROJECT_ROOT / "artifacts" / "experiment_manifest.json"
     ml_mae = 17.96
     ml_rmse = 29.53
-    p_mae = 53.25
+    p_mae = 46.88
 
     if manifest_file.exists():
         try:

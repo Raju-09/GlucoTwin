@@ -1,0 +1,62 @@
+{
+  "benchmark": "Comprehensive Baseline Suite (120-minute horizon)",
+  "split": "Chronological hold-out (120-min safety buffer)",
+  "test_samples": 7316,
+  "test_patients": 10,
+  "models": [
+    {
+      "model_name": "Persistence Baseline",
+      "mae": 53.25,
+      "rmse": 71.26,
+      "mape_pct": 31.78,
+      "median_abs_error": 42.1,
+      "p90_abs_error": 119.9,
+      "rel_improvement_vs_persistence_pct": 0.0
+    },
+    {
+      "model_name": "Recent Mean (30-min window)",
+      "mae": 53.76,
+      "rmse": 71.16,
+      "mape_pct": 32.67,
+      "median_abs_error": 44.28,
+      "p90_abs_error": 118.9,
+      "rel_improvement_vs_persistence_pct": -1.0
+    },
+    {
+      "model_name": "Recent Mean (60-min window)",
+      "mae": 53.23,
+      "rmse": 69.58,
+      "mape_pct": 32.94,
+      "median_abs_error": 46.03,
+      "p90_abs_error": 114.99,
+      "rel_improvement_vs_persistence_pct": 0.0
+    },
+    {
+      "model_name": "Linear Trend (Extrapolated 120m)",
+      "mae": 97.38,
+      "rmse": 145.1,
+      "mape_pct": 60.79,
+      "median_abs_error": 65.17,
+      "p90_abs_error": 221.79,
+      "rel_improvement_vs_persistence_pct": -82.9
+    },
+    {
+      "model_name": "Diurnal Climatology (Time-of-Day)",
+      "mae": 23.96,
+      "rmse": 34.56,
+      "mape_pct": 15.36,
+      "median_abs_error": 15.53,
+      "p90_abs_error": 61.83,
+      "rel_improvement_vs_persistence_pct": 55.0
+    },
+    {
+      "model_name": "GlucoTwin v0.1 (Learned GBT)",
+      "mae": 18.69,
+      "rmse": 30.84,
+      "mape_pct": 11.79,
+      "median_abs_error": 9.49,
+      "p90_abs_error": 48.15,
+      "rel_improvement_vs_persistence_pct": 64.9
+    }
+  ]
+}

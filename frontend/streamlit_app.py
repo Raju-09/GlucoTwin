@@ -60,14 +60,14 @@ def load_experiment_manifest() -> dict:
         "dataset_version": "SYNTH-T2D-42",
         "model_architecture": "HistGradientBoostingRegressor (Two-Stream Fusion)",
         "benchmarks": {
-            "persistence_mae_mgdl": 53.25,
-            "cgm_only_mae_mgdl": 18.73,
-            "cgm_plus_ehr_mae_mgdl": 17.89,
-            "full_fusion_mae_mgdl": 17.96,
-            "full_fusion_rmse_mgdl": 29.53,
-            "full_fusion_mape_pct": 11.17,
-            "full_fusion_median_abs_error_mgdl": 8.53,
-            "relative_improvement_vs_persistence_pct": 66.3,
+            "persistence_mae_mgdl": 46.88,
+            "cgm_only_mae_mgdl": 18.31,
+            "cgm_plus_ehr_mae_mgdl": 17.61,
+            "full_fusion_mae_mgdl": 17.67,
+            "full_fusion_rmse_mgdl": 28.27,
+            "full_fusion_mape_pct": 10.82,
+            "full_fusion_median_abs_error_mgdl": 8.54,
+            "relative_improvement_vs_persistence_pct": 62.3,
         },
     }
 
@@ -620,11 +620,12 @@ with tab1:
         cgm_m = bm.get('cgm_only_mae_mgdl', 18.31)
         ehr_m = bm.get('cgm_plus_ehr_mae_mgdl', 17.61)
         full_m = bm.get('full_fusion_mae_mgdl', 17.67)
+        p_m = bm.get('persistence_mae_mgdl', 46.88)
         st.markdown(
             f"""
             | Configuration | Data Streams | Test MAE (mg/dL) | Δ MAE (Model − Ref) | Improvement (Ref − Model) [95% CI] |
             |---|---|:---:|:---:|:---:|
-            | **Persistence Baseline** | Naive y(t+120) = y(t) | **53.25** | *+34.94 mg/dL* | *−34.94 mg/dL* |
+            | **Persistence Baseline** | Naive y(t+120) = y(t) | **{p_m:.2f}** | *+{p_m - cgm_m:+.2f} mg/dL* | *−{p_m - cgm_m:.2f} mg/dL* |
             | **Config A (CGM Only)** | 24 Lags + Rolling Stats (41 feats) | **{cgm_m:.2f}** | *Reference (0.00)* | *Reference* |
             | **Config B (CGM + Static EHR)** | Demographics + Labs + Fasting Lab (50 feats) | **{ehr_m:.2f}** | **{ehr_m - cgm_m:+.2f} mg/dL** | **+0.70 [+0.49, +0.96] mg/dL** |
             | **Config C (CGM + Wearables)** | Decoupled HR, HRV, Steps, Sleep (47 feats) | **18.32** | +0.01 mg/dL | −0.01 [−0.08, +0.07] mg/dL |

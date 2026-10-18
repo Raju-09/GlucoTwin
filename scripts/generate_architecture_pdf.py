@@ -53,7 +53,7 @@ def create_architecture_diagram(output_path: Path):
 
     # 3. Model Inference & Gating FSM
     draw_box(68, 56, 28, 25, "PREDICTIVE MODEL CORE", 
-             "• HistGradientBoostingRegressor (Two-Stream)\n• 120-Minute Point Forecast at t+120 min\n• Multimodal Feature Fusion (EHR + CGM)\n• Test MAE: 17.61 mg/dL (vs 53.25 Persistence)\n• Adverse Event Engine: 76.2% Sensitivity on >180 mg/dL", 
+             "• HistGradientBoostingRegressor (Two-Stream)\n• 120-Minute Point Forecast at t+120 min\n• Multimodal Feature Fusion (EHR + CGM)\n• Test MAE: 17.61 mg/dL (vs 46.88 Persistence)\n• Adverse Event Engine: 76.2% Sensitivity on >180 mg/dL", 
              "#EDE7F6", "#512DA8", title_color="#311B92")
 
     draw_box(68, 22, 28, 25, "RELIABILITY & SAFETY GATE (δ_t)", 
