@@ -118,7 +118,7 @@ def build_presentation_pdf(output_path: Path):
         [Paragraph("<b>Competition:</b> Happiest Health — Digital Twin Challenge 2026", body_style)],
         [Paragraph("<b>Team:</b> Team Synapse  •  <b>College:</b> Mohan Babu University", body_style)],
         [Paragraph("<b>Team Leader:</b> Sammeta Siva Prasad Raju  •  <b>Member:</b> Bedadakota Devi Chandrika", body_style)],
-        [Paragraph("<b>Repository:</b> https://github.com/Raju-09/GlucoTwin  •  <b>License:</b> MIT Open Source", body_style)],
+        [Paragraph("<b>Repository:</b> https://github.com/Raju-09/GlucoTwin  •  <b>Video:</b> https://youtu.be/Vsmb3QibpKI  •  <b>License:</b> MIT", body_style)],
     ]
     meta_table = Table(meta_data, colWidths=[9.5 * inch])
     meta_table.setStyle(TableStyle([

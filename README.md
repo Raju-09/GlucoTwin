@@ -20,7 +20,7 @@
 | **Team Members** | **Sammeta Siva Prasad Raju, Bedadakota Devi Chandrika** (2 Members) |
 | **College / Incubator** | **Mohan Babu University** |
 | **GitHub Repository** | `https://github.com/Raju-09/GlucoTwin` (Public) |
-| **Demo Video** | [YouTube Unlisted Link — 15–20 Minute Walkthrough] |
+| **Demo Video** | [YouTube Walkthrough (Unlisted)](https://youtu.be/Vsmb3QibpKI) |
 | **Architecture Diagram** | [`docs/architecture_diagram.pdf`](docs/architecture_diagram.pdf) (Vector PDF) |
 | **Presentation** | [`docs/glucotwin_presentation.pdf`](docs/glucotwin_presentation.pdf) (10-Slide Deck PDF) |
 | **License** | [MIT License](LICENSE) (Open Source) |
